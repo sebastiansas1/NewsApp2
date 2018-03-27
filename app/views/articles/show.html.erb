@@ -1,0 +1,9 @@
+<h2><%= @article.headline %></h2>
+<h4><%= @article.subheading %></h4>
+<p>TOPIC: <%= @article.topic %></p>
+<p>KEYWORD: <%= @article.keyword %></p>
+
+<%= link_to  "Back", root_path %>
+
+<%= link_to  "Edit", edit_article_path(@article) %>
+<%= link_to  "Delete", article_path(@article), method: :delete, data: { confirm: "Are you sure?" } %>

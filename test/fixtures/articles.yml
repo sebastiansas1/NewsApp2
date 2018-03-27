@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  headline: MyString
+  subheading: MyString
+  topic: MyString
+  keyword: MyString
+  views: 
+  likes: 
+
+two:
+  headline: MyString
+  subheading: MyString
+  topic: MyString
+  keyword: MyString
+  views: 
+  likes: 
