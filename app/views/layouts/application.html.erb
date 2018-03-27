@@ -19,25 +19,34 @@
         </div>
 
         <ul class="nav navbar-nav">
-
-          <li><%= link_to  "Sign Up", new_reader_registration_path %></li>
           
-          <% if reader_signed_in? %>
-            <li><%= link_to  "Sign Out", destroy_reader_session_path, method: :delete %></li>
-          <% else %>
-            <li><%= link_to  "Log In", new_reader_session_path %></li>
-          <% end %>
+
 
         </ul>
 
 
         <ul class="nav navbar-nav navbar-right">
-          
-            <% if reader_signed_in? %>
 
-              <li><%= link_to  "Add Article", new_article_path %></li>
+          <!-- READER -->
 
-            <% end %>
+          <% if reader_signed_in? %>
+          <li><%= link_to current_reader.name, edit_reader_registration_path %></li>
+            <li><%= link_to  "Log Out", destroy_reader_session_path, method: :delete %></li>
+          <% end %>
+
+
+          <!-- ADMIN -->
+
+          <% if admin_signed_in? %>
+
+            <li><%= link_to  "Add Article", new_article_path %></li>
+            <li><%= link_to current_admin.name %></li>
+            <li><%= link_to  "Log Out", destroy_reader_session_path, method: :delete %></li>
+          <% end %>
+
+          <% unless admin_signed_in? || reader_signed_in? %>
+            <li><%= link_to  "Log In", new_reader_session_path %></li>
+          <% end %>
 
         </ul>
 
