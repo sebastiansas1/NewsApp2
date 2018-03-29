@@ -1,9 +1,39 @@
-<h2><%= @article.headline %></h2>
-<h4><%= @article.subheading %></h4>
-<p>TOPIC: <%= @article.topic %></p>
-<p>KEYWORD: <%= @article.keyword %></p>
+
+<!-- ARTICLE -->
+
+<div class="row">
+    <div class="col-md-4">
+        <h2><%= @article.headline %></h2>
+        <%= image_tag @article.article_img.url(:article_show), class: "article-show" %>
+        <h4><%= @article.subheading %></h4>
+    </div>
+</div>
+
+<br><br>
+
+<!-- ARTICLE STATS -->
+
+<div class="row">
+    <div class="col-md-4 col-article-info" align="left">
+        <p>CATEGORY: <strong><%= @article.category.name %></strong></p>
+        <p>KEYWORD: <strong><%= @article.keyword %></strong></p>
+    </div>
+    <div class="col-md-8 col-article-stats" align="left">
+        <p>VIEWS: <strong><%= @article.views %></strong></p>
+        <p>LIKES: <strong><%= @article.likes %></strong></p>
+    </div>
+</div>
+
+<br><br>
+
+<!-- NAVIGATION LINKS -->
 
 <%= link_to  "Back", root_path %>
 
-<%= link_to  "Edit", edit_article_path(@article) %>
-<%= link_to  "Delete", article_path(@article), method: :delete, data: { confirm: "Are you sure?" } %>
+<% if admin_signed_in? %>
+
+    <%= link_to  "Edit", edit_article_path(@article) %>
+    <%= link_to  "Delete", article_path(@article), method: :delete, data: { confirm: "Are you sure?" } %>    
+
+<% end %>
+

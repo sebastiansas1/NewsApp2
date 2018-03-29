@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180327210910) do
+ActiveRecord::Schema.define(version: 20180329163649) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -33,10 +33,21 @@ ActiveRecord::Schema.define(version: 20180327210910) do
   create_table "articles", force: :cascade do |t|
     t.string "headline"
     t.string "subheading"
-    t.string "topic"
     t.string "keyword"
-    t.integer "views"
-    t.integer "likes"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "admin_id"
+    t.integer "views", default: 0, null: false
+    t.integer "likes", default: 0, null: false
+    t.integer "category_id"
+    t.string "article_img_file_name"
+    t.string "article_img_content_type"
+    t.integer "article_img_file_size"
+    t.datetime "article_img_updated_at"
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

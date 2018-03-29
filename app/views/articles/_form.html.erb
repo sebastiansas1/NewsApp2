@@ -1,8 +1,9 @@
-<%= simple_form_for @article do |f| %>
+<%= simple_form_for @article, :html => { :multipart => true } do |f| %>
 
     <%= f.input :headline, label: "Headline" %>
     <%= f.input :subheading, label: "Subheading" %>
-    <%= f.input :topic, label: "Topic" %>
+    <%= select_tag(:category_id, options_for_select(@categories), :prompt => "Select a category") %>
+    <%= f.file_field :article_img %>
     <%= f.input :keyword, label: "Keyword" %>
     <%= f.button :submit %>
 

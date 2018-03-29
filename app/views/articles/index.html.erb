@@ -1,4 +1,16 @@
+<h1 class="current-category"><%= params[:category] %></h1>
+<div class="row">
 
-<% @articles.each do |article| %>
-    <h3><%= link_to article.headline, article_path(article) %></h3>
-<% end %>
+    <% @articles.each do |article| %>
+
+        <div class="col-md-3">
+            <h3 class="article-headline"><%= article.headline %></h3>
+            <a href="/articles/<%= article.id %>" class="a-article">
+                <%= image_tag article.article_img.url(:article_index), class: "article_img" %>
+            </a>
+            <p class="article-subheading"><%= article.subheading %></p>
+        </div>
+
+    <% end %>
+
+</div>

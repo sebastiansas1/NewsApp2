@@ -1,3 +1,12 @@
 <h2>Edit Article</h2>
 
-<%= render  "form" %>
+<%= simple_form_for @article, :html => { :multipart => true } do |f| %>
+
+    <%= f.input :headline, label: "Headline" %>
+    <%= f.input :subheading, label: "Subheading" %>
+    <%= f.select :category_id, @categories %>
+    <%= f.file_field :article_img %>
+    <%= f.input :keyword, label: "Keyword" %>
+    <%= f.button :submit %>
+
+<% end %>
