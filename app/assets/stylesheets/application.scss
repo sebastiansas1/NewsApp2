@@ -12,6 +12,7 @@
  *
  *= require_tree .
  *= require_self
+ *= require material_icons
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
@@ -34,7 +35,15 @@ p {
     text-align: center;
     width: 100%;
 }
-.navbar-initial {float:none;}
+.navbar-initial {
+    float:none;
+    font-weight: bold;
+    font-size: 25px;
+}
+
+.logo {
+    font-weight: bold;
+}
 
 .article-headline {
     margin-top: 20px;
@@ -47,8 +56,13 @@ p {
 }
 
 .article-show {
-    width: 650px;
-    height: 400px;
+    width: 100%;
+    height: 50%;
+}
+
+.article-rel {
+    width: 80%;
+    height: 50%;
 }
 
 .article-box {
@@ -61,9 +75,27 @@ p {
     transition: ease-in 100ms;
 }
 
+.article-mini-headline {
+    width: 80%;
+    text-align: left;
+}
+
+.article-mini-headline:hover {
+    color: dodgerblue;
+}
+
+.article-mini-date {
+    width: 80%;
+    text-align: left;
+}
+
 .article-box:hover {
     box-shadow: gray 3px 3px 5px;
     transition: ease-in 100ms;
+}
+
+.article-left-panel {
+    margin-left: 1%;
 }
 
 .row-article-content {

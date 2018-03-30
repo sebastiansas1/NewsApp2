@@ -14,6 +14,13 @@ class ArticlesController < ApplicationController
     end
 
     def show
+        @related_articles = Article.
+                                where(:category_id => @article.category_id).
+                                where.not(:id => @article.id).
+                                order("created_at DESC").
+                                limit(2)
+        @related_category = Category.find(@article.category_id).name
+        
         if reader_signed_in?
             if current_reader.orders.where(:article_id => @article.id).blank?
                 @order = Order.new 
