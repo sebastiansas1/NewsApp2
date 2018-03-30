@@ -13,8 +13,14 @@ class ArticlesController < ApplicationController
 
     def show
         if reader_signed_in?
-            @article.views += 1
-            @article.save
+            if current_reader.orders.where(:article_id => @article.id).blank?
+                @order = Order.new 
+                @article.views += 1
+                @article.save
+                @order.article_id = @article.id 
+                @order.reader_id = current_reader.id 
+                @order.save 
+            end
         end
     end
 
