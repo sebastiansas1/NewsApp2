@@ -1,12 +1,20 @@
-<h2>Edit Article</h2>
+<div class="col-md-6 col-md-offset-3">
 
-<%= simple_form_for @article, :html => { :multipart => true } do |f| %>
+    <div class="edit-article-form">
 
-    <%= f.input :headline, label: "Headline" %>
-    <%= f.input :subheading, label: "Subheading" %>
-    <%= f.select :category_id, @categories %>
-    <%= f.file_field :article_img %>
-    <%= f.input :keyword, label: "Keyword" %>
-    <%= f.button :submit %>
+        <h2>Edit Article</h2>
 
-<% end %>
+        <%= simple_form_for @article, :html => { :multipart => true } do |f| %>
+
+            <%= f.input :headline, label: "Headline" %>
+            <%= f.input :subheading, label: "Subheading" %>
+            <%= f.select :category_id, @categories %>
+            <%= f.file_field :article_img %>
+            <%= f.input :keyword, label: "Keyword" %>
+            <%= f.button :submit, class: "btn btn-custom2" %>
+
+        <% end %>
+
+    </div>
+
+</div>

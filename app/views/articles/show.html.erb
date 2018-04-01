@@ -1,14 +1,14 @@
 
 <!-- ARTICLE -->
 
-<div class="row row-article-content">
+<div class="row row-article-content article-info">
 
     <!-- LEFT PANEL -->
 
     <div class="col-md-7 article-left-panel">
         <h2><%= @article.headline %></h2>
         <%= image_tag @article.article_img.url(:article_show), class: "article-show" %>
-        <h4><%= @article.subheading %></h4>
+        <h4 style="font-weight: 300;"><%= @article.subheading %></h4>
         <br>
         
         <% if reader_signed_in? %>
@@ -22,7 +22,7 @@
                         <span class="far fa-heart" id="showhide-heart" aria-hidden="true"></span>
                     <% end %>
                     
-                    <span class="likes-count" style="font-size: 15px;"><%= @article.cached_votes_score %></span>
+                    <span class="likes-count" style="font-size: 15px; font-weight: 400;"><%= @article.cached_votes_score %></span>
                 </button>
             <% end %>  
 
@@ -47,7 +47,7 @@
                 <h5 class="article-mini-headline" onclick="location.href='/articles/<%= related.id %>';" style="cursor: pointer;" ><%= related.headline %></h5>
                 <p class="article-mini-date">
                     <%= related.created_at.strftime("%d %B %Y") %> | 
-                    <%= link_to @related_category, articles_path(category: @related_category), class: "article-mini-category" %>
+                    <%= link_to @related_category, articles_path(category: @related_category), class: "article-mini-category", style: "font-weight: 400;" %>
                 </p>
                 
             </div>
@@ -61,14 +61,15 @@
 
 <!-- ARTICLE STATS -->
 
-<div class="row row-article-stats">
+<div class="row row-article-stats article-info">
     <div class="col-md-4 col-article-info" align="left">
-        <p>CATEGORY: <strong><%= @article.category.name %></strong></p>
-        <p>KEYWORD: <strong><%= @article.keyword %></strong></p>
+        <p class="p-stats">Category: <strong><%= @article.category.name %></strong></p>
+        <p class="p-stats">Keyword: <strong><%= @article.keyword %></strong></p>
     </div>
+
     <div class="col-md-8 col-article-stats" align="left">
-        <p>VIEWS: <strong><%= @article.views %></strong></p>
-        <p>LIKES: <strong class="article-stats-likes"><%= @article.cached_votes_up %></strong></p>
+        <p class="p-stats">Views: <strong><%= @article.views %></strong></p>
+        <p class="p-stats">Likes: <strong class="article-stats-likes"><%= @article.cached_votes_up %></strong></p>
     </div>
 </div>
 
@@ -76,12 +77,14 @@
 
 <!-- NAVIGATION LINKS -->
 
-<%= link_to  "Back", root_path %>
+<div class="links btn-group">
 
-<% if admin_signed_in? %>
+    <% if admin_signed_in? %>
 
-    <%= link_to  "Edit", edit_article_path(@article) %>
-    <%= link_to  "Delete", article_path(@article), method: :delete, data: { confirm: "Are you sure?" } %>    
+        <%= link_to  "Edit", edit_article_path(@article), class: "btn btn-custom" %>
+        <%= link_to  "Delete", article_path(@article), class: "btn btn-custom", method: :delete, data: { confirm: "Are you sure?" } %>    
 
-<% end %>
+    <% end %>
+
+</div>
 

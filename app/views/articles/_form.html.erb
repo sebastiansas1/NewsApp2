@@ -5,6 +5,6 @@
     <%= select_tag(:category_id, options_for_select(@categories), :prompt => "Select a category") %>
     <%= f.file_field :article_img %>
     <%= f.input :keyword, label: "Keyword" %>
-    <%= f.button :submit %>
+    <%= f.button :submit, class: "btn btn-custom2" %>
 
 <% end %>

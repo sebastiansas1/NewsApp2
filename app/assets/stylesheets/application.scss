@@ -13,15 +13,88 @@
  *= require_tree .
  *= require_self
  */
+ @import url(http://fonts.googleapis.com/css?family=Lora|Ubuntu:300,400,500); 
  @import "bootstrap-sprockets";
  @import "bootstrap";
 
+/* Variables, mixins, etc.. */
+
+@mixin background-tile {
+	box-sizing: border-box;
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 3px 3px 5px 6px #ccc;
+	padding: 1.5em 1.25em;
+}
+
 body {
-    background-color: #eaeaea;
+	background-color: #f5f5f5;
+}
+
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Ubuntu', sans-serif;
+    font-weight: 500;
+    
 }
 
 p {
     font-size: 13px;
+}
+
+p.alert, p.notice {
+    margin: 0;
+    color: #f70455;
+    padding-left: 5px;
+}
+
+.p-stats {
+    font-size: 16px;
+}
+
+/* Navbar/navigation styles */
+
+.navbar {
+	font-family: 'Ubuntu', sans-serif;
+	text-transform: uppercase;
+}
+
+.navbar-default {
+	background-color: #fff;
+	padding-bottom: 5px;
+	padding-top: 5px;
+
+	.navbar-nav > li > a {
+		color: #222;
+		&:hover {
+			color: darken(#f70455, 5%);
+			transition: 0.5s;
+		}
+	}
+
+	.navbar-header {
+
+		.navbar-brand {
+			color: #222;
+			letter-spacing: 1.4px;
+		}
+
+	}
+
+	.dropdown-menu > li > a:hover {
+		background-color: #f70455;
+		color: #fff;
+	}
+
+	.navbar-nav > .open > a, .navbar-nav > .open > a:hover, .navbar-nav > .open > a:focus {
+		background-color: #f70455;
+		color: #fff;	
+	}
+
+}
+
+.dropdown-menu > .active > a {
+	background-color: #f70455;
+	color: #fff;
 }
 
 .navbar-centre {
@@ -43,6 +116,8 @@ p {
 .logo {
     font-weight: bold;
 }
+
+/* Article styles */
 
 .red-word {
     color: #f70455;
@@ -96,14 +171,6 @@ p {
     color: #f70455;
 }
 
-li.active .category-link{
-    background-color: #f70455;    
-}
-
-li.active .category-link:hover {
-    background-color: #d80047;   
-}
-
 .btn-like {
     font-size: 15px;
 }
@@ -115,6 +182,10 @@ li.active .category-link:hover {
 
 .article-left-panel {
     margin-left: 1%;
+}
+
+.article-info {
+    @include background-tile;
 }
 
 a {
@@ -148,7 +219,111 @@ a:hover, a:focus, a:active  {
 
 .row-article-stats {
     background-color: white;
-    padding-top: 15px;
+    padding-top: 30px;
     border-radius: 5px;
 }
 
+/* Button/link styles */
+
+.btn-custom {
+	color: #f70455;
+	background-color: #fff;
+	border: 1px solid #f70455;
+	padding: 8px 20px;
+	border-radius: 5px;
+	font-family: 'Ubuntu', sans-serif;
+	&:hover {
+		text-decoration: none;
+		background-color: #f70455;
+		color: #fff;
+		transition: 0.5s;
+	}
+}
+
+.btn-custom2 {
+	color: #333;
+	background-color: #fff;
+	border: 1px solid #222;
+	padding: 8px 20px;
+	border-radius: 5px;
+	font-family: 'Ubuntu', sans-serif;
+	&:hover {
+		text-decoration: none;
+		background-color: #333;
+		color: #fff;
+		transition: 0.5s;
+	}	
+}
+
+/* current-category styles */
+
+.current-category {
+    margin-bottom: 40px;
+    text-shadow: #bdbdbd 10px 10px 25px;
+}
+
+/* New Article Form styles */
+
+.new-article-form {
+	@include background-tile;
+
+	h1 {
+		margin-top: 0;
+	}
+
+	#category_id {
+		margin-bottom: 10px;
+	}
+
+	#article_article_img {
+		margin-bottom: 10px;
+	}
+
+}
+
+/* Edit Article Form styles */
+
+.edit-article-form {
+
+	@include background-tile;
+
+	h1 {
+		margin-top: 0;
+	}
+
+	#article_category_id {
+		margin-bottom: 10px;
+	}
+
+	#article_article_img {
+		margin-bottom: 10px;
+	}
+
+}
+
+/* Signup/Login form styles */
+
+.signup-form {
+	@include background-tile;
+
+	h2 {
+		margin-top: 0;
+	}
+
+}
+
+.login-form {
+	@include background-tile;
+
+	h2 {
+		margin-top: 0;
+	}
+
+}
+
+/* Form styles */
+
+.form-control:focus {
+    border-color: #f70455;
+    box-shadow: inset 0 1px 1px rgba(255, 9, 67, 0.075), 0 0 8px rgba(233, 102, 144, 0.6); 
+}
