@@ -118,8 +118,22 @@ p.notice {
 	color: #fff;
 }
 
-.navbar-centre {
-    margin-left: 26%;
+.avatar {
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+}
+
+.avatar-name {
+	color: black;
+}
+
+.avatar-dropdown {
+	padding: 2px;
+}
+
+.avatar-button {
+	border: transparent;
 }
 
 .navbar-login {
@@ -135,7 +149,7 @@ p.notice {
 }
 
 .logo {
-    font-weight: bold;
+	font-weight: bold;
 }
 
 /* Article styles */
@@ -167,7 +181,8 @@ p.notice {
 .article-box {
     width: 250px;
     height: 320px;
-    margin: 20px;
+	margin: 20px;
+	padding-top: 1px;
     background-color: white;
     border-radius: 5px;
     box-shadow: gray 1px 1px 10px;

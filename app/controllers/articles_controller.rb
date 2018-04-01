@@ -81,7 +81,7 @@ class ArticlesController < ApplicationController
     private
 
         def article_params
-            params.require(:article).permit(:headline, :subheading, :category_id, :keyword, :views, :likes, :article_img, )
+            params.require(:article).permit(:headline, :subheading, :category_id, :keyword, :views, :likes, :article_img)
         end
 
         def find_article

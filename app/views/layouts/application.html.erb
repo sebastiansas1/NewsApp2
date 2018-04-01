@@ -54,8 +54,20 @@
                 <% end %>
               </ul>
             </li>
-            <li><%= link_to current_reader.name, edit_reader_registration_path %></li>
-            <li><%= link_to  "Log Out", destroy_reader_session_path, method: :delete %></li>
+
+            <div class="btn-group avatar-dropdown">
+              <button type="button" class="btn btn-default dropdown-toggle avatar-button" data-toggle="dropdown" 
+              aria-haspopup="true" aria-expanded="false">
+                <%= image_tag current_reader.avatar, class: "avatar" %>
+                <%= link_to current_reader.name, class: "avatar-name" %> 
+              </button>
+
+              <ul class="dropdown-menu" role="menu">
+                <li><%= link_to "Edit Profile", edit_reader_registration_path %> </li>
+                <li><%= link_to  "Log Out", destroy_reader_session_path, method: :delete %></li>
+              </ul>
+            
+            </div>
 
           <% end %> 
 
