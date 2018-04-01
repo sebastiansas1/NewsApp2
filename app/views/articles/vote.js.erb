@@ -1,0 +1,17 @@
+
+<% if current_reader.liked? @article %>
+    $('.like-btn').addClass('liked');
+    $('#showhide-heart').click(function() {
+        $(this).toggleClass('far fa-heart');
+    });
+<% else %> 
+    $('.like-btn').removeClass('liked');
+    $('#showhide-heart').click(function() {
+        $(this).toggleClass('fas fa-heart');
+    });
+<% end %>
+
+$('.likes-count').html("<%= @article.cached_votes_score %>")
+$('.article-stats-likes').html("<%= @article.cached_votes_score %>")
+
+

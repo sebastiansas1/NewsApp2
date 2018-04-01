@@ -19,6 +19,8 @@
 #
 
 class Reader < ApplicationRecord
+  acts_as_voter
+  
   has_many :orders
   has_many :articles, through: :orders
   # Include default devise modules. Others available are:

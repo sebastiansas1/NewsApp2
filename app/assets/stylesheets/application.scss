@@ -12,7 +12,6 @@
  *
  *= require_tree .
  *= require_self
- *= require material_icons
  */
  @import "bootstrap-sprockets";
  @import "bootstrap";
@@ -89,6 +88,10 @@ p {
     text-align: left;
 }
 
+.btn-like {
+    font-size: 15px;
+}
+
 .article-box:hover {
     box-shadow: gray 3px 3px 5px;
     transition: ease-in 100ms;
@@ -96,6 +99,29 @@ p {
 
 .article-left-panel {
     margin-left: 1%;
+}
+
+a {
+    color: gray;
+}
+
+a:hover, a:focus, a:active  {
+    color: #4c4b4b;
+    text-decoration: none;
+}
+.btn-like-custom {
+    border: transparent;
+    line-height: 20px;
+}
+.liked {
+    color: black;
+    font-weight: bold;
+}
+
+.btn-custom {
+    padding: 5px 10px 5px 10px;
+    border-radius: 3px;
+    border: transparent;
 }
 
 .row-article-content {

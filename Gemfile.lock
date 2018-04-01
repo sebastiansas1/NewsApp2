@@ -38,6 +38,7 @@ GEM
       i18n (~> 0.7)
       minitest (~> 5.1)
       tzinfo (~> 1.1)
+    acts_as_votable (0.11.1)
     addressable (2.5.2)
       public_suffix (>= 2.0.2, < 4.0)
     annotate (2.7.2)
@@ -101,8 +102,6 @@ GEM
       nokogiri (>= 1.5.9)
     mail (2.7.0)
       mini_mime (>= 0.1.1)
-    material_icons (2.2.1)
-      railties (>= 3.2)
     method_source (0.9.0)
     mime-types (3.1)
       mime-types-data (~> 3.2015)
@@ -218,6 +217,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  acts_as_votable (~> 0.11.1)
   annotate (~> 2.7, >= 2.7.2)
   bootstrap-sass (~> 3.3, >= 3.3.7)
   byebug
@@ -227,7 +227,6 @@ DEPENDENCIES
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)
-  material_icons
   paperclip (~> 6.0)
   puma (~> 3.7)
   rails (~> 5.1.4)

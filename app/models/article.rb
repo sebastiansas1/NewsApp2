@@ -16,9 +16,18 @@
 #  article_img_content_type :string
 #  article_img_file_size    :integer
 #  article_img_updated_at   :datetime
+#  cached_votes_total       :integer          default(0)
+#  cached_votes_score       :integer          default(0)
+#  cached_votes_up          :integer          default(0)
+#  cached_votes_down        :integer          default(0)
+#  cached_weighted_score    :integer          default(0)
+#  cached_weighted_total    :integer          default(0)
+#  cached_weighted_average  :float            default(0.0)
 #
 
 class Article < ApplicationRecord
+    acts_as_votable
+    
     belongs_to :admin
     belongs_to :category
     has_many :orders

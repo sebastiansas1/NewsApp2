@@ -1,12 +1,14 @@
 class ArticlesController < ApplicationController
-    before_action :find_article, only: [:show, :edit, :update, :destroy]
+    before_action :find_article, only: [:show, :edit, :update, :destroy, :vote]
     before_action :require_login
+    respond_to :js, :json, :html
 
     def index
         if params[:category].blank?
             @articles = Article.all.order("created_at DESC")
         elsif params[:category] == "Top Trending"
             @articles = Article.all.order("views DESC")
+            @most_liked_articles = Article.all.order("cached_votes_score DESC")
         else
             @category_id = Category.find_by(name: params[:category]).id
             @articles = Article.where(:category_id => @category_id).order("created_at DESC")
@@ -66,11 +68,19 @@ class ArticlesController < ApplicationController
         @article.destroy
         redirect_to root_path
     end
+
+    def vote 
+        if !current_reader.liked? @article
+            @article.liked_by current_reader
+        elsif current_reader.liked? @article
+            @article.unliked_by current_reader
+        end 
+    end 
     
     private
 
         def article_params
-            params.require(:article).permit(:headline, :subheading, :category_id, :keyword, :views, :likes, :article_img)
+            params.require(:article).permit(:headline, :subheading, :category_id, :keyword, :views, :likes, :article_img, )
         end
 
         def find_article
