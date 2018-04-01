@@ -41,14 +41,35 @@ p {
     font-size: 13px;
 }
 
-p.alert, p.notice {
+p.alert {
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 500;
+	font-size: 14px;
     margin: 0;
     color: #f70455;
-    padding-left: 5px;
+	padding-left: 5px;
+}
+
+p.notice {
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 500;
+	font-size: 14px;
+    margin: 0;
+	color: #41a4f5;
+	padding-left: 5px;
 }
 
 .p-stats {
     font-size: 16px;
+}
+
+.date {
+	color: #696969;
+}
+
+/* Icons styles */
+.fa-clock {
+	color: #696969;
 }
 
 /* Navbar/navigation styles */

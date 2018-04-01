@@ -6,9 +6,9 @@
     <!-- LEFT PANEL -->
 
     <div class="col-md-7 article-left-panel">
-        <h2><%= @article.headline %></h2>
+        <h2 style="padding-bottom: 10px;"><%= @article.headline %></h2>
         <%= image_tag @article.article_img.url(:article_show), class: "article-show" %>
-        <h4 style="font-weight: 300;"><%= @article.subheading %></h4>
+        <h4 style="font-weight: 300; padding-top: 10px;"><%= @article.subheading %></h4>
         <br>
         
         <% if reader_signed_in? %>
@@ -37,16 +37,18 @@
     <!-- RIGHT PANEL -->
 
     <div class="col-md-3 related-articles-section" align="middle">
-        <br><br><br>
+        <br><br>
         <h3>Related Articles</h3>
 
         <% @related_articles.each do |related| %>
 
             <div class="col-md-12 article-mini" align-self="middle">
-                <%= image_tag related.article_img.url(:article_show), class: "article-rel" %>
+                <div class="article-mini-img" onclick="location.href='/articles/<%= related.id %>';" style="cursor: pointer;">
+                    <%= image_tag related.article_img.url(:article_show), class: "article-rel" %>
+                </div>
                 <h5 class="article-mini-headline" onclick="location.href='/articles/<%= related.id %>';" style="cursor: pointer;" ><%= related.headline %></h5>
                 <p class="article-mini-date">
-                    <%= related.created_at.strftime("%d %B %Y") %> | 
+                    <i class="far fa-clock"></i><span class="date"> <%= related.created_at.strftime("%d %B %Y") %></span> | 
                     <%= link_to @related_category, articles_path(category: @related_category), class: "article-mini-category", style: "font-weight: 400;" %>
                 </p>
                 
