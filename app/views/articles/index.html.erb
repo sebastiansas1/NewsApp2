@@ -14,3 +14,25 @@
     <% end %>
 
 </div>
+
+
+<% if params[:category] == "Top Trending" %>
+    
+    <h1 class="current-category">Most Liked</h1>
+    <div class="row">
+
+        <% @most_liked_articles.each do |liked_article| %>
+
+            <div class="col-md-3 article-box" onclick="location.href='/articles/<%= liked_article.id %>';" style="cursor: pointer;">
+                <h4 class="article-headline"><%= liked_article.headline %></h4>
+                <a href="/articles/<%= liked_article.id %>" class="a-article">
+                    <%= image_tag liked_article.article_img.url(:article_index), class: "article_img" %>
+                </a>
+                <p class="article-subheading"><%= liked_article.subheading %></p>
+            </div>
+
+        <% end %>
+
+    </div>
+
+<% end %>

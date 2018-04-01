@@ -11,18 +11,21 @@
         <h4><%= @article.subheading %></h4>
         <br>
         
+        <% if reader_signed_in? %>
 
-        <%= link_to like_article_path(@article), class:"like-btn liked", method: :put, remote: :true do %>
-            <button type="button" class="btn-like-custom" aria-label="Left Align">
-                
-                <% if current_reader.liked? @article %>
-                    <span class="fas fa-heart" id="showhide-heart" aria-hidden="true"></span>
-                <% else %>    
-                    <span class="far fa-heart" id="showhide-heart" aria-hidden="true"></span>
-                <% end %>
-                
-                <span class="likes-count" style="font-size: 15px;"><%= @article.cached_votes_score %></span>
-            </button>
+            <%= link_to like_article_path(@article), class:"like-btn liked", method: :put, remote: :true do %>
+                <button type="button" class="btn-like-custom" aria-label="Left Align">
+                    
+                    <% if current_reader.liked? @article %>
+                        <span class="fas fa-heart" id="showhide-heart" aria-hidden="true"></span>
+                    <% else %>    
+                        <span class="far fa-heart" id="showhide-heart" aria-hidden="true"></span>
+                    <% end %>
+                    
+                    <span class="likes-count" style="font-size: 15px;"><%= @article.cached_votes_score %></span>
+                </button>
+            <% end %>  
+
         <% end %>
         
     </div>
