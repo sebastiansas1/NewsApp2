@@ -47,7 +47,7 @@
                 <h5 class="article-mini-headline" onclick="location.href='/articles/<%= related.id %>';" style="cursor: pointer;" ><%= related.headline %></h5>
                 <p class="article-mini-date">
                     <%= related.created_at.strftime("%d %B %Y") %> | 
-                    <%= link_to @related_category, articles_path(category: @related_category) %>
+                    <%= link_to @related_category, articles_path(category: @related_category), class: "article-mini-category" %>
                 </p>
                 
             </div>

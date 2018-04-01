@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
     before_action :find_article, only: [:show, :edit, :update, :destroy, :vote]
     before_action :require_login
+    before_action :authenticate_admin!, only: [:new, :edit, :destroy]
     respond_to :js, :json, :html
 
     def index

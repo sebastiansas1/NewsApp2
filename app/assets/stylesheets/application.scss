@@ -17,7 +17,7 @@
  @import "bootstrap";
 
 body {
-    background-color: #e0e0e0;
+    background-color: #eaeaea;
 }
 
 p {
@@ -42,6 +42,10 @@ p {
 
 .logo {
     font-weight: bold;
+}
+
+.red-word {
+    color: #f70455;
 }
 
 .article-headline {
@@ -86,6 +90,18 @@ p {
 .article-mini-date {
     width: 80%;
     text-align: left;
+}
+
+.article-mini-category, .article-mini-category:hover  {
+    color: #f70455;
+}
+
+li.active .category-link{
+    background-color: #f70455;    
+}
+
+li.active .category-link:hover {
+    background-color: #d80047;   
 }
 
 .btn-like {
