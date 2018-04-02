@@ -1,0 +1,56 @@
+ 
+<div class="col-md-6 article-history-left-panel">
+
+    <h1 class="current-category">History</h1>
+
+    <!-- Read Today articles -->
+
+    <% if @grouped_orders.present? && @grouped_orders[true].present? %>
+    
+        <div class="col-md-12">
+
+            <h4> Today </h4>
+
+            <% @grouped_orders[true].each do |order| %>
+
+                <div class="col-md-3 article-box-history" onclick="location.href='/articles/<%= Article.find(order.article_id).id %>';" style="cursor: pointer;">
+                    <h5 class="article-headline-history"><%= Article.find(order.article_id).headline %></h5>
+                    <a href="/articles/<%= Article.find(order.article_id).id %>" class="a-article">
+                        <%= image_tag Article.find(order.article_id).article_img.url(:article_index), class: "article_img-history" %>
+                    </a>
+                </div>
+
+            <% end %> 
+
+        </div>
+
+    <% end %>
+
+    <!-- Day wise grouped articles -->
+
+    <% if @day_wise_sorted_orders.present? %>
+
+        <% @day_wise_sorted_orders.each do |hash_elements|%>
+
+            <div class="col-md-12">
+
+                <h4> <%= hash_elements.first %> </h4>
+
+                <% hash_elements.last.take(4).each do |order| %>
+
+                    <div class="col-md-3 article-box-history" onclick="location.href='/articles/<%= Article.find(order.article_id).id %>';" style="cursor: pointer;">
+                        <h5 class="article-headline-history"><%= Article.find(order.article_id).headline %></h5>
+                        <a href="/articles/<%= Article.find(order.article_id).id %>" class="a-article">
+                            <%= image_tag Article.find(order.article_id).article_img.url(:article_index), class: "article_img-history" %>
+                        </a>
+                    </div>
+                    
+                <% end %> 
+
+            </div>
+
+        <% end %>
+
+    <% end %>
+
+</div>

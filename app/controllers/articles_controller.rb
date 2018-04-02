@@ -77,6 +77,20 @@ class ArticlesController < ApplicationController
             @article.unliked_by current_reader
         end 
     end 
+
+    def saved 
+
+        @order = current_reader.orders.all.order("created_at")
+
+        #Retrives all messages and divides into two groups todays messages and other messages
+        @grouped_orders = @order.group_by{ |t| t.created_at.to_date == DateTime.now.to_date }
+
+        if @grouped_orders[false].present?
+            #Create day wise groups of messages      
+            @day_wise_sorted_orders  = @grouped_orders[false].group_by{ |t| t.created_at.strftime("%A #{t.created_at.day.ordinalize} %B, %Y ")}
+        end    
+
+    end
     
     private
 

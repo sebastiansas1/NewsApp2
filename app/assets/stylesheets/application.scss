@@ -162,9 +162,19 @@ p.notice {
     margin-top: 20px;
 }
 
+.article-headline-history {
+	margin-top: 15px;
+}
+
 .article_img {
     width: 220px;
     height: 123px;
+    margin: 5px 0px 5px 0px;
+}
+
+.article_img-history {
+	width: 170px;
+    height: 96px;
     margin: 5px 0px 5px 0px;
 }
 
@@ -182,6 +192,17 @@ p.notice {
     width: 250px;
     height: 320px;
 	margin: 20px;
+	padding-top: 1px;
+    background-color: white;
+    border-radius: 5px;
+    box-shadow: gray 1px 1px 10px;
+    transition: ease-in 100ms;
+}
+
+.article-box-history {
+	width: 200px;
+    height: 200px;
+	margin: 10px;
 	padding-top: 1px;
     background-color: white;
     border-radius: 5px;
@@ -212,6 +233,11 @@ p.notice {
 }
 
 .article-box:hover {
+    box-shadow: gray 3px 3px 5px;
+    transition: ease-in 100ms;
+}
+
+.article-box-history:hover {
     box-shadow: gray 3px 3px 5px;
     transition: ease-in 100ms;
 }
@@ -294,7 +320,7 @@ a:hover, a:focus, a:active  {
 /* current-category styles */
 
 .current-category {
-    margin-bottom: 40px;
+    margin-bottom: 20px;
     text-shadow: #bdbdbd 10px 10px 25px;
 }
 

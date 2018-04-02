@@ -23,10 +23,10 @@
           </div>
 
           <ul class="nav navbar-nav navbar-centre">
-            <li><%= link_to "For Me" %></li>
+            <li><%= link_to "For Me", root_path %></li>
             <li><%= link_to "Trending", articles_path(category: "Top Trending")%></li>        
             <li><%= link_to "Friends" %></li>
-            <li><%= link_to "Saved" %></li>
+            <li><%= link_to "Saved", saved_articles_path %></li>
           </ul>
 
         <% else %>
