@@ -8,8 +8,8 @@ class ArticlesController < ApplicationController
         if params[:category].blank?
             @articles = Article.all.order("created_at DESC")
         elsif params[:category] == "Top Trending"
-            @articles = Article.all.order("views DESC")
-            @most_liked_articles = Article.all.order("cached_votes_score DESC")
+            @articles = Article.all.order("views DESC").limit(8)
+            @most_liked_articles = Article.all.order("cached_votes_score DESC").limit(8)
         else
             @category_id = Category.find_by(name: params[:category]).id
             @articles = Article.where(:category_id => @category_id).order("created_at DESC")

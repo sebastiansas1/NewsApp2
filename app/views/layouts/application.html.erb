@@ -7,7 +7,7 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
-    <script type="text/javascript"> (function() { var css = document.createElement('link'); css.href = '//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css'; css.rel = 'stylesheet'; css.type = 'text/css'; document.getElementsByTagName('head')[0].appendChild(css); })(); </script>
+    
   </head>
 
   <body>
@@ -26,7 +26,6 @@
             <li><%= link_to "For Me", root_path %></li>
             <li><%= link_to "Trending", articles_path(category: "Top Trending")%></li>        
             <li><%= link_to "Friends" %></li>
-            <li><%= link_to "Saved", saved_articles_path %></li>
           </ul>
 
         <% else %>
@@ -63,8 +62,13 @@
               </button>
 
               <ul class="dropdown-menu" role="menu">
-                <li><%= link_to "Edit Profile", edit_reader_registration_path %> </li>
-                <li><%= link_to  "Log Out", destroy_reader_session_path, method: :delete %></li>
+
+                <li><%= link_to glyph(:repeat) + " History", saved_articles_path %></li>
+                <p></p>
+                <li><%= link_to glyph(:pencil) + " Edit Profile", edit_reader_registration_path %></li>
+                <p></p>
+                <li><%= link_to glyph(:off) + " Log Out", destroy_reader_session_path, method: :delete %></li>
+
               </ul>
             
             </div>
@@ -76,7 +80,7 @@
 
           <% if admin_signed_in? %>
 
-            <li><%= link_to  "Add Article", new_article_path %></li>
+            <li><%= link_to glyph(:flash) + " Add Article", new_article_path %></li>
             <li><%= link_to current_admin.name, edit_admin_registration_path %></li>
             <li><%= link_to  "Log Out", destroy_reader_session_path, method: :delete %></li>
 

@@ -7,7 +7,7 @@
 
     <% if @grouped_orders.present? && @grouped_orders[true].present? %>
     
-        <div class="col-md-12">
+        <div class="col-md-12" style="margin-bottom: 10px;">
 
             <h4> Today </h4>
 
@@ -32,7 +32,7 @@
 
         <% @day_wise_sorted_orders.each do |hash_elements|%>
 
-            <div class="col-md-12">
+            <div class="col-md-12" style="margin-bottom: 10px;">
 
                 <h4> <%= hash_elements.first %> </h4>
 
