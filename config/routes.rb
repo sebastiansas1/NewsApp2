@@ -9,7 +9,7 @@ Rails.application.routes.draw do
     end
   end 
 
-  get "saved_articles" => "articles#saved"
+  get "history" => "articles#history"
   
   root 'articles#index'
 

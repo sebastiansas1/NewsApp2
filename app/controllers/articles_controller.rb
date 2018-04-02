@@ -78,7 +78,7 @@ class ArticlesController < ApplicationController
         end 
     end 
 
-    def saved 
+    def history 
 
         @order = current_reader.orders.all.order("created_at DESC")
 
@@ -89,6 +89,10 @@ class ArticlesController < ApplicationController
             #Create day wise groups of messages      
             @day_wise_sorted_orders  = @grouped_orders[false].group_by{ |t| t.created_at.strftime("%A #{t.created_at.day.ordinalize} %B, %Y ")}
         end    
+
+    end
+
+    def friends
 
     end
     
