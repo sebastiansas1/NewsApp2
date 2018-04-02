@@ -80,7 +80,7 @@ class ArticlesController < ApplicationController
 
     def saved 
 
-        @order = current_reader.orders.all.order("created_at")
+        @order = current_reader.orders.all.order("created_at DESC")
 
         #Retrives all messages and divides into two groups todays messages and other messages
         @grouped_orders = @order.group_by{ |t| t.created_at.to_date == DateTime.now.to_date }
