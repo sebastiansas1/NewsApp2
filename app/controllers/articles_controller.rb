@@ -8,8 +8,8 @@ class ArticlesController < ApplicationController
         if params[:category].blank?
             @articles = Article.all.order("created_at DESC")
         elsif params[:category] == "Top Trending"
-            @articles = Article.all.order("views DESC").limit(8)
-            @most_liked_articles = Article.all.order("cached_votes_score DESC").limit(8)
+            @articles = Article.all.order(views: :desc, created_at: :desc).limit(8)
+            @most_liked_articles = Article.all.order(cached_votes_score: :desc, created_at: :desc).limit(8)
         else
             @category_id = Category.find_by(name: params[:category]).id
             @articles = Article.where(:category_id => @category_id).order("created_at DESC")
@@ -88,7 +88,17 @@ class ArticlesController < ApplicationController
         if @grouped_orders[false].present?
             #Create day wise groups of messages      
             @day_wise_sorted_orders  = @grouped_orders[false].group_by{ |t| t.created_at.strftime("%A #{t.created_at.day.ordinalize} %B, %Y ")}
-        end    
+        end   
+        
+        @liked_articles = Array.new
+
+        @all_articles = Article.all 
+
+        @all_articles.each do |article|
+            if (current_reader.voted_for? article)
+                @liked_articles.push article
+            end
+        end
 
     end
 

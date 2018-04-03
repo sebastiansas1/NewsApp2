@@ -68,7 +68,7 @@ p.notice {
 }
 
 .container {
-	width: 80%;
+	width: 90%;
 }
 
 /* Icons styles */
@@ -170,6 +170,10 @@ p.notice {
 	margin-top: 15px;
 }
 
+.article-subheading {
+
+}
+
 .article_img {
     width: 220px;
     height: 123px;
@@ -200,7 +204,10 @@ p.notice {
     background-color: white;
     border-radius: 5px;
     box-shadow: gray 1px 1px 10px;
-    transition: ease-in 100ms;
+	transition: ease-in 100ms;
+	overflow: auto;
+	display: block;
+	text-overflow:ellipsis;
 }
 
 .article-box-history {

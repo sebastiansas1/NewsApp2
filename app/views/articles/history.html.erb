@@ -1,4 +1,6 @@
- 
+
+<!-- Left Column -->
+
 <div class="col-md-6 article-history-left-panel">
 
     <h1 class="current-category">History</h1>
@@ -11,7 +13,7 @@
 
             <h4> Today </h4>
 
-            <% @grouped_orders[true].each do |order| %>
+            <% @grouped_orders[true].take(4).each do |order| %>
 
                 <div class="col-md-3 article-box-history" onclick="location.href='/articles/<%= Article.find(order.article_id).id %>';" style="cursor: pointer;">
                     <h5 class="article-headline-history"><%= Article.find(order.article_id).headline %></h5>
@@ -50,6 +52,25 @@
             </div>
 
         <% end %>
+
+    <% end %>
+
+</div>
+
+<!-- Right Column -->
+
+<div class="col-md-6 article-history-right-panel">
+    
+    <h1 class="current-category">Liked Articles</h1>
+
+    <% @liked_articles.take(8).each do |article| %>
+
+        <div class="col-md-3 article-box-history" onclick="location.href='/articles/<%= article.id %>';" style="cursor: pointer;">
+            <h5 class="article-headline-history"><%= article.headline %></h5>
+            <a href="/articles/<%= article.id %>" class="a-article">
+                <%= image_tag article.article_img.url(:article_index), class: "article_img-history" %>
+            </a>
+        </div>
 
     <% end %>
 
