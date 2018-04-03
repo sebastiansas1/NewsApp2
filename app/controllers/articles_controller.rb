@@ -92,7 +92,7 @@ class ArticlesController < ApplicationController
         
         @liked_articles = Array.new
 
-        @all_articles = Article.all 
+        @all_articles = Article.all.order(created_at: :desc)
 
         @all_articles.each do |article|
             if (current_reader.voted_for? article)
