@@ -140,6 +140,24 @@ p.notice {
 	border: transparent;
 }
 
+.avatar-friend {
+	width: 75px;
+	height: 75px;
+	border-radius: 50%;
+}
+
+.friend-bar {
+	display: flex;
+}
+
+.friend-bar-text {
+	width: 200px;
+}
+
+.friend-name {
+	margin-left: 10px;
+}
+
 .navbar-login {
     float: left;
     padding: 15px;
@@ -168,10 +186,6 @@ p.notice {
 
 .article-headline-history {
 	margin-top: 15px;
-}
-
-.article-subheading {
-
 }
 
 .article_img {

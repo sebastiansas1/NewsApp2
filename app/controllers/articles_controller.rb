@@ -103,6 +103,16 @@ class ArticlesController < ApplicationController
     end
 
     def friends
+        @friends = current_reader.friends.all.order(strength: :desc)
+
+        @array = Array.new
+
+        @friends.each do |friend| 
+            @reader = Reader.find(friend.friend_id)
+            @reader_orders = @reader.orders.all.order(created_at: :desc)
+            @grouped_articles_by_reader = @reader_orders.group_by{ |t| t.reader_id}
+            @array.push @grouped_articles_by_reader
+        end
 
     end
     
