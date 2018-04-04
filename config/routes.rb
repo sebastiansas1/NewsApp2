@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   get "history" => "articles#history"
   get "friends" => "articles#friends"
-  
+    
   root 'articles#index'
 
 end

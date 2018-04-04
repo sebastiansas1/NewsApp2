@@ -24,6 +24,7 @@ gem 'sass', '~> 3.5', '>= 3.5.6'
 gem 'devise', '~> 4.4', '>= 4.4.3'
 gem 'paperclip', '~> 6.0'
 gem 'acts_as_votable', '~> 0.11.1'
+gem 'httparty', '~> 0.16.2'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

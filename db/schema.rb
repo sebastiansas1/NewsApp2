@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180403142335) do
+ActiveRecord::Schema.define(version: 20180404211033) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -51,6 +51,8 @@ ActiveRecord::Schema.define(version: 20180403142335) do
     t.integer "cached_weighted_score", default: 0
     t.integer "cached_weighted_total", default: 0
     t.float "cached_weighted_average", default: 0.0
+    t.string "img_src"
+    t.text "body_text"
   end
 
   create_table "categories", force: :cascade do |t|

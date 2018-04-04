@@ -37,6 +37,10 @@ h1, h2, h3, h4, h5, h6 {
     
 }
 
+h4 {
+	font-size: 20px;
+}
+
 p {
     font-size: 13px;
 }
@@ -62,13 +66,18 @@ p.notice {
 .p-stats {
     font-size: 16px;
 }
+@media (min-width: 992px) {
+	p.article-body-text {
+		width: 171%;
+	}
+}
 
 .date {
 	color: #696969;
 }
 
 .container {
-	width: 90%;
+	width: 95%;
 }
 
 /* Icons styles */
@@ -191,7 +200,7 @@ p.notice {
 .article_img {
     width: 220px;
     height: 123px;
-    margin: 5px 0px 5px 0px;
+    margin: 15px 0px 0px 0px;
 }
 
 .article_img-history {

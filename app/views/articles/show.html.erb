@@ -7,8 +7,13 @@
 
     <div class="col-md-7 article-left-panel">
         <h2 style="padding-bottom: 10px;"><%= @article.headline %></h2>
-        <%= image_tag @article.article_img.url(:article_show), class: "article-show" %>
-        <h4 style="font-weight: 300; padding-top: 10px;"><%= @article.subheading %></h4>
+        <%= image_tag @article.img_src, class: "article-show" %>
+        <h4 style="font-weight: 500; padding-top: 10px; font-size: 17px;"><%= @article.subheading %></h4>
+        <br>
+        <h5> <%= @article.created_at.strftime("%A #{@article.created_at.day.ordinalize} %B, %Y ") %></h5>
+        <br>
+        <p class="article-body-text" style="font-size: 15px"> <%= @article.body_text %> </p>
+
         <br>
         
         <% if reader_signed_in? %>
@@ -44,7 +49,7 @@
 
             <div class="col-md-12 article-mini" align-self="middle">
                 <div class="article-mini-img" onclick="location.href='/articles/<%= related.id %>';" style="cursor: pointer;">
-                    <%= image_tag related.article_img.url(:article_show), class: "article-rel" %>
+                    <%= image_tag related.img_src, class: "article-rel" %>
                 </div>
                 <h5 class="article-mini-headline" onclick="location.href='/articles/<%= related.id %>';" style="cursor: pointer;" ><%= related.headline %></h5>
                 <p class="article-mini-date">

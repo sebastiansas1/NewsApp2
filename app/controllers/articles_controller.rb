@@ -1,10 +1,18 @@
 class ArticlesController < ApplicationController
+
+    include ApiHelper
+
     before_action :find_article, only: [:show, :edit, :update, :destroy, :vote]
     before_action :require_login
     before_action :authenticate_admin!, only: [:new, :edit, :destroy]
     respond_to :js, :json, :html
 
     def index
+
+        api = ApiHelper::GuardianApi.new('guardianapis', 1)
+        
+        api.all_articles 
+
         if params[:category].blank?
             @articles = Article.all.order("created_at DESC")
         elsif params[:category] == "Top Trending"
@@ -119,7 +127,7 @@ class ArticlesController < ApplicationController
     private
 
         def article_params
-            params.require(:article).permit(:headline, :subheading, :category_id, :keyword, :views, :likes, :article_img)
+            # params.require(:article).permit(:headline, :subheading, :category_id, :keyword, :views, :likes, :article_img)
         end
 
         def find_article

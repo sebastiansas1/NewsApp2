@@ -25,7 +25,7 @@
           <ul class="nav navbar-nav navbar-centre">
             <li><%= link_to "For Me", root_path %></li>
             <li><%= link_to "Trending", articles_path(category: "Top Trending")%></li>        
-            <li><%= link_to "Friends", friends_path(reader_id: current_reader.id) %></li>
+            <li><%= link_to "Friends", friends_path %></li>
           </ul>
 
         <% else %>
