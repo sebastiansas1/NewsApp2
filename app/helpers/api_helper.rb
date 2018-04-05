@@ -21,17 +21,21 @@ module ApiHelper
 
             articles.each do |article|
                 fields = article['fields']
-
+                category = article['sectionName'].to_s
                 headline = article['webTitle'].to_s
                 subheading = fields['trailText'].to_s
                 thumbnail = fields['thumbnail'].to_s
                 bodyText = fields['bodyText'].to_s
                 category = article['sectionName'].to_s
 
-                if !subheading.to_s['<'] && !bodyText.to_s.strip.empty? && !thumbnail.to_s.strip.empty?
+                if !subheading['<'] && !bodyText.strip.empty? && !thumbnail.strip.empty? && category.mb_chars.length < 15
                     
-                    Article.create(headline: headline, subheading: subheading, body_text: bodyText, category_id: 1, img_src: thumbnail, created_at: Time.now, updated_at: Time.now)
-                 
+                    Category.create(name: category)
+
+                    category_id = Category.find_by(:name => category).id
+
+                    Article.create(headline: headline, subheading: subheading, body_text: bodyText, category_id: category_id, img_src: thumbnail, created_at: Time.now, updated_at: Time.now)
+                    
                 end
             end
         end
