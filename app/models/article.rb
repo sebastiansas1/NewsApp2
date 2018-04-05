@@ -25,6 +25,7 @@
 #  cached_weighted_average  :float            default(0.0)
 #  img_src                  :string
 #  body_text                :text
+#  api_id                   :string
 #
 
 class Article < ApplicationRecord
@@ -37,5 +38,5 @@ class Article < ApplicationRecord
 
     has_attached_file :article_img, :styles => { :article_index => "220x123>", :article_show => "650x400>" }, :default_url => "/images/:style/missing.png"
     validates_attachment_content_type :article_img, :content_type => /\Aimage\/.*\z/
-    validates_uniqueness_of :headline
+    validates_uniqueness_of :api_id
 end

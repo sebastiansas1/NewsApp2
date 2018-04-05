@@ -11,6 +11,9 @@ include ApiHelper
 Reader.create!([{ id: 1, email: "lorena@gmail.com", password: "SDxDm123", :password_confirmation => "SDxDm123", created_at: Time.now, updated_at: Time.now, name: "Lorena" },
                    { id: 2, email: "mike@gmail.com", password: "SDxDm123", :password_confirmation => "SDxDm123", created_at: Time.now, updated_at: Time.now, name: "Mike" }])
 
+Friend.create!([{ id: 1, reader_id: 1, friend_id: 2, strength: 50 }, 
+                { id: 2, reader_id: 2, friend_id: 1, strength: 50 }])
+
 Admin.create!( id: 1, email: "sebastiansasbusiness@gmail.com", password: "SDxDm123", :password_confirmation => "SDxDm123", created_at: Time.now, updated_at: Time.now, name: "Sebastian" )
 
 p "Created #{Category.count} things"

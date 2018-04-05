@@ -20,6 +20,7 @@
 #  avatar_content_type    :string
 #  avatar_file_size       :integer
 #  avatar_updated_at      :datetime
+#  preference_id          :integer
 #
 
 class Reader < ApplicationRecord
@@ -28,8 +29,9 @@ class Reader < ApplicationRecord
   has_many :orders
   has_many :articles, through: :orders
   has_many :friends
+  has_many :preferences
 
-  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, default_url: "/images/:style/missing.png"
+  has_attached_file :avatar, styles: { medium: "300x300>", thumb: "100x100>" }, :default_url => "/assets/medium/default.png"
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   # Include default devise modules. Others available are:

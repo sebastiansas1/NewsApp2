@@ -14,13 +14,17 @@ module ApiHelper
         end
 
         def all_articles
-            json = self.class.get("/search?#{PARAMS_KEY}&page-size=20&show-fields=trailText,thumbnail,bodyText")
+            json = self.class.get("/search?#{PARAMS_KEY}&page-size=20&show-tags=keyword&show-fields=trailText,thumbnail,bodyText")
             # json = self.class.get("/search?#{PARAMS_KEY}", @options)
             response = json['response']
             articles = response['results']
 
             articles.each do |article|
+                api_article_id = article['id']
+
                 fields = article['fields']
+                tags = article['tags']
+
                 category = article['sectionName'].to_s
                 headline = article['webTitle'].to_s
                 subheading = fields['trailText'].to_s
@@ -30,11 +34,16 @@ module ApiHelper
 
                 if !subheading['<'] && !bodyText.strip.empty? && !thumbnail.strip.empty? && category.mb_chars.length < 15
                     
+                    tags.each do |tag|
+                        keyword = "#{tag['webTitle'].to_s}, "
+                        # Associate keyword with category
+                    end
+
                     Category.create(name: category)
 
                     category_id = Category.find_by(:name => category).id
 
-                    Article.create(headline: headline, subheading: subheading, body_text: bodyText, category_id: category_id, img_src: thumbnail, created_at: Time.now, updated_at: Time.now)
+                    Article.create(api_id: api_article_id, headline: headline, subheading: subheading, body_text: bodyText, category_id: category_id, img_src: thumbnail, created_at: Time.now, updated_at: Time.now)
                     
                 end
             end

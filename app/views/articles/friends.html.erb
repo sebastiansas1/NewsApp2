@@ -35,10 +35,10 @@
                         <% @article = Article.find(friend_article.article_id) %>
 
                         <div class="col-md-3 article-box-history" onclick="location.href='/articles/<%= @article.id %>';" style="cursor: pointer;">
-                            <h5 class="article-headline-history"><%= @article.headline %></h5>
                             <a href="/articles/<%= @article.id %>" class="a-article">
-                                <%= image_tag @article.article_img.url(:article_index), class: "article_img-history" %>
+                                <%= image_tag @article.img_src, class: "article_img-history", style:"margin-top:14px;" %>
                             </a>
+                            <h5 class="article-headline-history"><%= @article.headline %></h5>
                         </div>
 
                     <% end %>
