@@ -5,7 +5,6 @@
 #  id                       :integer          not null, primary key
 #  headline                 :string
 #  subheading               :string
-#  keyword                  :string
 #  created_at               :datetime         not null
 #  updated_at               :datetime         not null
 #  admin_id                 :integer
@@ -35,6 +34,7 @@ class Article < ApplicationRecord
     belongs_to :category
     has_many :orders
     has_many :readers, through: :orders 
+    has_many :keywords, as: :word
 
     has_attached_file :article_img, :styles => { :article_index => "220x123>", :article_show => "650x400>" }, :default_url => "/images/:style/missing.png"
     validates_attachment_content_type :article_img, :content_type => /\Aimage\/.*\z/

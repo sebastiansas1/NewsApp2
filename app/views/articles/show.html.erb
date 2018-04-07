@@ -12,7 +12,7 @@
         <br>
         <h5> <%= @article.created_at.strftime("%A #{@article.created_at.day.ordinalize} %B, %Y ") %></h5>
         <br>
-        <p class="article-body-text" style="font-size: 15px"> <%= @article.body_text %> </p>
+        <p class="article-body-text" style="font-size: 17px"> <%= @article.body_text %> </p>
 
         <br>
         
@@ -71,7 +71,17 @@
 <div class="row row-article-stats article-info">
     <div class="col-md-4 col-article-info" align="left">
         <p class="p-stats">Category: <strong><%= @article.category.name %></strong></p>
-        <p class="p-stats">Keyword: <strong><%= @article.keyword %></strong></p>
+        <p class="p-stats">Keyword: 
+            <strong>
+                <% @article.keywords.each_with_index do |keyword, index| %>
+                    <% if index != @article.keywords.count - 1%>
+                        <%= keyword.name%>,   
+                    <% else %>
+                        <%= keyword.name%>
+                    <% end %>
+                <% end %>
+            </strong>
+        </p>
     </div>
 
     <div class="col-md-8 col-article-stats" align="left">
@@ -81,17 +91,4 @@
 </div>
 
 <br><br>
-
-<!-- NAVIGATION LINKS -->
-
-<div class="links btn-group">
-
-    <% if admin_signed_in? %>
-
-        <%= link_to  "Edit", edit_article_path(@article), class: "btn btn-custom" %>
-        <%= link_to  "Delete", article_path(@article), class: "btn btn-custom", method: :delete, data: { confirm: "Are you sure?" } %>    
-
-    <% end %>
-
-</div>
 

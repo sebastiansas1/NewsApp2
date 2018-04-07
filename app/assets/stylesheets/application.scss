@@ -92,6 +92,28 @@ p.notice {
 	text-transform: uppercase;
 }
 
+@media (min-width: 768px) {
+
+	.navbar-nav .active-nav a::after {
+
+		border-bottom: 5px solid #f70455;
+		bottom: -4.9px;
+		content: " ";
+		left: 0;
+		position: absolute;
+		right: 0;
+	}
+}
+
+.navbar-default .navbar-nav > .active-nav > a {
+	background-color: transparent;
+	color: black;
+	&:hover {
+		background-color: transparent;
+		color: black;
+	}
+}
+
 .navbar-default {
 	background-color: #fff;
 	padding-bottom: 5px;
@@ -99,6 +121,7 @@ p.notice {
 
 	.navbar-nav > li > a {
 		color: #222;
+		
 		&:hover {
 			color: darken(#f70455, 5%);
 			transition: 0.5s;
@@ -419,3 +442,5 @@ a:hover, a:focus, a:active  {
     border-color: #f70455;
     box-shadow: inset 0 1px 1px rgba(255, 9, 67, 0.075), 0 0 8px rgba(233, 102, 144, 0.6); 
 }
+
+

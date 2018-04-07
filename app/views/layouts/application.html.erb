@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>NewsApp</title>
+    <title><%=@title%></title>
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <script defer src="https://use.fontawesome.com/releases/v5.0.9/js/all.js" integrity="sha384-8iPTk2s/jMVj81dnzb/iFR2sdA7u06vHJyyLlAd4snFpCl/SnyUjRrbdJsw1pGIl" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/png" href="/assets/medium/logo3.png">
     
   </head>
 
@@ -22,11 +24,23 @@
             <%= link_to  "NewsApp", root_path, class: "navbar-brand logo", style: "color: #f70455;" %>
           </div>
 
-          <ul class="nav navbar-nav navbar-centre">
-            <li><%= link_to "For Me", root_path %></li>
-            <li><%= link_to "Trending", articles_path(category: "Top Trending")%></li>        
-            <li><%= link_to "Friends", friends_path %></li>
-          </ul>
+          <% if reader_signed_in? %>
+
+            <ul class="nav navbar-nav navbar-centre">
+              <li class="<%=cp(root_path)%>-nav"> <%= link_to glyph(:heart) + " For Me", root_path %></li>
+              <li class="<%=cp(articles_path)%>-nav"> <%= link_to glyph(:stats) + " Trending", articles_path(category: "Top Trending")%></li>        
+              <li class="<%=cp(friends_path)%>-nav"> <%= link_to glyph(:star) + " Friends", friends_path %></li>
+            </ul>
+
+          <% else %>
+
+            <ul class="nav navbar-nav navbar-centre">
+              <li class="<%=cp(root_path)%>-nav"> <%= link_to glyph(:globe) + " Global Activity", root_path %></li>
+              <li class="<%=cp(articles_path)%>-nav"> <%= link_to glyph(:user) + " Users", articles_path %></li>      
+              <li class="<%=cp(friends_path)%>-nav"> <%= link_to glyph(:misc) + " Misc", friends_path %></li>
+            </ul>
+
+          <% end %>
 
         <% else %>
 
@@ -80,7 +94,6 @@
 
           <% if admin_signed_in? %>
 
-            <li><%= link_to glyph(:flash) + " Add Article", new_article_path %></li>
             <li><%= link_to current_admin.name, edit_admin_registration_path %></li>
             <li><%= link_to  "Log Out", destroy_reader_session_path, method: :delete %></li>
 

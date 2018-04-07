@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180405181812) do
+ActiveRecord::Schema.define(version: 20180407154247) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -33,7 +33,6 @@ ActiveRecord::Schema.define(version: 20180405181812) do
   create_table "articles", force: :cascade do |t|
     t.string "headline"
     t.string "subheading"
-    t.string "keyword"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "admin_id"
@@ -73,9 +72,11 @@ ActiveRecord::Schema.define(version: 20180405181812) do
   create_table "keywords", force: :cascade do |t|
     t.string "name"
     t.integer "relevance", default: 0, null: false
+    t.string "word_type"
+    t.integer "word_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "preference_id"
+    t.index ["word_type", "word_id"], name: "index_keywords_on_word_type_and_word_id"
   end
 
   create_table "orders", force: :cascade do |t|
@@ -88,7 +89,6 @@ ActiveRecord::Schema.define(version: 20180405181812) do
   create_table "preferences", force: :cascade do |t|
     t.string "category"
     t.integer "relevance", default: 0, null: false
-    t.integer "keyword_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "reader_id"
@@ -112,7 +112,6 @@ ActiveRecord::Schema.define(version: 20180405181812) do
     t.string "avatar_content_type"
     t.integer "avatar_file_size"
     t.datetime "avatar_updated_at"
-    t.integer "preference_id"
     t.index ["email"], name: "index_readers_on_email", unique: true
     t.index ["reset_password_token"], name: "index_readers_on_reset_password_token", unique: true
   end
