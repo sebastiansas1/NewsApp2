@@ -49,6 +49,9 @@ class ArticlesController < ApplicationController
                 @order.reader_id = current_reader.id 
                 @order.save                 
 
+                Category.find(@article.category_id).increment!(:relevance)
+            
+
                 @keywords = @article.keywords.all
 
                 current_reader.preferences.create(category: @related_category, created_at: Time.now, updated_at: Time.now)
@@ -188,7 +191,7 @@ class ArticlesController < ApplicationController
         end 
 
         def require_login
-            unless admin_signed_in? || reader_signed_in? 
+            unless reader_signed_in? 
               redirect_to new_reader_session_path
             end
         end

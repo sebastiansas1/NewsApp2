@@ -21,7 +21,7 @@
         <% if reader_signed_in? || admin_signed_in? %>
 
           <div class="navbar-header">
-            <%= link_to  "NewsApp", root_path, class: "navbar-brand logo", style: "color: #f70455;" %>
+            <img src="/assets/medium/logo3.png" alt="News App Logo" class="navbar-brand logo" onclick="location.href='/';" >
           </div>
 
           <% if reader_signed_in? %>
@@ -35,9 +35,9 @@
           <% else %>
 
             <ul class="nav navbar-nav navbar-centre">
-              <li class="<%=cp(root_path)%>-nav"> <%= link_to glyph(:globe) + " Global Activity", root_path %></li>
-              <li class="<%=cp(articles_path)%>-nav"> <%= link_to glyph(:user) + " Users", articles_path %></li>      
-              <li class="<%=cp(friends_path)%>-nav"> <%= link_to glyph(:misc) + " Misc", friends_path %></li>
+              <li class="<%=cp(root_path)%>-nav"> <%= link_to glyph(:globe) + " Global Activity", statistics_path %></li>
+              <li class="<%=cp(articles_path)%>-nav"> <%= link_to glyph(:user) + " Users", users_path  %></li>      
+              <li class="<%=cp(friends_path)%>-nav"> <%= link_to glyph(:misc) + " Misc" %></li>
             </ul>
 
           <% end %>
@@ -45,7 +45,7 @@
         <% else %>
 
           <div class="navbar-login">
-            <%= link_to  "NewsApp", root_path, class: "navbar-brand navbar-initial", style: "color: #f70455;"  %>
+            <img src="/assets/medium/logo3.png" alt="News App Logo" class="navbar-brand navbar-initial" onclick="location.href='/';" >
           </div>
 
         <% end %>
@@ -95,7 +95,7 @@
           <% if admin_signed_in? %>
 
             <li><%= link_to current_admin.name, edit_admin_registration_path %></li>
-            <li><%= link_to  "Log Out", destroy_reader_session_path, method: :delete %></li>
+            <li><%= link_to  "Log Out", destroy_admin_session_path, method: :delete %></li>
 
           <% end %>
 

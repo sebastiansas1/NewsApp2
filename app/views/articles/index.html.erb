@@ -6,11 +6,11 @@
 <% end %>
 
 <h1 class="current-category" style="font-weight: bold;"><%= params[:category] %></h1>
-<div class="row">
+<div class="row justify-content-center">
 
     <% @articles.each do |article| %>
 
-        <div class="col-md-3 article-box" onclick="location.href='/articles/<%= article.id %>';" style="cursor: pointer;">
+        <div class="col-md-3 col-md-offset-1 article-box" onclick="location.href='/articles/<%= article.id %>';" style="cursor: pointer;">
             <a href="/articles/<%= article.id %>" class="a-article">
                 <%= image_tag article.img_src, class: "article_img" %>
             </a>

@@ -25,6 +25,8 @@ gem 'devise', '~> 4.4', '>= 4.4.3'
 gem 'paperclip', '~> 6.0'
 gem 'acts_as_votable', '~> 0.11.1'
 gem 'httparty', '~> 0.16.2'
+gem 'groupdate', '~> 4.0'
+gem 'chartkick', '~> 2.3', '>= 2.3.3'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

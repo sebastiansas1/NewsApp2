@@ -14,16 +14,14 @@ module ApiHelper
         end
 
         def all_articles
-            json = self.class.get("/search?#{PARAMS_KEY}&page-size=40&show-tags=keyword&show-fields=trailText,thumbnail,bodyText")
-            # json = self.class.get("/search?#{PARAMS_KEY}", @options)
+            json = self.class.get("/search?#{PARAMS_KEY}&page-size=140&show-tags=keyword&show-fields=trailText,thumbnail,bodyText")
             response = json['response']
             articles = response['results']
 
             articles.each do |article|
+
                 api_article_id = article['id']
-
                 fields = article['fields']
-
                 category = article['sectionName'].to_s
                 headline = article['webTitle'].to_s
                 subheading = fields['trailText'].to_s
@@ -49,14 +47,18 @@ module ApiHelper
                             Article.find_by(api_id: api_article_id).keywords.create(name: keyword, created_at: Time.now, updated_at: Time.now)
     
                         end
-
                     end
-
-
-                    
                 end
             end
         end
+
+        def related_articles(article_id)
+            json = self.class.get("/#{article_id}?#{PARAMS_KEY}show-tags=keyword&show-fields=trailText,thumbnail,bodyText")
+
+
+
+        end
+
     end
 
 end

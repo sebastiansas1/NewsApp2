@@ -50,7 +50,7 @@ p.alert {
 	font-weight: 500;
 	font-size: 14px;
     margin: 0;
-    color: #f70455;
+    color: #f70439;
 	padding-left: 5px;
 }
 
@@ -96,7 +96,7 @@ p.notice {
 
 	.navbar-nav .active-nav a::after {
 
-		border-bottom: 5px solid #f70455;
+		border-bottom: 5px solid #f70439;
 		bottom: -4.9px;
 		content: " ";
 		left: 0;
@@ -123,7 +123,7 @@ p.notice {
 		color: #222;
 		
 		&:hover {
-			color: darken(#f70455, 5%);
+			color: darken(#f70439, 5%);
 			transition: 0.5s;
 		}
 	}
@@ -138,19 +138,19 @@ p.notice {
 	}
 
 	.dropdown-menu > li > a:hover {
-		background-color: #f70455;
+		background-color: #f70439;
 		color: #fff;
 	}
 
 	.navbar-nav > .open > a, .navbar-nav > .open > a:hover, .navbar-nav > .open > a:focus {
-		background-color: #f70455;
+		background-color: #f70439;
 		color: #fff;	
 	}
 
 }
 
 .dropdown-menu > .active > a {
-	background-color: #f70455;
+	background-color: #f70439;
 	color: #fff;
 }
 
@@ -182,6 +182,28 @@ p.notice {
 	display: flex;
 }
 
+.reader-bar {
+	display: flex;
+}
+
+.reader-bar-text {
+	margin-left: 6px;
+}
+
+.col-reader {
+	margin-right: 15px;
+	margin-left: 15px;
+}
+
+.col-preferences {
+	margin-bottom: 30px;
+}
+
+.col-keywords {
+	margin-bottom: 30px;
+}
+
+
 .friend-bar-text {
 	width: 200px;
 }
@@ -192,24 +214,30 @@ p.notice {
 
 .navbar-login {
     float: left;
-    padding: 15px;
+    padding: 4px;
     text-align: center;
     width: 100%;
 }
 .navbar-initial {
     float:none;
-    font-weight: bold;
-    font-size: 25px;
+    width: 100px;
+	height: 100px;
+	padding: 0px;
+	cursor: pointer;
 }
 
 .logo {
-	font-weight: bold;
+	width: 50px;
+	height: 50px;
+	margin: 0px 45px 0px 15px;
+	padding: 0px;
+	cursor: pointer;
 }
 
 /* Article styles */
 
 .red-word {
-    color: #f70455;
+    color: #f70439;
 }
 
 .article-headline {
@@ -278,7 +306,7 @@ p.notice {
 }
 
 .article-mini-category, .article-mini-category:hover  {
-    color: #f70455;
+    color: #f70439;
 }
 
 .btn-like {
@@ -341,15 +369,15 @@ a:hover, a:focus, a:active  {
 /* Button/link styles */
 
 .btn-custom {
-	color: #f70455;
+	color: #f70439;
 	background-color: #fff;
-	border: 1px solid #f70455;
+	border: 1px solid #f70439;
 	padding: 8px 20px;
 	border-radius: 5px;
 	font-family: 'Ubuntu', sans-serif;
 	&:hover {
 		text-decoration: none;
-		background-color: #f70455;
+		background-color: #f70439;
 		color: #fff;
 		transition: 0.5s;
 	}
@@ -370,6 +398,15 @@ a:hover, a:focus, a:active  {
 	}	
 }
 
+.btn-preference {
+	margin: 10px;
+	border: 1px solid #afafaf;
+}
+
+.btn-keyword {
+	margin: 10px;
+	border: 1px solid #afafaf;
+}
 /* current-category styles */
 
 .current-category {
@@ -439,8 +476,8 @@ a:hover, a:focus, a:active  {
 /* Form styles */
 
 .form-control:focus {
-    border-color: #f70455;
-    box-shadow: inset 0 1px 1px rgba(255, 9, 67, 0.075), 0 0 8px rgba(233, 102, 144, 0.6); 
+    border-color: #f70439;
+    box-shadow: inset 0 1px 1px rgba(255, 9, 42, 0.075), 0 0 8px rgba(233, 102, 120, 0.6); 
 }
 
 

@@ -2,57 +2,53 @@
 
 <div class="row">
 
-<% @friends.each do |friend| %>
+    <% @friends.each do |friend| %>
 
-    <% @reader = Reader.find(friend.friend_id) %>
+        <% @reader = Reader.find(friend.friend_id) %>
 
-    <!-- Friend Bar -->
+        <!-- Friend Bar -->
 
-    <div class="col-md-6">
+        <div class="col-md-6">
 
-        <br><br>
+            <br><br>
 
-        <div class="col-md-12 col-md-offset-1">
+            <div class="col-md-12 col-md-offset-1">
 
-            <div class="friend-bar">
-                <%= image_tag @reader.avatar, class: "avatar-friend" %>
-                <div class="friend-bar-text">
-                    <h3 class="friend-name"><%= @reader.name %></h3>
-                    <p class="friend-name">Has been reading ...</p>
+                <div class="friend-bar">
+                    <%= image_tag @reader.avatar, class: "avatar-friend" %>
+                    <div class="friend-bar-text">
+                        <h3 class="friend-name"><%= @reader.name %></h3>
+                        <p class="friend-name">Has been reading ...</p>
+                    </div>
                 </div>
+                
+                <br>
+
             </div>
-            
-            <br>
+        
+            <div class="col-md-12 col-md-offset-1" style="margin-bottom: 10px;">
 
-        </div>
-    
-        <div class="col-md-12 col-md-offset-1" style="margin-bottom: 10px;">
+                <% @array.each do |a| %>
+                    <% if a[friend.friend_id].class == Array %>
+                        <% a[friend.friend_id].take(4).each do |friend_article| %>  
+                            
+                            <% @article = Article.find(friend_article.article_id) %>
 
-            <% @array.each do |a| %>
-                <% if a[friend.friend_id].class == Array %>
-                    <% a[friend.friend_id].take(4).each do |friend_article| %>  
-                        
-                        <% @article = Article.find(friend_article.article_id) %>
+                            <div class="col-md-3 article-box-history" onclick="location.href='/articles/<%= @article.id %>';" style="cursor: pointer;">
+                                <a href="/articles/<%= @article.id %>" class="a-article">
+                                    <%= image_tag @article.img_src, class: "article_img-history", style:"margin-top:14px;" %>
+                                </a>
+                                <h5 class="article-headline-history"><%= @article.headline %></h5>
+                            </div>
 
-                        <div class="col-md-3 article-box-history" onclick="location.href='/articles/<%= @article.id %>';" style="cursor: pointer;">
-                            <a href="/articles/<%= @article.id %>" class="a-article">
-                                <%= image_tag @article.img_src, class: "article_img-history", style:"margin-top:14px;" %>
-                            </a>
-                            <h5 class="article-headline-history"><%= @article.headline %></h5>
-                        </div>
-
+                        <% end %>
                     <% end %>
                 <% end %>
-            <% end %>
+
+            </div>
 
         </div>
 
-    </div>
-
-
-
-<% end %> 
-
-</div>
+    <% end %> 
 
 </div>

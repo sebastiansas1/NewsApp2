@@ -1,0 +1,62 @@
+<h1 class="current-category">Global Statistics</h1>
+
+<br>
+
+<h3>Readers</h3>
+
+<div class="row row-readers">
+
+    <% @readers.each do |reader| %>
+
+        <!-- Reader Bar -->
+
+        <div class="col-md-2 col-reader">
+
+            <br><br>
+
+
+            <div class="reader-bar" style="cursor:pointer;" >
+                <%= image_tag reader.avatar, class: "avatar-friend" %>
+                <div class="reader-bar-text">
+                    <h3 class="reader-name"><%= reader.name %></h3>
+                </div>
+            </div>
+            
+            <br>
+    
+
+        </div>
+
+    <% end %> 
+
+</div>
+
+<br>
+
+<h3>Category Relevance</h3>
+
+<br>
+
+<div class="col-md-12 col-preferences">
+
+    <%= pie_chart @data %>
+
+</div>
+
+
+
+<h3>Keyword Relevance</h3>
+
+<br>
+
+<div class="col-md-12 col-keywords">
+
+    <% @keywords.each do |keyword| %>
+
+        <button type="button" class="btn btn-secondary btn-keyword">
+            <%= keyword.name %> <span class="badge badge-light"><%= keyword.relevance %></span>
+        </button>
+
+    <% end %>
+
+</div>
