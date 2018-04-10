@@ -1,0 +1,49 @@
+<div class="col-md-12 col-reader-statistics">
+
+    <div class="reader-bar">
+        <%= image_tag @reader.avatar, class: "avatar-friend" %>
+        <div class="reader-bar-text">
+            <h3 class="reader-name" style="margin-bottom: 2px;"><%= @reader.name %></h3>
+            <p>Preference: 
+                <strong class="purple-word">
+                    All
+                </strong>
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<div class="col-md-12">
+
+    <div class="col-md-12 col-keywords">
+
+        <% @preferences.each do |preference| %>
+
+            <div class="col-md-3 word-box">
+
+                <h4 class="preference-name category" onclick="location.href='/statistics/readers/<%=@reader.id%>/preferences/<%=preference.id%>';" ><%= preference.category %> <span class="badge badge-light preference" style="margin: 5px;"><%= preference.relevance %></span></h4>
+
+                <% preference.keywords.order(relevance: :desc).take(4).each do |keyword| %>
+
+                    <div class="word-box word">
+                        <h6><%= keyword.name %> <span class="badge badge-light keyword" style="float: right;"><%= keyword.relevance %></span></h6>
+                    </div>          
+
+                <% end %>
+
+                <% unless (preference.keywords.count - 4) <= 0 %>
+
+                    <div class="word-box word" onclick="location.href='/statistics/readers/<%=@reader.id%>/preferences/<%=preference.id%>';">
+                        <h6><u><%= (preference.keywords.count - 4) %> more keywords</u></h6>
+                    </div>
+
+                <% end %>
+
+            </div>
+
+        <% end %>
+
+    </div>
+
+</div>

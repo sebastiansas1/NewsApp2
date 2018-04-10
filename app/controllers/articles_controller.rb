@@ -42,15 +42,11 @@ class ArticlesController < ApplicationController
         if reader_signed_in?
             if current_reader.orders.where(:article_id => @article.id).blank?
 
-                @order = Order.new 
-                @article.views += 1
-                @article.save
-                @order.article_id = @article.id 
-                @order.reader_id = current_reader.id 
-                @order.save                 
+                @article.increment!(:views)
+
+                current_reader.orders.create(article_id: @article.id, reader_id: current_reader.id, category_id: @article.category_id, created_at: Time.now, updated_at: Time.now)            
 
                 Category.find(@article.category_id).increment!(:relevance)
-            
 
                 @keywords = @article.keywords.all
 

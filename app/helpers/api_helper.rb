@@ -44,8 +44,11 @@ module ApiHelper
     
                             keyword = tag['webTitle'].to_s
                             # Associate keyword with article
-                            Article.find_by(api_id: api_article_id).keywords.create(name: keyword, created_at: Time.now, updated_at: Time.now)
-    
+                            cat = Category.find_by(:name => keyword)
+
+                            if cat.nil?
+                                Article.find_by(api_id: api_article_id).keywords.create(name: keyword, created_at: Time.now, updated_at: Time.now)
+                            end
                         end
                     end
                 end

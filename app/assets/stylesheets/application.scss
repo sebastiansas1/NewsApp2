@@ -203,6 +203,26 @@ p.notice {
 	margin-bottom: 30px;
 }
 
+.col-reader-statistics {
+	margin: 20px 0px 30px 0px;
+}
+
+.category {
+	cursor:pointer;
+	text-align: center; 
+	margin: 20px 0px 20px 0px;
+	&:hover {
+		color: #8c18f8;
+	}
+}
+
+.word {
+	overflow: hidden;
+	cursor:pointer;
+	&:hover {
+		color: #f70439;
+	}
+}
 
 .friend-bar-text {
 	width: 200px;
@@ -238,6 +258,10 @@ p.notice {
 
 .red-word {
     color: #f70439;
+}
+
+.purple-word {
+	color: #8c18f8;
 }
 
 .article-headline {
@@ -478,6 +502,23 @@ a:hover, a:focus, a:active  {
 .form-control:focus {
     border-color: #f70439;
     box-shadow: inset 0 1px 1px rgba(255, 9, 42, 0.075), 0 0 8px rgba(233, 102, 120, 0.6); 
+}
+
+.word-box {
+	margin: 10px 5px 5px 5px;
+	padding: 5px 10px 5px 10px;
+	border-radius: 3px;
+	background-color: white;
+	border: #acaaaa 1px solid;
+	font-weight: bold;
+}
+
+.keyword {
+	background-color: #f81848;
+}
+
+.preference {
+	background-color: #8c18f8;
 }
 
 

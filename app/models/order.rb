@@ -2,11 +2,12 @@
 #
 # Table name: orders
 #
-#  id         :integer          not null, primary key
-#  article_id :integer
-#  reader_id  :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  article_id  :integer
+#  reader_id   :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  category_id :integer
 #
 
 class Order < ApplicationRecord

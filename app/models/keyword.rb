@@ -4,7 +4,7 @@
 #
 #  id         :integer          not null, primary key
 #  name       :string
-#  relevance  :integer
+#  relevance  :integer          default(0), not null
 #  word_type  :string
 #  word_id    :integer
 #  created_at :datetime         not null

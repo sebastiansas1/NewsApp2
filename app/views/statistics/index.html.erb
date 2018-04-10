@@ -2,7 +2,7 @@
 
 <br>
 
-<h3>Readers</h3>
+<h3>Readers (<%= @readers.count %>)</h3>
 
 <div class="row row-readers">
 
@@ -15,7 +15,7 @@
             <br><br>
 
 
-            <div class="reader-bar" style="cursor:pointer;" >
+            <div class="reader-bar" onclick="location.href='statistics/readers/<%= reader.id %>';" style="cursor:pointer;" >
                 <%= image_tag reader.avatar, class: "avatar-friend" %>
                 <div class="reader-bar-text">
                     <h3 class="reader-name"><%= reader.name %></h3>
@@ -34,29 +34,20 @@
 <br>
 
 <h3>Category Relevance</h3>
+<p>(based on <b><%= @readers.count %></b> readers)</p>
 
 <br>
 
 <div class="col-md-12 col-preferences">
 
-    <%= pie_chart @data %>
+    <%= pie_chart @data, donut: true  %>
 
 </div>
 
-
-
-<h3>Keyword Relevance</h3>
+<h3>Topic Relevance</h3>
 
 <br>
 
 <div class="col-md-12 col-keywords">
-
-    <% @keywords.each do |keyword| %>
-
-        <button type="button" class="btn btn-secondary btn-keyword">
-            <%= keyword.name %> <span class="badge badge-light"><%= keyword.relevance %></span>
-        </button>
-
-    <% end %>
-
+    <%= bar_chart Keyword.where("relevance > ?", 0).where(:word_type => "Preference").order(relevance: :desc).limit(50).group(:name).sum(:relevance), colors: ["#93f", "#666"], min: 0, max: 10, width: "90%", height: "1200px"   %>
 </div>

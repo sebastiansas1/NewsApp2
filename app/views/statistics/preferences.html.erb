@@ -1,0 +1,41 @@
+<div class="col-md-12 col-reader-statistics">
+
+    <div class="reader-bar">
+        <%= image_tag @reader.avatar, class: "avatar-friend" %>
+        <div class="reader-bar-text">
+            <h3>
+                <h3 style="cursor:pointer; margin-bottom: 2px;">
+                    <%= link_to  @reader.name, statistics_reader_path(@reader.id) %>
+                </h3>
+                <p>Preference: 
+                    <strong class="purple-word">
+                        <%=@preference.category%>
+                    </strong>
+                </p>
+            </h3>
+        </div>
+    </div>
+
+</div>
+
+<br>
+
+<h5>Articles read with this preference: <%=@categorised_orders.count%></h5>
+
+<br>
+
+<div class="col-md-12">
+
+    <%= area_chart @categorised_orders.group_by_day(:created_at).count, colors: ["#93f", "#666"] %>
+
+</div>
+
+<div class="col-md-12">
+
+    <br><h5>Keywords in this category: <%= @keywords.count %></h5> <br>
+
+    <%= bar_chart @keywords.where("relevance > ?", 0).order(relevance: :desc).limit(20).group(:name).sum(:relevance), colors: ["#93f", "#666"], min: 0, max: 10, width: "90%", height: "800px"   %>
+
+</div>
+
+

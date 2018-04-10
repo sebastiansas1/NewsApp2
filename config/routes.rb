@@ -19,7 +19,9 @@ Rails.application.routes.draw do
 
   resources :statistics
 
-  get "users" => "statistics#users"
+  get "statistics/readers/:reader_id" => "statistics#readers", as: 'statistics_reader'
+  get "statistics/readers/:reader_id/preferences/:preference_id" => "statistics#preferences", as: 'statistics_reader_preference'
+  get "statistics/readers/:reader_id/keywords/:preference_id" => "statistics#keywords", as: 'statistics_reader_keyword'
   
   # ROOT PATH
 
