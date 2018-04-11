@@ -1,8 +1,9 @@
 class StatisticsController < ApplicationController
 
     before_action :require_login
-    before_action :find_reader, only: [:readers, :preferences]
-    before_action :find_preference, only: [:preferences]
+    before_action :find_reader, only: [:readers, :preferences, :keywords]
+    before_action :find_preference, only: [:preferences, :keywords]
+    before_action :find_word, only: [:keywords]
     respond_to :js, :json, :html
 
     def index 
@@ -29,9 +30,25 @@ class StatisticsController < ApplicationController
         category_id = Category.find_by(:name => @preference.category).id 
 
         @categorised_orders = @reader.orders.where(:category_id => category_id).order(created_at: :asc)
- 
-        @day_wise_sorted_orders  = @categorised_orders.group_by{ |t| t.created_at.strftime("%A %B %Y ")}
 
+    end
+
+    def keywords
+
+        category_id = Category.find_by(:name => @preference.category).id 
+
+        orders = @reader.orders.where(:category_id => category_id) 
+
+        orders.each do |order|
+            
+            @keywords = Article.find(order.article_id).keywords
+
+            @keywords.each do |keyword|
+                if keyword.name == @word.name
+                    KeywordStatistic.create(keyword_id: @word.id, name: keyword.name, created_at: order.created_at)
+                end
+            end
+        end
     end
 
     private 
@@ -48,6 +65,10 @@ class StatisticsController < ApplicationController
 
     def find_preference
         @preference = Preference.find(params[:preference_id])
+    end
+
+    def find_word
+        @word = Keyword.find(params[:keyword_id])
     end
 
 end

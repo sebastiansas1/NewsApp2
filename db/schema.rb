@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180410160412) do
+ActiveRecord::Schema.define(version: 20180411170248) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -68,6 +68,13 @@ ActiveRecord::Schema.define(version: 20180410160412) do
     t.datetime "updated_at", null: false
     t.integer "strength"
     t.integer "friend_id"
+  end
+
+  create_table "keyword_statistics", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "keyword_id"
   end
 
   create_table "keywords", force: :cascade do |t|

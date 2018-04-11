@@ -26,7 +26,7 @@
 
                 <% preference.keywords.order(relevance: :desc).take(4).each do |keyword| %>
 
-                    <div class="word-box word">
+                    <div class="word-box word" onclick="location.href='/statistics/readers/<%=@reader.id%>/preferences/<%=preference.id%>/keywords/<%=keyword.id%>';">
                         <h6><%= keyword.name %> <span class="badge badge-light keyword" style="float: right;"><%= keyword.relevance %></span></h6>
                     </div>          
 

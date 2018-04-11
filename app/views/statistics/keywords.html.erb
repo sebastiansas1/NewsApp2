@@ -1,0 +1,29 @@
+<div class="col-md-12 col-reader-statistics">
+
+    <div class="reader-bar">
+        <%= image_tag @reader.avatar, class: "avatar-friend" %>
+        <div class="reader-bar-text">
+            <h3 style="cursor:pointer; margin-bottom: 2px;">
+                <%= link_to  @reader.name, statistics_reader_path(@reader.id) %>
+            </h3>
+            <p>Preference: 
+                <strong class="red-word">
+                    <%= @word.name %>
+                </strong>
+            </p>
+        </div>
+    </div>
+
+</div>
+
+<h1>Keywords</h1>
+
+
+<div class="col-md-12">
+
+    <%= line_chart KeywordStatistic.where(:keyword_id => @word.id).group_by_day(:created_at).count, colors: ["#93f", "#666"] %>
+
+</div>
+
+
+

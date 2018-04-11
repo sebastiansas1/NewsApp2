@@ -49,5 +49,5 @@
 <br>
 
 <div class="col-md-12 col-keywords">
-    <%= bar_chart Keyword.where("relevance > ?", 0).where(:word_type => "Preference").order(relevance: :desc).limit(50).group(:name).sum(:relevance), colors: ["#93f", "#666"], min: 0, max: 10, width: "90%", height: "1200px"   %>
+    <%= bar_chart Keyword.where("relevance > ?", 0).where(:word_type => "Preference").order(relevance: :desc).limit(150).group(:name).sum(:relevance), colors: ["#93f", "#666"], min: 0, max: 20, width: "90%", height: "2500px"   %>
 </div>
