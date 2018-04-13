@@ -1,0 +1,33 @@
+<% if !@personal_articles.empty? %>
+
+    <h1 class="current-category" style="font-weight: bold;">Picked Articles just for 
+        <strong class="red-word">You
+        </strong>
+    </h1>    
+
+    <div class="row justify-content-center">
+
+        <% @personal_articles.each do |article| %>
+
+            <div class="col-md-3 col-md-offset-1 article-box" onclick="location.href='/articles/<%= article.id %>';" style="cursor: pointer;">
+                <a href="/articles/<%= article.id %>" class="a-article">
+                    <%= image_tag article.img_src, class: "article_img" %>
+                </a>
+                
+                <h4 class="article-headline"><%= article.headline %></h4>
+
+                <p class="article-mini-date" style="position: absolute; bottom: 0px; text-transform: uppercase; font-size: 14px; color:gray;">
+                    <%= Category.find(article.category_id).name %>
+                </p>
+            </div>
+
+        <% end %>
+
+    </div>
+
+<% else %>
+
+    <h1 class="current-category" style="font-weight: bold;">Start reading some articles</h1>   
+  
+<% end %>
+

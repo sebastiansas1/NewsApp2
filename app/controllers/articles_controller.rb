@@ -1,17 +1,12 @@
 class ArticlesController < ApplicationController
-  include ApiHelper
 
-  before_action :find_article, only: %i[show edit update destroy vote]
+  before_action :find_article, only: %i[show vote]
   before_action :require_login
   skip_before_action :verify_authenticity_token, only: [:show]
   respond_to :js, :json, :html
 
   def index
     @title = 'Homepage'
-
-    api = ApiHelper::GuardianApi.new('guardianapis', 1)
-
-    api.all_articles
 
     if params[:category].blank?
       @articles = Article.all.order('created_at DESC')
@@ -53,7 +48,7 @@ class ArticlesController < ApplicationController
         @keywords.each do |keyword|
           next if keyword == @related_category
 
-          current_reader.preferences.find_by(category: @related_category).keywords.create(name: keyword.name, created_at: Time.now, updated_at: Time.now)
+          current_reader.preferences.find_by(category: @related_category).keywords.create(name: keyword.name, tag: keyword.tag, created_at: Time.now, updated_at: Time.now)
           word = current_reader.preferences.find_by(category: @related_category).keywords.find_by(name: keyword.name)
 
           unless word.nil?
@@ -65,47 +60,12 @@ class ArticlesController < ApplicationController
     end
   end
 
-  def new
-    @article = current_admin.articles.build
-    @categories = Category.all.map { |c| [c.name, c.id] }
-  end
-
-  def create
-    @article = current_admin.articles.build(article_params)
-    @article.category_id = params[:category_id]
-
-    if @article.save
-      redirect_to root_path
-    else
-      render 'new'
-    end
-  end
-
-  def edit
-    @categories = Category.all.map { |c| [c.name, c.id] }
-  end
-
-  def update
-    @article.category_id = params[:category_id]
-    if @article.update(article_params)
-      redirect_to article_path(@article)
-    else
-      render 'edit'
-    end
-  end
-
-  def destroy
-    @article.destroy
-    redirect_to root_path
-  end
-
   def vote
     if !current_reader.liked? @article
 
       @article.liked_by current_reader
       @keywords = @article.keywords.all
       @related_category = Category.find(@article.category_id).name
-
       current_reader.preferences.find_by(category: @related_category).increment!(:relevance)
 
       @keywords.each do |keyword|
@@ -114,7 +74,7 @@ class ArticlesController < ApplicationController
         word = current_reader.preferences.find_by(category: @related_category).keywords.find_by(name: keyword.name)
 
         unless word.nil?
-          word.relevance += 3
+          word.relevance += 1
           word.save
         end
       end
@@ -164,10 +124,6 @@ class ArticlesController < ApplicationController
   end
 
   private
-
-  def article_params
-    # params.require(:article).permit(:headline, :subheading, :category_id, :keyword_id, :views, :likes, :article_img)
-  end
 
   def find_article
     @article = Article.find(params[:id])

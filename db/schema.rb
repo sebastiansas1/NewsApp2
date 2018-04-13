@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180411170248) do
+ActiveRecord::Schema.define(version: 20180413194539) do
 
   create_table "admins", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -35,14 +35,9 @@ ActiveRecord::Schema.define(version: 20180411170248) do
     t.string "subheading"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "admin_id"
     t.integer "views", default: 0, null: false
     t.integer "likes", default: 0, null: false
     t.integer "category_id"
-    t.string "article_img_file_name"
-    t.string "article_img_content_type"
-    t.integer "article_img_file_size"
-    t.datetime "article_img_updated_at"
     t.integer "cached_votes_total", default: 0
     t.integer "cached_votes_score", default: 0
     t.integer "cached_votes_up", default: 0
@@ -53,6 +48,7 @@ ActiveRecord::Schema.define(version: 20180411170248) do
     t.string "img_src"
     t.text "body_text"
     t.string "api_id"
+    t.datetime "publication_date"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -84,6 +80,7 @@ ActiveRecord::Schema.define(version: 20180411170248) do
     t.integer "word_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "tag"
     t.index ["word_type", "word_id"], name: "index_keywords_on_word_type_and_word_id"
   end
 
@@ -93,6 +90,30 @@ ActiveRecord::Schema.define(version: 20180411170248) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "category_id"
+  end
+
+  create_table "personal_articles", force: :cascade do |t|
+    t.string "api_id"
+    t.string "headline"
+    t.string "subheading"
+    t.string "img_src"
+    t.text "body_text"
+    t.integer "category_id"
+    t.integer "views", default: 0, null: false
+    t.integer "likes", default: 0, null: false
+    t.integer "rank", default: 0, null: false
+    t.integer "cached_votes_total", default: 0
+    t.integer "cached_votes_score", default: 0
+    t.integer "cached_votes_up", default: 0
+    t.integer "cached_votes_down", default: 0
+    t.integer "cached_weighted_score", default: 0
+    t.integer "cached_weighted_total", default: 0
+    t.float "cached_weighted_average", default: 0.0
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.datetime "publication_date"
+    t.integer "reader_id"
+    t.datetime "read_date"
   end
 
   create_table "preferences", force: :cascade do |t|

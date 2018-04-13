@@ -1,7 +1,12 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%=@title%></title>
+    <% unless @title.nil? %>
+      <title><%=@title%></title>    
+    <% else %>
+      <title>News App</title>
+    <% end %>
+
     <%= csrf_meta_tags %>
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
@@ -27,7 +32,7 @@
           <% if reader_signed_in? %>
 
             <ul class="nav navbar-nav navbar-centre">
-              <li class="<%=cp(root_path)%>-nav"> <%= link_to glyph(:heart) + " For Me", root_path %></li>
+              <li class="<%=cp(personal_articles_path(reader_id: current_reader.id))%>-nav"> <%= link_to glyph(:heart) + " For Me", personal_articles_path(reader_id: current_reader.id) %></li>
               <li class="<%=cp(articles_path)%>-nav"> <%= link_to glyph(:stats) + " Trending", articles_path(category: "Top Trending")%></li>        
               <li class="<%=cp(friends_path)%>-nav"> <%= link_to glyph(:star) + " Friends", friends_path %></li>
             </ul>

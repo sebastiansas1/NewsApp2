@@ -1,15 +1,17 @@
 # == Schema Information
 #
-# Table name: articles
+# Table name: personal_articles
 #
 #  id                      :integer          not null, primary key
+#  api_id                  :string
 #  headline                :string
 #  subheading              :string
-#  created_at              :datetime         not null
-#  updated_at              :datetime         not null
+#  img_src                 :string
+#  body_text               :text
+#  category_id             :integer
 #  views                   :integer          default(0), not null
 #  likes                   :integer          default(0), not null
-#  category_id             :integer
+#  rank                    :integer          default(0), not null
 #  cached_votes_total      :integer          default(0)
 #  cached_votes_score      :integer          default(0)
 #  cached_votes_up         :integer          default(0)
@@ -17,18 +19,17 @@
 #  cached_weighted_score   :integer          default(0)
 #  cached_weighted_total   :integer          default(0)
 #  cached_weighted_average :float            default(0.0)
-#  img_src                 :string
-#  body_text               :text
-#  api_id                  :string
+#  created_at              :datetime         not null
+#  updated_at              :datetime         not null
 #  publication_date        :datetime
+#  reader_id               :integer
+#  read_date               :datetime
 #
 
-class Article < ApplicationRecord
+class PersonalArticle < ApplicationRecord
   acts_as_votable
 
-  belongs_to :category
-  has_many :orders
-  has_many :readers, through: :orders
+  belongs_to :reader
   has_many :keywords, as: :word
 
   validates_uniqueness_of :api_id
