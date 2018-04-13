@@ -8,7 +8,11 @@
             </h3>
             <p>Preference: 
                 <strong class="red-word">
-                    <%= @word.name %>
+                    <%= @word.name %> 
+                </strong>
+                within
+                <strong class="purple-word">
+                    <%= @preference.category %>
                 </strong>
             </p>
         </div>
@@ -16,12 +20,12 @@
 
 </div>
 
-<h1>Keywords</h1>
+<br><h5>Articles read with this preference: <%= KeywordStatistic.where(:keyword_id => @word.id).count %></h5> <br>
 
 
 <div class="col-md-12">
 
-    <%= line_chart KeywordStatistic.where(:keyword_id => @word.id).group_by_day(:created_at).count, colors: ["#93f", "#666"] %>
+    <%= line_chart KeywordStatistic.where(:keyword_id => @word.id).group_by_day(:created_at).count, colors: ["#f70439", "#666"] %>
 
 </div>
 
