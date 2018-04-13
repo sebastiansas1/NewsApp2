@@ -6,14 +6,14 @@ class ApplicationController < ActionController::Base
   protected
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :avatar])
-    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :avatar])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[name avatar])
+    devise_parameter_sanitizer.permit(:account_update, keys: %i[name avatar])
   end
 
   # Overwriting the sign_in redirect path method
   def after_sign_in_path_for(resource)
     stored_location_for(resource) ||
-      if resource.is_a?(Reader) 
+      if resource.is_a?(Reader)
         root_path
       elsif resource.is_a?(Admin)
         statistics_path
@@ -30,5 +30,4 @@ class ApplicationController < ActionController::Base
       root_path
     end
   end
-
 end

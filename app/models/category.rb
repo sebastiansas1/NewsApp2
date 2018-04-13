@@ -10,7 +10,7 @@
 #
 
 class Category < ApplicationRecord
-    has_many :articles
+  has_many :articles
 
-    validates_uniqueness_of :name
+  validates_uniqueness_of :name
 end

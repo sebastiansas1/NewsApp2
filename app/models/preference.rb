@@ -11,9 +11,9 @@
 #
 
 class Preference < ApplicationRecord
-    belongs_to :reader
-    has_many :keywords, as: :word
-    
-    validates_uniqueness_of :category, :scope => :reader_id
-    validates :relevance, :inclusion => { :in => 0..100 }
+  belongs_to :reader
+  has_many :keywords, as: :word
+
+  validates_uniqueness_of :category, scope: :reader_id
+  validates :relevance, inclusion: { in: 0..100 }
 end

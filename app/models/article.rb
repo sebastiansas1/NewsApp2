@@ -28,15 +28,15 @@
 #
 
 class Article < ApplicationRecord
-    acts_as_votable
-    
-    # belongs_to :admin
-    belongs_to :category
-    has_many :orders
-    has_many :readers, through: :orders 
-    has_many :keywords, as: :word
+  acts_as_votable
 
-    has_attached_file :article_img, :styles => { :article_index => "220x123>", :article_show => "650x400>" }, :default_url => "/images/:style/missing.png"
-    validates_attachment_content_type :article_img, :content_type => /\Aimage\/.*\z/
-    validates_uniqueness_of :api_id
+  # belongs_to :admin
+  belongs_to :category
+  has_many :orders
+  has_many :readers, through: :orders
+  has_many :keywords, as: :word
+
+  has_attached_file :article_img, styles: { article_index: '220x123>', article_show: '650x400>' }, default_url: '/images/:style/missing.png'
+  validates_attachment_content_type :article_img, content_type: /\Aimage\/.*\z/
+  validates_uniqueness_of :api_id
 end

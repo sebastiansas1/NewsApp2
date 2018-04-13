@@ -11,6 +11,6 @@
 #
 
 class Order < ApplicationRecord
-    belongs_to :reader
-    belongs_to :article
+  belongs_to :reader
+  belongs_to :article
 end

@@ -11,8 +11,7 @@
 #
 
 class Friend < ApplicationRecord
-    belongs_to :reader 
+  belongs_to :reader
 
-    validates :strength, :inclusion => { :in => 0..100 }
-    
+  validates :strength, inclusion: { in: 0..100 }
 end

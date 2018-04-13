@@ -12,8 +12,8 @@
 #
 
 class Keyword < ApplicationRecord
-    belongs_to :word, polymorphic: true
+  belongs_to :word, polymorphic: true
 
-    validates_uniqueness_of :name, :scope => :word_id
-    validates :relevance, :inclusion => { :in => 0..100 }
+  validates_uniqueness_of :name, scope: :word_id
+  validates :relevance, inclusion: { in: 0..100 }
 end
