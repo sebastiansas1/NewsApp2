@@ -111,7 +111,6 @@ module ApiHelper
     def sort_keywords(tags, api_article_id)
       tags.each do |tag|
         api_tag_id = tag['id'].to_s
-        puts "TAAAAAAGGGGGGG IIIIIS: #{api_tag_id}"
         keyword = tag['webTitle'].to_s
         # Associate keyword with article
         cat = Category.find_by(name: keyword)
