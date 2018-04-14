@@ -2,7 +2,7 @@ require 'rufus-scheduler'
 
 scheduler = Rufus::Scheduler.singleton
 
-scheduler.every '10m' do
+scheduler.every '6h' do
   api = ApiHelper::GuardianApi.new('guardianapis', 1)
   api.all_articles
   puts "Articles Updated from API at #{Time.now}"
