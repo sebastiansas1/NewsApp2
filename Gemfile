@@ -21,7 +21,7 @@ gem 'sprockets-rails', '~> 3.2', '>= 3.2.1'
 gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
 gem 'jquery-rails'
 gem 'sass', '~> 3.5', '>= 3.5.6'
-gem 'devise', '~> 4.4', '>= 4.4.3'
+gem 'devise'
 gem 'paperclip', '~> 6.0'
 gem 'acts_as_votable', '~> 0.11.1'
 gem 'httparty', '~> 0.16.2'
@@ -42,6 +42,22 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
+end
+
+group :production do 
+  gem 'mysql2', '>= 0.3.18', '< 0.5'
+  gem 'sprockets-rails', '~> 3.2', '>= 3.2.1'
+  gem 'bootstrap-sass', '~> 3.3', '>= 3.3.7'
+  gem 'jquery-rails'
+  gem 'sass', '~> 3.5', '>= 3.5.6'
+  gem 'devise'
+  gem 'paperclip', '~> 6.0'
+  gem 'acts_as_votable', '~> 0.11.1'
+  gem 'httparty', '~> 0.16.2'
+  gem 'chartkick', '~> 2.3', '>= 2.3.3'
+  gem 'groupdate'
+  gem 'rufus-scheduler', '~> 3.4', '>= 3.4.2'
+  gem 'yaml_db'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]

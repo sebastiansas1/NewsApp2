@@ -30,7 +30,7 @@ ActiveRecord::Schema.define(version: 20180413233530) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "articles", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "headline"
     t.text "subheading"
     t.datetime "created_at", null: false
@@ -77,7 +77,7 @@ ActiveRecord::Schema.define(version: 20180413233530) do
     t.string "name"
     t.integer "relevance", default: 0, null: false
     t.string "word_type"
-    t.bigint "word_id"
+    t.integer "word_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "tag"
@@ -146,7 +146,7 @@ ActiveRecord::Schema.define(version: 20180413233530) do
     t.index ["reset_password_token"], name: "index_readers_on_reset_password_token", unique: true
   end
 
-  create_table "votes", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+  create_table "votes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "votable_type"
     t.integer "votable_id"
     t.string "voter_type"

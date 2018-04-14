@@ -237,7 +237,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   chartkick (~> 2.3, >= 2.3.3)
   coffee-rails (~> 4.2)
-  devise (~> 4.4, >= 4.4.3)
+  devise
   groupdate
   httparty (~> 0.16.2)
   jbuilder (~> 2.5)
