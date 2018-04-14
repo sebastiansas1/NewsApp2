@@ -58,6 +58,7 @@ group :production do
   gem 'groupdate'
   gem 'rufus-scheduler', '~> 3.4', '>= 3.4.2'
   gem 'yaml_db'
+  gem 'rails_12factor'
 end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
