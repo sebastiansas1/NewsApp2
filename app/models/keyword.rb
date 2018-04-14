@@ -3,13 +3,13 @@
 # Table name: keywords
 #
 #  id         :integer          not null, primary key
-#  name       :string
+#  name       :string(255)
 #  relevance  :integer          default(0), not null
-#  word_type  :string
+#  word_type  :string(255)
 #  word_id    :integer
 #  created_at :datetime         not null
 #  updated_at :datetime         not null
-#  tag        :string
+#  tag        :string(255)
 #
 
 class Keyword < ApplicationRecord

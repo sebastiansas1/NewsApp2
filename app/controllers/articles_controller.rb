@@ -2,22 +2,22 @@ class ArticlesController < ApplicationController
 
   before_action :find_article, only: %i[show vote]
   before_action :require_login
-  skip_before_action :verify_authenticity_token, only: [:show]
+  skip_before_action :verify_authenticity_token, only: %i[index show vote history friends]
   respond_to :js, :json, :html
 
   def index
     @title = 'Homepage'
 
     if params[:category].blank?
-      @articles = Article.all.order('created_at DESC')
+      @articles = Article.all.order(publication_date: :desc)
     elsif params[:category] == 'Top Trending'
       @title = 'Homepage - Top Trending'
-      @articles = Article.all.order(views: :desc, created_at: :desc).limit(8)
-      @most_liked_articles = Article.all.order(cached_votes_score: :desc, created_at: :desc).limit(8)
+      @articles = Article.all.order(views: :desc, publication_date: :desc).limit(8)
+      @most_liked_articles = Article.all.order(cached_votes_score: :desc, publication_date: :desc).limit(8)
     else
       @title = "Homepage - #{params[:category]}"
       @category_id = Category.find_by(name: params[:category]).id
-      @articles = Article.where(category_id: @category_id).order('created_at DESC')
+      @articles = Article.where(category_id: @category_id).order(publication_date: :desc)
     end
   end
 
@@ -27,7 +27,7 @@ class ArticlesController < ApplicationController
     @related_articles = Article
                         .where(category_id: @article.category_id)
                         .where.not(id: @article.id)
-                        .order('created_at DESC')
+                        .order(publication_date: :desc)
                         .limit(2)
     @related_category = Category.find(@article.category_id).name
 

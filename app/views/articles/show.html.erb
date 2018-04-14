@@ -10,7 +10,7 @@
         <%= image_tag @article.img_src, class: "article-show" %>
         <h4 style="font-weight: 500; padding-top: 10px; font-size: 17px;"><%= @article.subheading %></h4>
         <br>
-        <h5> <%= @article.created_at.strftime("%A #{@article.created_at.day.ordinalize} %B, %Y ") %></h5>
+        <h5> <%= @article.publication_date.strftime("%A #{@article.publication_date.day.ordinalize} %B, %Y ") %></h5>
         <br>
         <p class="article-body-text" style="font-size: 17px"> <%= @article.body_text %> </p>
 

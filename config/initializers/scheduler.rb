@@ -2,13 +2,13 @@ require 'rufus-scheduler'
 
 scheduler = Rufus::Scheduler.singleton
 
-scheduler.every '20s' do
+scheduler.every '10m' do
   api = ApiHelper::GuardianApi.new('guardianapis', 1)
   api.all_articles
   puts "Articles Updated from API at #{Time.now}"
 end
 
-scheduler.every '1m' do
+scheduler.every '10m' do
   api = ApiHelper::GuardianApi.new('guardianapis', 2)
 
   Reader.all.each do |reader|

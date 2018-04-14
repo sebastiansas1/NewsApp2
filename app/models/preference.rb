@@ -3,7 +3,7 @@
 # Table name: preferences
 #
 #  id         :integer          not null, primary key
-#  category   :string
+#  category   :string(255)
 #  relevance  :integer          default(0), not null
 #  created_at :datetime         not null
 #  updated_at :datetime         not null

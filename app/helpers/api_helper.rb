@@ -74,6 +74,7 @@ module ApiHelper
 
       return false if valid_article(subheading, body_text, thumbnail, category.mb_chars.length)
 
+      Category.create(name: category)
       category_id = Category.find_by(name: category).id
 
       if new_personal_article(api_article_id, headline, subheading,

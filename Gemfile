@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.1.4'
-gem 'sqlite3'
+gem 'mysql2', '>= 0.3.18', '< 0.5'
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '>= 3.2'
 gem 'uglifier', '>= 1.3.0'
@@ -25,9 +25,11 @@ gem 'devise', '~> 4.4', '>= 4.4.3'
 gem 'paperclip', '~> 6.0'
 gem 'acts_as_votable', '~> 0.11.1'
 gem 'httparty', '~> 0.16.2'
-gem 'groupdate', '~> 4.0'
 gem 'chartkick', '~> 2.3', '>= 2.3.3'
+gem 'groupdate'
 gem 'rufus-scheduler', '~> 3.4', '>= 3.4.2'
+gem 'yaml_db'
+
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

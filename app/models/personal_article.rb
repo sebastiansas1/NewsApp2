@@ -3,11 +3,11 @@
 # Table name: personal_articles
 #
 #  id                      :integer          not null, primary key
-#  api_id                  :string
-#  headline                :string
-#  subheading              :string
-#  img_src                 :string
-#  body_text               :text
+#  api_id                  :string(255)
+#  headline                :string(255)
+#  subheading              :text(65535)
+#  img_src                 :string(255)
+#  body_text               :text(65535)
 #  category_id             :integer
 #  views                   :integer          default(0), not null
 #  likes                   :integer          default(0), not null
@@ -18,7 +18,7 @@
 #  cached_votes_down       :integer          default(0)
 #  cached_weighted_score   :integer          default(0)
 #  cached_weighted_total   :integer          default(0)
-#  cached_weighted_average :float            default(0.0)
+#  cached_weighted_average :float(24)        default(0.0)
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  publication_date        :datetime

@@ -3,8 +3,8 @@
 # Table name: articles
 #
 #  id                      :integer          not null, primary key
-#  headline                :string
-#  subheading              :string
+#  headline                :string(255)
+#  subheading              :text(65535)
 #  created_at              :datetime         not null
 #  updated_at              :datetime         not null
 #  views                   :integer          default(0), not null
@@ -16,10 +16,10 @@
 #  cached_votes_down       :integer          default(0)
 #  cached_weighted_score   :integer          default(0)
 #  cached_weighted_total   :integer          default(0)
-#  cached_weighted_average :float            default(0.0)
-#  img_src                 :string
-#  body_text               :text
-#  api_id                  :string
+#  cached_weighted_average :float(24)        default(0.0)
+#  img_src                 :string(255)
+#  body_text               :text(65535)
+#  api_id                  :string(255)
 #  publication_date        :datetime
 #
 

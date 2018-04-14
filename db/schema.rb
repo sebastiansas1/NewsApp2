@@ -10,9 +10,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180413194539) do
+ActiveRecord::Schema.define(version: 20180413233530) do
 
-  create_table "admins", force: :cascade do |t|
+  create_table "admins", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -30,9 +30,9 @@ ActiveRecord::Schema.define(version: 20180413194539) do
     t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
   end
 
-  create_table "articles", force: :cascade do |t|
+  create_table "articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "headline"
-    t.string "subheading"
+    t.text "subheading"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "views", default: 0, null: false
@@ -44,21 +44,21 @@ ActiveRecord::Schema.define(version: 20180413194539) do
     t.integer "cached_votes_down", default: 0
     t.integer "cached_weighted_score", default: 0
     t.integer "cached_weighted_total", default: 0
-    t.float "cached_weighted_average", default: 0.0
+    t.float "cached_weighted_average", limit: 24, default: 0.0
     t.string "img_src"
     t.text "body_text"
     t.string "api_id"
     t.datetime "publication_date"
   end
 
-  create_table "categories", force: :cascade do |t|
+  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "relevance", default: 0, null: false
   end
 
-  create_table "friends", force: :cascade do |t|
+  create_table "friends", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "reader_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -66,14 +66,14 @@ ActiveRecord::Schema.define(version: 20180413194539) do
     t.integer "friend_id"
   end
 
-  create_table "keyword_statistics", force: :cascade do |t|
+  create_table "keyword_statistics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "keyword_id"
   end
 
-  create_table "keywords", force: :cascade do |t|
+  create_table "keywords", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "name"
     t.integer "relevance", default: 0, null: false
     t.string "word_type"
@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 20180413194539) do
     t.index ["word_type", "word_id"], name: "index_keywords_on_word_type_and_word_id"
   end
 
-  create_table "orders", force: :cascade do |t|
+  create_table "orders", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer "article_id"
     t.integer "reader_id"
     t.datetime "created_at", null: false
@@ -92,10 +92,10 @@ ActiveRecord::Schema.define(version: 20180413194539) do
     t.integer "category_id"
   end
 
-  create_table "personal_articles", force: :cascade do |t|
+  create_table "personal_articles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "api_id"
     t.string "headline"
-    t.string "subheading"
+    t.text "subheading"
     t.string "img_src"
     t.text "body_text"
     t.integer "category_id"
@@ -108,7 +108,7 @@ ActiveRecord::Schema.define(version: 20180413194539) do
     t.integer "cached_votes_down", default: 0
     t.integer "cached_weighted_score", default: 0
     t.integer "cached_weighted_total", default: 0
-    t.float "cached_weighted_average", default: 0.0
+    t.float "cached_weighted_average", limit: 24, default: 0.0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.datetime "publication_date"
@@ -116,7 +116,7 @@ ActiveRecord::Schema.define(version: 20180413194539) do
     t.datetime "read_date"
   end
 
-  create_table "preferences", force: :cascade do |t|
+  create_table "preferences", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "category"
     t.integer "relevance", default: 0, null: false
     t.datetime "created_at", null: false
@@ -124,7 +124,7 @@ ActiveRecord::Schema.define(version: 20180413194539) do
     t.integer "reader_id"
   end
 
-  create_table "readers", force: :cascade do |t|
+  create_table "readers", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "email", default: "", null: false
     t.string "encrypted_password", default: "", null: false
     t.string "reset_password_token"
@@ -146,7 +146,7 @@ ActiveRecord::Schema.define(version: 20180413194539) do
     t.index ["reset_password_token"], name: "index_readers_on_reset_password_token", unique: true
   end
 
-  create_table "votes", force: :cascade do |t|
+  create_table "votes", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "votable_type"
     t.integer "votable_id"
     t.string "voter_type"
