@@ -23,12 +23,14 @@ class StatisticsController < ApplicationController
   end
 
   def preferences
-    @keywords = @reader.preferences.find_by(id: @preference.id).keywords.order(relevance: :desc)
+    @keywords = @reader.preferences.find_by(id: @preference.id).keywords
 
     category_id = Category.find_by(name: @preference.category).id
 
-    @categorised_orders = @reader.orders.where(category_id: category_id).order(created_at: :asc)
+    @categorised_orders = @reader.orders.where(category_id: category_id)
+
   end
+
 
   def keywords
     category_id = Category.find_by(name: @preference.category).id

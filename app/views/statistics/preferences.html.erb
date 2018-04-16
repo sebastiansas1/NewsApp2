@@ -34,7 +34,7 @@
 
     <br><h5>Keywords in this category: <%= @keywords.count %></h5> <br>
 
-    <%= bar_chart @keywords.where("relevance > ?", 0).order(relevance: :desc).limit(20).group(:name).sum(:relevance), colors: ["#93f", "#666"], min: 0, max: 20, width: "90%", height: "800px"   %>
+    <%= bar_chart @keywords.where("relevance > ?", 0).limit(20).group(:name).sum(:relevance), colors: ["#93f", "#666"], min: 0, max: 20, width: "90%", height: "800px"   %>
 
 </div>
 

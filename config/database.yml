@@ -1,13 +1,39 @@
-#MySQL Database Configuration
+# #MySQL Database Configuration
+
+
+# default: &default
+#   adapter: mysql2
+#   encoding: utf8
+#   pool: 5
+#   username: root
+#   password: 
+#   host: localhost
+
+# development:
+#   <<: *default
+#   database: NewsApp_development
+
+# test:
+#   <<: *default
+#   database: NewsApp_test
+
+# production:
+#   <<: *default
+#   database: ENV['DATABASE_URL']
+#   username: ENV['DATABASE_USERNAME']
+#   password: ENV['DATABASE_PASSWORD']
+
+#PostgreSQL Database Configuration
 
 
 default: &default
-  adapter: mysql2
-  encoding: utf8
+  adapter: postgresql
+  encoding: unicode
   pool: 5
-  username: root
-  password: password
+  username: sebastian
+  password: 
   host: localhost
+  timeout: 5000
 
 development:
   <<: *default
@@ -16,9 +42,3 @@ development:
 test:
   <<: *default
   database: NewsApp_test
-
-production:
-  <<: *default
-  database: ENV['DATABASE_URL']
-  username: ENV['DATABASE_USERNAME']
-  password: ENV['DATABASE_PASSWORD']
