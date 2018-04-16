@@ -1,30 +1,4 @@
-# #MySQL Database Configuration
-
-
-# default: &default
-#   adapter: mysql2
-#   encoding: utf8
-#   pool: 5
-#   username: root
-#   password: 
-#   host: localhost
-
-# development:
-#   <<: *default
-#   database: NewsApp_development
-
-# test:
-#   <<: *default
-#   database: NewsApp_test
-
-# production:
-#   <<: *default
-#   database: ENV['DATABASE_URL']
-#   username: ENV['DATABASE_USERNAME']
-#   password: ENV['DATABASE_PASSWORD']
-
 #PostgreSQL Database Configuration
-
 
 default: &default
   adapter: postgresql
@@ -42,3 +16,13 @@ development:
 test:
   <<: *default
   database: NewsApp_test
+
+production: 
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: ivbrxlznebujoc
+  password: 8df9c9063260de42c37ff268d5e8f3cfdec7e43b35bb69ac291c2d99dfd71c9b
+  host: ec2-23-23-142-5.compute-1.amazonaws.com
+  port: 5432
+  database: ddms1jrgq9q33e
