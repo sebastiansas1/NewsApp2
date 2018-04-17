@@ -31,5 +31,5 @@ class Article < ApplicationRecord
   has_many :readers, through: :orders
   has_many :keywords, as: :word
 
-  validates_uniqueness_of :api_id
+  validates_uniqueness_of :api_id, scope: :reader_id
 end

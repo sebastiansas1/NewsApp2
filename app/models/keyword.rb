@@ -15,6 +15,6 @@
 class Keyword < ApplicationRecord
   belongs_to :word, polymorphic: true
 
-  validates_uniqueness_of :name, scope: :word_id
+  validates_uniqueness_of :name, conditions: -> { where.not(reader_id: nil) }, scope: %i[reader_id category_id]
   validates :relevance, inclusion: { in: 0..100 }
 end

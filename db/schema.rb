@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180413233530) do
+ActiveRecord::Schema.define(version: 20180417011336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -52,6 +52,7 @@ ActiveRecord::Schema.define(version: 20180413233530) do
     t.text "body_text"
     t.string "api_id"
     t.datetime "publication_date"
+    t.integer "reader_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -84,6 +85,8 @@ ActiveRecord::Schema.define(version: 20180413233530) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "tag"
+    t.integer "reader_id"
+    t.integer "category_id"
     t.index ["word_type", "word_id"], name: "index_keywords_on_word_type_and_word_id"
   end
 
@@ -93,6 +96,7 @@ ActiveRecord::Schema.define(version: 20180413233530) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "category_id"
+    t.string "article_url"
   end
 
   create_table "personal_articles", force: :cascade do |t|

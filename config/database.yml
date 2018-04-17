@@ -4,7 +4,7 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: 5
-  username: sebastian
+  username: Sebastian
   password: 
   host: localhost
   timeout: 5000

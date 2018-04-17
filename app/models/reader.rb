@@ -28,6 +28,7 @@ class Reader < ApplicationRecord
   has_many :orders
   has_many :articles, through: :orders
   has_many :personal_articles
+  has_many :articles
   has_many :friends
   has_many :preferences
 

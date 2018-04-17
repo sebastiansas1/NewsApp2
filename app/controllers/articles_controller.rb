@@ -1,6 +1,7 @@
 class ArticlesController < ApplicationController
 
   before_action :find_article, only: %i[show vote]
+  before_action :find_reader, only: %i[index_personal]
   before_action :require_login
   skip_before_action :verify_authenticity_token, only: %i[index show vote history friends]
   respond_to :js, :json, :html
@@ -9,7 +10,7 @@ class ArticlesController < ApplicationController
     @title = 'Homepage'
 
     if params[:category].blank?
-      @articles = Article.all.order(publication_date: :desc)
+      @articles = Article.where(reader_id: nil).order(publication_date: :desc)
     elsif params[:category] == 'Top Trending'
       @title = 'Homepage - Top Trending'
       @articles = Article.all.order(views: :desc, publication_date: :desc).limit(8)
@@ -19,6 +20,13 @@ class ArticlesController < ApplicationController
       @category_id = Category.find_by(name: params[:category]).id
       @articles = Article.where(category_id: @category_id).order(publication_date: :desc)
     end
+  end
+
+  def index_personal
+    @title = 'For You'
+
+    @articles = Article.where(reader_id: @reader.id)
+                       .order(publication_date: :desc)
   end
 
   def show
@@ -36,7 +44,7 @@ class ArticlesController < ApplicationController
 
         @article.increment!(:views)
 
-        current_reader.orders.create(article_id: @article.id, reader_id: current_reader.id, category_id: @article.category_id, created_at: Time.now, updated_at: Time.now)
+        current_reader.orders.create(article_id: @article.id, article_url: @article.api_id, reader_id: current_reader.id, category_id: @article.category_id, created_at: Time.now, updated_at: Time.now)
 
         Category.find(@article.category_id).increment!(:relevance)
 
@@ -48,7 +56,7 @@ class ArticlesController < ApplicationController
         @keywords.each do |keyword|
           next if keyword == @related_category
 
-          current_reader.preferences.find_by(category: @related_category).keywords.create(name: keyword.name, tag: keyword.tag, created_at: Time.now, updated_at: Time.now)
+          current_reader.preferences.find_by(category: @related_category).keywords.create(name: keyword.name, tag: keyword.tag, reader_id: current_reader.id, category_id: @article.category_id, created_at: Time.now, updated_at: Time.now)
           word = current_reader.preferences.find_by(category: @related_category).keywords.find_by(name: keyword.name)
 
           unless word.nil?
@@ -127,6 +135,10 @@ class ArticlesController < ApplicationController
 
   def find_article
     @article = Article.find(params[:id])
+  end
+
+  def find_reader
+    @reader = Reader.find(params[:reader_id])
   end
 
   def require_login

@@ -1,4 +1,4 @@
-<% if !@personal_articles.empty? %>
+<% if !@articles.empty? %>
 
     <h1 class="current-category" style="font-weight: bold;">Picked Articles just for 
         <strong class="red-word">You
@@ -7,7 +7,7 @@
 
     <div class="row justify-content-center">
 
-        <% @personal_articles.each do |article| %>
+        <% @articles.each do |article| %>
 
             <div class="col-md-3 col-md-offset-1 article-box" onclick="location.href='/articles/<%= article.id %>';" style="cursor: pointer;">
                 <a href="/articles/<%= article.id %>" class="a-article">

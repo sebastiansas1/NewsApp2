@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   get 'history' => 'articles#history'
   get 'friends' => 'articles#friends'
 
-  get 'readers/:reader_id/articles' => 'personal_articles#index', as: 'personal_articles'
+  get 'readers/:reader_id/articles' => 'articles#index_personal', as: 'personal_articles'
   get 'readers/:reader_id/articles/:article_id' => 'personal_articles#show', as: 'personal_article'
 
   # ADMIN ROUTES
