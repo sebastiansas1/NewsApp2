@@ -17,10 +17,11 @@
             <div class="article-mini-date" style="width: 85%; position: absolute; bottom: 0px; text-transform: uppercase; font-size: 14px; color:gray;">
                 <p>
                     <%= Category.find(article.category_id).name %>
-                    <% @orders.each do |order| %>
-                        <% if article.id == order.article_id %>
-                            <span style="color: #8c18f8; float: right;"><i class="fas fa-check-circle"></i> Read</span>
-                        <% end %>
+                    <% if @orders.find_by(article_id: article.id) %>
+                        <span style="color: #8c18f8; float: right;"><i class="fas fa-check-circle"></i> Read</span>
+                    <% end %>
+                    <% if article.created_at > current_reader.last_sign_in_at && @orders.find_by(article_id: article.id).nil? %>
+                        <span style="color: #f81848; float: right;"><i class="fab fa-hotjar"></i> New</span>
                     <% end %>
                 </p>
             </div>

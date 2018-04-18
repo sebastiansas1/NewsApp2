@@ -3,7 +3,6 @@ class ArticlesController < ApplicationController
   before_action :find_article, only: %i[show vote]
   before_action :find_reader, only: %i[index_personal]
   before_action :require_login
-  skip_before_action :verify_authenticity_token, only: %i[index show vote history friends]
   respond_to :js, :json, :html
 
   def index
