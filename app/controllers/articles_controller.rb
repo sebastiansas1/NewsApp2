@@ -8,6 +8,7 @@ class ArticlesController < ApplicationController
 
   def index
     @title = 'Homepage'
+    @orders = current_reader.orders.all.order(created_at: :desc)
 
     if params[:category].blank?
       @articles = Article.where(reader_id: nil).order(publication_date: :desc)
@@ -24,7 +25,7 @@ class ArticlesController < ApplicationController
 
   def index_personal
     @title = 'For You'
-
+    @orders = current_reader.orders.all.order(created_at: :desc)
     @articles = Article.where(reader_id: @reader.id)
                        .order(publication_date: :desc)
   end
@@ -97,7 +98,7 @@ class ArticlesController < ApplicationController
   def history
     @title = 'History'
 
-    @order = current_reader.orders.all.order('created_at DESC')
+    @order = current_reader.orders.all.order(created_at: :desc)
 
     # Retrives all orders and divides into two groups today's orders and other day's orders
     @grouped_orders = @order.group_by { |t| t.created_at.to_date == DateTime.now.to_date }

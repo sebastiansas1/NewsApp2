@@ -13,10 +13,18 @@
             </a>
             
             <h4 class="article-headline"><%= article.headline %></h4>
+            
+            <div class="article-mini-date" style="width: 85%; position: absolute; bottom: 0px; text-transform: uppercase; font-size: 14px; color:gray;">
+                <p>
+                    <%= Category.find(article.category_id).name %>
+                    <% @orders.each do |order| %>
+                        <% if article.id == order.article_id %>
+                            <span style="color: #8c18f8; float: right;"><i class="fas fa-check-circle"></i> Read</span>
+                        <% end %>
+                    <% end %>
+                </p>
+            </div>
 
-            <p class="article-mini-date" style="position: absolute; bottom: 0px; text-transform: uppercase; font-size: 14px; color:gray;">
-                <%= Category.find(article.category_id).name %>
-            </p>
         </div>
 
     <% end %>
