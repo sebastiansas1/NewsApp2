@@ -14,18 +14,18 @@
                 <strong class="purple-word">
                     <%= @preference.category %>
                 </strong>
-            </p>
+            </p><br>
         </div>
     </div>
 
 </div>
 
-<br><h5>Articles read with this preference: <%= KeywordStatistic.where(:keyword_id => @word.id).count %></h5> <br>
+<h3>Total Articles Read: <%= KeywordStatistic.where(:keyword_id => @word.id).count %></h3> <br>
 
 
 <div class="col-md-12">
 
-    <%= line_chart KeywordStatistic.where(:keyword_id => @word.id).group_by_day(:created_at).count, colors: ["#f70439", "#666"], min: 0, max: 6 %>
+    <%= line_chart KeywordStatistic.where(:keyword_id => @word.id).group_by_day(:created_at).count, colors: ["#f70439", "#666"],label: "Articles", min:0, max: @maxvalue %>
 
 </div>
 

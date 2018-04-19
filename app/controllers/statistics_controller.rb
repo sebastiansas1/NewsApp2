@@ -20,6 +20,8 @@ class StatisticsController < ApplicationController
 
   def readers
     @preferences = @reader.preferences.order(relevance: :desc)
+
+    @orders = @reader.orders
   end
 
   def preferences
@@ -28,6 +30,9 @@ class StatisticsController < ApplicationController
     category_id = Category.find_by(name: @preference.category).id
 
     @categorised_orders = @reader.orders.where(category_id: category_id)
+
+    @maxvalue = @categorised_orders.group_by_day(:created_at).count.values.max
+    @maxvalue += 1
 
   end
 
@@ -46,6 +51,10 @@ class StatisticsController < ApplicationController
         end
       end
     end
+
+    @maxvalue = KeywordStatistic.where(:keyword_id => @word.id).group_by_day(:created_at).count.values.max
+    @maxvalue += 1
+
   end
 
   private

@@ -11,7 +11,7 @@
                     <strong class="purple-word">
                         <%=@preference.category%>
                     </strong>
-                </p>
+                </p><br>
             </h3>
         </div>
     </div>
@@ -20,22 +20,34 @@
 
 <br>
 
-<h5>Articles read with this preference: <%=@categorised_orders.count%></h5>
+<h3>Total Articles Read: <%=@categorised_orders.count%></h3><br>
 
 <br>
 
 <div class="col-md-12">
 
-    <%= line_chart @categorised_orders.group_by_day(:created_at).count, colors: ["#93f", "#666"] %><br>
+    <%= line_chart @categorised_orders.group_by_day(:created_at).count, colors: ["#93f", "#666"], min: 0, max: @maxvalue, ytitle: "Articles", label: "Articles" %><br><br>
 
 </div>
 
-<h5>Keywords in this category: <%= @keywords.count %></h5> <br>
+<h3>Topics in this Category: <%= @keywords.count %></h3><br>
 
 <div class="col-md-12">
 
     <% heigth = 20*Keyword.where("relevance > ?", 0).limit(20).count %>
-    <%= bar_chart @keywords.where("relevance > ?", 0).limit(20).group(:name).sum(:relevance), colors: ["#93f", "#666"], min: 0, max: 20, width: "90%", height: "#{heigth}px"   %>
+    <%= bar_chart @keywords.where("relevance > ?", 0).limit(20).group(:name).sum(:relevance), colors: ["#93f", "#666"], min: 0, max: 20, width: "90%", height: "#{heigth}px", label: "Relevance" %> <br><br>
+
+</div>
+
+<h3>Reading Pattern for Topics</h3><br><br>
+
+<div class="col-md-12">
+
+    <% @set_of_keywords = @keywords.group(:id).order('max(relevance) DESC').limit(10)%>
+
+    <%= line_chart @set_of_keywords.all.map { |keyword|
+        {name: keyword.name, data: KeywordStatistic.where(keyword_id: keyword.id).group_by_day(:created_at).count}
+    }, legend: :left %>
 
 </div>
 

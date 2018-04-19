@@ -8,11 +8,13 @@
                 <strong class="purple-word">
                     All
                 </strong>
-            </p>
+            </p><br>
         </div>
     </div>
 
 </div>
+
+<h3>Preference Set</h3><br>
 
 <div class="col-md-12">
 
@@ -46,4 +48,12 @@
 
     </div>
 
+</div>
+
+<h3>Reading Pattern for Categories</h3><br><br>
+
+<div class="col-md-12">
+    <%= line_chart @preferences.all.map { |preference|
+        {name: preference.category, data: @orders.where(category_id: Category.find_by(name: preference.category).id).group_by_day(:created_at).count}
+    }, legend: :left, ytitle: "Articles" %>
 </div>

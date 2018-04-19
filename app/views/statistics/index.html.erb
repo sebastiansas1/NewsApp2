@@ -33,6 +33,17 @@
 
 <br>
 
+<h3>Reading Frequency</h3><br>
+
+<div class="col-md-12">
+
+    <%= line_chart Reader.all.map { |reader|
+        {name: reader.name, data: reader.orders.group_by_day(:created_at).count}
+    }, legend: :left, ytitle: "Articles" %> <br><br>
+
+</div>
+
+
 <h3>Category Relevance</h3>
 <p>(based on <b><%= @readers.count %></b> readers)</p>
 
@@ -40,7 +51,7 @@
 
 <div class="col-md-12 col-preferences">
 
-    <%= pie_chart @data, donut: true  %>
+    <%= pie_chart @data, donut: true, legend: :left  %>
 
 </div>
 
@@ -50,5 +61,5 @@
 
 <div class="col-md-12 col-keywords">
     <% heigth = 20*Keyword.where("relevance > ?", 0).count %>
-    <%= bar_chart Keyword.where("relevance > ?", 0).where(:word_type => "Preference").order(name: :asc).limit(150).group(:name).sum(:relevance), colors: ["#93f", "#666"], min: 0, max: 20, width: "90%", height: "#{heigth}px"   %>
+    <%= bar_chart Keyword.where("relevance > ?", 0).where(:word_type => "Preference").order(name: :asc).limit(150).group(:name).sum(:relevance), colors: ["#93f", "#666"], min: 0, max: 20, width: "90%", height: "#{heigth}px", xtitle: "Relevance (Global)", label: "Relevance"%>
 </div>
