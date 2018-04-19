@@ -26,13 +26,14 @@
 
 <div class="col-md-12">
 
-    <%= line_chart @categorised_orders.group_by_day(:created_at).count, colors: ["#93f", "#666"] %>
+    <%= line_chart @categorised_orders.group_by_day(:created_at).count, colors: ["#93f", "#666"] %><br>
 
 </div>
 
+<h5>Keywords in this category: <%= @keywords.count %></h5> <br>
+
 <div class="col-md-12">
 
-    <br><h5>Keywords in this category: <%= @keywords.count %></h5> <br>
     <% heigth = 20*Keyword.where("relevance > ?", 0).limit(20).count %>
     <%= bar_chart @keywords.where("relevance > ?", 0).limit(20).group(:name).sum(:relevance), colors: ["#93f", "#666"], min: 0, max: 20, width: "90%", height: "#{heigth}px"   %>
 

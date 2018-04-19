@@ -20,22 +20,22 @@
 
         <% @preferences.each do |preference| %>
 
-            <div class="col-md-3 word-box">
+            <div class="col-md-3 preference-box category-box">
 
                 <h4 class="preference-name category" onclick="location.href='/statistics/readers/<%=@reader.id%>/preferences/<%=preference.id%>';" ><%= preference.category %> <span class="badge badge-light preference" style="margin: 5px;"><%= preference.relevance %></span></h4>
 
                 <% preference.keywords.order(relevance: :desc).take(4).each do |keyword| %>
 
-                    <div class="word-box word" onclick="location.href='/statistics/readers/<%=@reader.id%>/preferences/<%=preference.id%>/keywords/<%=keyword.id%>';">
-                        <h6><%= keyword.name %> <span class="badge badge-light keyword" style="float: right;"><%= keyword.relevance %></span></h6>
+                    <div class="preference-box word-box" onclick="location.href='/statistics/readers/<%=@reader.id%>/preferences/<%=preference.id%>/keywords/<%=keyword.id%>';">
+                        <h6 style="font-size: 11px;"><%= keyword.name %> <span class="badge badge-light keyword" style="float: right;"><%= keyword.relevance %></span></h6>
                     </div>          
 
                 <% end %>
 
                 <% unless (preference.keywords.count - 4) <= 0 %>
 
-                    <div class="word-box word" onclick="location.href='/statistics/readers/<%=@reader.id%>/preferences/<%=preference.id%>';">
-                        <h6><u><%= (preference.keywords.count - 4) %> more keywords</u></h6>
+                    <div class="preference-box word-box" onclick="location.href='/statistics/readers/<%=@reader.id%>/preferences/<%=preference.id%>';">
+                        <h6 style="font-size: 11px;"><u><%= (preference.keywords.count - 4) %> more keywords</u></h6>
                     </div>
 
                 <% end %>
