@@ -16,4 +16,5 @@
 //= require turbolinks
 //= require Chart.bundle
 //= require chartkick
+//= require fontawesome-init
 //= require_tree .
