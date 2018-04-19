@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180417011336) do
+ActiveRecord::Schema.define(version: 20180419003038) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -97,30 +97,6 @@ ActiveRecord::Schema.define(version: 20180417011336) do
     t.datetime "updated_at", null: false
     t.integer "category_id"
     t.string "article_url"
-  end
-
-  create_table "personal_articles", force: :cascade do |t|
-    t.string "api_id"
-    t.string "headline"
-    t.text "subheading"
-    t.string "img_src"
-    t.text "body_text"
-    t.integer "category_id"
-    t.integer "views", default: 0, null: false
-    t.integer "likes", default: 0, null: false
-    t.integer "rank", default: 0, null: false
-    t.integer "cached_votes_total", default: 0
-    t.integer "cached_votes_score", default: 0
-    t.integer "cached_votes_up", default: 0
-    t.integer "cached_votes_down", default: 0
-    t.integer "cached_weighted_score", default: 0
-    t.integer "cached_weighted_total", default: 0
-    t.float "cached_weighted_average", default: 0.0
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.datetime "publication_date"
-    t.integer "reader_id"
-    t.datetime "read_date"
   end
 
   create_table "preferences", force: :cascade do |t|

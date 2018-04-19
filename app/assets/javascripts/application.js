@@ -10,11 +10,12 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
+// require turbolinks
+// require fontawesome-init
+
 //= require jquery3
 //= require bootstrap-sprockets
 //= require rails-ujs
-//= require turbolinks
 //= require Chart.bundle
 //= require chartkick
-//= require fontawesome-init
 //= require_tree .
