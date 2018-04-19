@@ -18,7 +18,7 @@ class ArticlesController < ApplicationController
     else
       @title = "Homepage - #{params[:category]}"
       @category_id = Category.find_by(name: params[:category]).id
-      @articles = Article.where(category_id: @category_id).order(publication_date: :desc)
+      @articles = Article.where(category_id: @category_id).order(created_at: :desc)
     end
   end
 

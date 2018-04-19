@@ -22,6 +22,9 @@ class StatisticsController < ApplicationController
     @preferences = @reader.preferences.order(relevance: :desc)
 
     @orders = @reader.orders
+
+    @articles = Article.where(reader_id: @reader.id)
+
   end
 
   def preferences

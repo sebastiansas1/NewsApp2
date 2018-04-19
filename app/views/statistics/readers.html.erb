@@ -55,5 +55,16 @@
 <div class="col-md-12">
     <%= line_chart @preferences.all.map { |preference|
         {name: preference.category, data: @orders.where(category_id: Category.find_by(name: preference.category).id).group_by_day(:created_at).count}
+    }, legend: :left, ytitle: "Articles" %> <br><br>
+</div>
+
+<h3>Suggestion Pattern</h3><br><br>
+
+<div class="col-md-12">
+
+    <%= line_chart @preferences.all.map { |preference|
+        {name: preference.category, data: @articles.where(category_id: Category.find_by(name: preference.category).id).group_by_day(:created_at).count}
     }, legend: :left, ytitle: "Articles" %>
+
+
 </div>
