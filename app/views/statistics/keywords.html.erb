@@ -25,7 +25,7 @@
 
 <div class="col-md-12">
 
-    <%= line_chart KeywordStatistic.where(:keyword_id => @word.id).group_by_day(:created_at).count, colors: ["#f70439", "#666"] %>
+    <%= line_chart KeywordStatistic.where(:keyword_id => @word.id).group_by_day(:created_at).count, colors: ["#f70439", "#666"], min: 0, max: KeywordStatistic.where(:keyword_id => @word.id).count %>
 
 </div>
 
