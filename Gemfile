@@ -11,7 +11,7 @@ gem 'puma', '~> 3.7'
 gem 'sass-rails', '>= 3.2'
 gem 'uglifier', '>= 1.3.0'
 gem 'coffee-rails', '~> 4.2'
-# gem 'turbolinks', '~> 5'
+gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
 # Custom Gems
@@ -36,7 +36,7 @@ end
 
 group :development do
   gem 'web-console', '>= 3.3.0'
-  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'listen'
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   gem 'annotate', '~> 2.7', '>= 2.7.2'

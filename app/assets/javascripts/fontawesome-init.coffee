@@ -1,2 +1,2 @@
-# $(document).on "turbolinks:load", ->
-#   FontAwesome.dom.i2svg()
+$(document).on "turbolinks:load", ->
+  FontAwesome.dom.i2svg()
