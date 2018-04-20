@@ -60,5 +60,5 @@
 <br>
 
 <div class="col-md-12 col-keywords">
-    <%= bar_chart @keywords.group(:name).sum(:relevance), colors: ["#93f", "#666"], min: 0, max: 100, width: "90%", height: "#{@heigth}px", xtitle: "Relevance (Global)", label: "Relevance"%>
+    <%= bar_chart @keywords.group(:name).sum(:preferencial_score), colors: ["#93f", "#666"], min: 0, max: 100, width: "90%", height: "#{@heigth}px", xtitle: "Relevance (Global)", label: "Relevance"%>
 </div>

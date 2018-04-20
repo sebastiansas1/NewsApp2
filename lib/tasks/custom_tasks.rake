@@ -3,13 +3,13 @@ namespace :custom_task do
   task update_personal_articles: :environment do
     api = ApiHelper::GuardianApi.new('guardianapis', 2)
     Reader.all.each do |reader|
-      puts "Doing articles for: #{reader.name}"
+      puts "Computing Articles for: #{reader.name}"
       return false if reader.preferences.nil?
       reader.preferences.order(relevance: :desc).limit(5).each do |preference|
-        puts "category: #{preference.category}"
+        puts "CATEGORY |||| #{preference.category}"
         return false if preference.nil?
         preference.keywords.order(relevance: :desc).limit(4).each do |keyword|
-          puts "word: #{keyword.name}"
+          puts "KEYWORD | #{keyword.name}"
           api.search(keyword.tag, reader.id) unless keyword.nil?
         end
       end
@@ -27,7 +27,7 @@ namespace :custom_task do
   desc 'Clean the database off all old and unread articles'
   task clean_old_articles: :environment do
     @trash = Article.where(views: 0)
-                             .where("created_at > '#{2.days.ago}'")
+                             .where("created_at < '#{2.days.ago}'")
 
     puts "#{@trash.count} Articles cleaned from database!"
 

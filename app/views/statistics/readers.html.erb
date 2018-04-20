@@ -24,12 +24,12 @@
 
             <div class="col-md-3 preference-box category-box">
 
-                <h4 class="preference-name category" onclick="location.href='/statistics/readers/<%=@reader.id%>/preferences/<%=preference.id%>';" ><%= preference.category %> <span class="badge badge-light preference" style="margin: 5px;"><%= preference.relevance %></span></h4>
+                <h4 class="preference-name category" onclick="location.href='/statistics/readers/<%=@reader.id%>/preferences/<%=preference.id%>';" ><%= preference.category %> <span class="badge badge-light preference" style="margin: 5px;"><%= ((preference.relevance / @preferences.sum(:relevance).to_f) * 100).round(0) %>%</span></h4>
 
                 <% preference.keywords.order(relevance: :desc).take(4).each do |keyword| %>
 
                     <div class="preference-box word-box" onclick="location.href='/statistics/readers/<%=@reader.id%>/preferences/<%=preference.id%>/keywords/<%=keyword.id%>';">
-                        <h6 style="font-size: 11px;"><%= keyword.name %> <span class="badge badge-light keyword" style="float: right;"><%= keyword.relevance %></span></h6>
+                        <h6 style="font-size: 11px;"><%= keyword.name[0..22]%> <span class="badge badge-light keyword" style="float: right;"><%= keyword.preferencial_score.to_i %></span></h6>
                     </div>          
 
                 <% end %>

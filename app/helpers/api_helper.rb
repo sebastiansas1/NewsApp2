@@ -10,9 +10,10 @@ module ApiHelper
     PAGE_SIZE = '&page-size=50'.freeze
     TAGS_KEYWORD = '&show-tags=keyword'.freeze
     FIELDS_ARTICLE = '&show-fields=trailText,thumbnail,bodyText'.freeze
-    STARS = '&star-rating=5'.freeze
+    MOST_VIEWED = '&show-most-viewed=true'.freeze
+    QUERY1 = '/search?'.freeze
 
-    PARAMETERS_API = "#{PARAMS_KEY}#{PAGE_SIZE}#{TAGS_KEYWORD}#{FIELDS_ARTICLE}".freeze
+    PARAMETERS_API = "#{PARAMS_KEY}#{PAGE_SIZE}#{TAGS_KEYWORD}#{FIELDS_ARTICLE}#{MOST_VIEWED}".freeze
 
     include HTTParty
     base_uri 'content.guardianapis.com'
@@ -24,7 +25,8 @@ module ApiHelper
     # Method that creates new articles (limited to 50)
     # from the Guardian API #
     def all_articles
-      json = self.class.get("/search?#{PARAMETERS_API}")
+      json = self.class.get("#{QUERY1 + PARAMETERS_API}")
+      puts "QUERY IS: #{QUERY1 + PARAMETERS_API}"
       response = json['response']
       articles = response['results']
 
@@ -35,7 +37,7 @@ module ApiHelper
 
     # Method that gathers articles based on the user's preferences #
     def search(tag_id, reader_id)
-      json = self.class.get("/search?#{PARAMETERS_API}&tag=#{tag_id}")
+      json = self.class.get("#{QUERY1 + PARAMETERS_API}&tag=#{tag_id}")
       response = json['response']
       articles = response['results']
 
@@ -56,8 +58,8 @@ module ApiHelper
       subheading = fields['trailText'].to_s
       thumbnail = fields['thumbnail'].to_s
       body_text = fields['bodyText'].to_s
-
-      return false if valid_article(subheading, body_text, thumbnail, category.mb_chars.length)
+      
+      return false if !valid_article(subheading, body_text, thumbnail, category.mb_chars.length)
 
       Category.create(name: category)
       category_id = Category.find_by(name: category).id
@@ -68,6 +70,7 @@ module ApiHelper
           sort_keywords(article['tags'], api_article_id)
         end
       else
+
         if new_personal_article(api_article_id, headline, subheading,
                                 body_text, category_id, thumbnail, 
                                 publication_date, reader_id)
@@ -78,9 +81,10 @@ module ApiHelper
 
     # Method that validates the json format is valid  #
     def valid_article(subheading, body_text, thumbnail, category_size)
-      unless !subheading['<'] && !body_text.strip.empty? &&
-             !thumbnail.strip.empty? && category_size < 15
+      if !subheading['<'] && !body_text.strip.empty? && !thumbnail.strip.empty? && category_size < 15
         true
+      else
+        false
       end
     end
 
@@ -104,8 +108,6 @@ module ApiHelper
 
       # Do not take if user has already read the article
       return false if Reader.find(reader_id).orders.find_by(article_url: api_id)
-
-      puts "CHECK THIS OUT! CURRENTLY DOING ARTICLE FOR READER WITH ID #{reader_id}"
 
       new_personal_article = Reader.find(reader_id)
                                    .articles
@@ -134,6 +136,7 @@ module ApiHelper
     end
 
     def sort_personal_keywords(tags, api_article_id, reader_id, category_id)
+      puts "Suggesting new article for #{Reader.find(reader_id).name}"
       tags.each do |tag|
         api_tag_id = tag['id'].to_s
         keyword = tag['webTitle'].to_s
