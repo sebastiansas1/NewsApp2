@@ -29,6 +29,7 @@ gem 'httparty', '~> 0.16.2'
 gem 'chartkick', '~> 2.3', '>= 2.3.4'
 gem 'groupdate'
 gem 'yaml_db'
+gem 'descriptive_statistics', '~> 2.4.0', :require => 'descriptive_statistics/safe'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

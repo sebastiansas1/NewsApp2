@@ -74,6 +74,7 @@ GEM
     coffee-script-source (1.12.2)
     concurrent-ruby (1.0.5)
     crass (1.0.3)
+    descriptive_statistics (2.4.0)
     devise (4.4.3)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
@@ -238,6 +239,7 @@ DEPENDENCIES
   capybara (~> 2.13)
   chartkick (~> 2.3, >= 2.3.4)
   coffee-rails (~> 4.2)
+  descriptive_statistics (~> 2.4.0)
   devise
   groupdate
   httparty (~> 0.16.2)

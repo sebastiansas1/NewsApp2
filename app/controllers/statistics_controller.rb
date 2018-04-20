@@ -6,16 +6,22 @@ class StatisticsController < ApplicationController
   respond_to :js, :json, :html
 
   def index
+
+    # normalizer = StatisticsHelper::Normalizer.new
+
+    # normalizer.normalize_keywords
+
     # ALL READERS
     @readers = Reader.all
 
     # ALL CATEGORIES - Maybe Table
     categories = Category.order(relevance: :desc).take(10)
-
     @data = categories.map { |c| [c.name, c.relevance] }.to_h
 
-    # ALL KEYWORDS - Maybe Table
-    @keywords = Keyword.order(relevance: :desc).take(20)
+    @heigth = 20*Keyword.where("relevance > ?", 0).count
+
+    @keywords = Keyword.where(word_type: "Preference").order(name: :asc).limit(150)
+
   end
 
   def readers

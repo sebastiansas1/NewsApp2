@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180419003038) do
+ActiveRecord::Schema.define(version: 20180420164900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 20180419003038) do
     t.string "tag"
     t.integer "reader_id"
     t.integer "category_id"
+    t.float "preferencial_score"
     t.index ["word_type", "word_id"], name: "index_keywords_on_word_type_and_word_id"
   end
 
