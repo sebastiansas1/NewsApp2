@@ -58,6 +58,8 @@ class StatisticsController < ApplicationController
 
     @categorised_orders = @reader.orders.where(category_id: category_id)
 
+    @heigth = 15*@keywords.count
+
     @maxvalue = @categorised_orders.group_by_day(:created_at).count.values.max
     @maxvalue += 1
 
