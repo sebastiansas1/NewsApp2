@@ -18,7 +18,12 @@ class ArticlesController < ApplicationController
     else
       @title = "Homepage - #{params[:category]}"
       @category_id = Category.find_by(name: params[:category]).id
-      @articles = Article.where(category_id: @category_id).order(publication_date: :desc)
+      # @articles = Article.where(category_id: @category_id).order(publication_date: :desc)
+      # @articles = Article.select(:api_id, :headline, 
+      #                            :subheading, :category_id, 
+      #                            :img_src, :publication_date, 
+      #                            :created_at, :updated_at).distinct.where(category_id: @category_id)
+      @articles = Article.select('DISTINCT ON (publication_date, api_id,headline) *').where(category_id: @category_id).order(publication_date: :desc)
     end
   end
 
