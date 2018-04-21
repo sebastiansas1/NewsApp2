@@ -43,6 +43,14 @@
 
 </div>
 
+<h3>Reading Patterns per Category</h3><br><br>
+
+<div class="col-md-12">
+    <%= line_chart @categories.map { |category|
+        {name: category.name, data: Order.where(category_id: category.id).group_by_day(:created_at).count}
+    }, legend: :left, ytitle: "Articles" %> <br><br>
+</div>
+
 
 <h3>Category Relevance</h3>
 <p>(based on <b><%= @readers.count %></b> readers)</p>
@@ -60,5 +68,6 @@
 <br>
 
 <div class="col-md-12 col-keywords">
-    <%= bar_chart @keywords.group(:name).sum(:preferencial_score), colors: ["#93f", "#666"], min: 0, max: 100, width: "90%", height: "#{@heigth}px", xtitle: "Relevance (Global)", label: "Relevance"%>
+    <%= bar_chart Keyword.where(word_type: "Preference").group(:name).sum(:preferencial_score), colors: ["#93f", "#666"], min: 0, max: 100, width: "90%", height: "#{@heigth}px", xtitle: "Relevance (Global)", label: "Relevance"%>
 </div>
+

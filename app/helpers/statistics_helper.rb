@@ -2,12 +2,21 @@ module StatisticsHelper
 
     class Normalizer
 
-        def normalize(value, max)
-            return normalized_data = ((value / max.to_f) * 100).to_i
+
+        def normalize(keywords)
+            words = keywords.all.extend(DescriptiveStatistics)
+            max_relevance = Keyword.where(word_type: "Preference").group(:name).sum(:relevance).values.max
+            words.each do |word|
+                rescale(word, max_relevance)
+            end
         end
 
-        def normalize_relevance(object, max_relevance)            
-            object.relevance = normalize(object.relevance, max_relevance)
+        # PRIVATE METHODS BELOW
+
+        def rescale(object, max)
+            x = object.relevance
+            z = (x / max.to_f) * 100
+            object.preferencial_score = z.round(2) 
             object.save
         end
 
@@ -21,19 +30,6 @@ module StatisticsHelper
             # object.relevance = rand(1..8)
             object.preferencial_score = percentage.round(2)
             object.save
-        end
-
-        def normalize_keywords
-            set_of_keywords = Keyword.all.extend(DescriptiveStatistics)
-            keywords = set_of_keywords.where(word_type: "Preference")
-
-            max_relevance = keywords.maximum(:relevance)
-            mean_relevance = keywords.mean(&:relevance)
-            sd_relevance = keywords.standard_deviation(&:relevance)
-
-            keywords.each do |keyword|
-                zScore_relevance(keyword, mean_relevance, sd_relevance)
-            end
         end
 
         def getPercentile(z)

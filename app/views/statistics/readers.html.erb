@@ -58,6 +58,12 @@
     }, legend: :left, ytitle: "Articles" %> <br><br>
 </div>
 
+<h3>All Keywords</h3><br><br>
+
+<div class="col-md-12">
+    <%= bar_chart @keywords.group(:name).sum(:preferencial_score), colors: ["#f70439", "#666"], min: 0, max: 100, width: "90%", height: "600px", label: "Relevance" %> <br><br>
+</div>
+
 <h3>Suggestion Pattern</h3><br><br>
 
 <div class="col-md-12">
@@ -66,5 +72,6 @@
         {name: preference.category, data: @articles.where(category_id: Category.find_by(name: preference.category).id).group_by_day(:created_at).count}
     }, legend: :left, ytitle: "Articles" %>
 
-
 </div>
+
+
