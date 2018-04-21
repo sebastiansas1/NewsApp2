@@ -14,7 +14,8 @@ class ArticlesController < ApplicationController
     elsif params[:category] == 'Top Trending'
       @title = 'Homepage - Top Trending'
       @articles = Article.all.order(views: :desc, publication_date: :desc).limit(8)
-      @most_liked_articles = Article.all.order(cached_votes_score: :desc, publication_date: :desc).limit(8)
+      @most_liked_articles = Article.select('DISTINCT ON (cached_votes_score, publication_date, api_id,headline) *').order(cached_votes_score: :desc, publication_date: :desc).limit(8)
+      
     else
       @title = "Homepage - #{params[:category]}"
       @category_id = Category.find_by(name: params[:category]).id

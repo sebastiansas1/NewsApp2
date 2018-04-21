@@ -7,6 +7,8 @@
 
     <% @articles.each do |article| %>
 
+    <% unless @orders.find_by(article_id: article.id) %>
+
         <div class="col-md-3 col-md-offset-1 article-box" onclick="location.href='/articles/<%= article.id %>';" style="cursor: pointer;">
             <a href="/articles/<%= article.id %>" class="a-article">
                 <%= image_tag article.img_src, class: "article_img" %>
@@ -27,6 +29,8 @@
             </div>
 
         </div>
+
+    <% end %>
 
     <% end %>
 
