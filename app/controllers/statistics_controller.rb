@@ -11,12 +11,12 @@ class StatisticsController < ApplicationController
 
     # ALL CATEGORIES - Maybe Table
     @categories = Category.order(relevance: :desc).take(10)
-
+    
     @data = @categories.map { |c| [c.name, c.relevance] }.to_h
 
-    @heigth = 20*Keyword.where("relevance > ?", 0).count
+    @heigth = 20*Keyword.where(word_type: "Preference").count
 
-    @keywords = Keyword.all
+    @keywords = Keyword.where(word_type: "Preferences")
 
     normalizer = StatisticsHelper::Normalizer.new
 
