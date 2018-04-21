@@ -13,4 +13,5 @@ class Category < ApplicationRecord
   has_many :articles
 
   validates_uniqueness_of :name
+  validates :preferencial_score, inclusion: { in: 0..100 }
 end
