@@ -14,9 +14,12 @@
 
 </div>
 
-<h3>Preference Set</h3><br>
+<div class="statistics-reader-title">
+    <h3>Preference Set</h3>
+    <p style="margin: 0px 0px 25px 10px; font-size: 11px;"><i>(Based on <b><%= @reader.orders.count %></b> articles read)</i></p>
+</div>
 
-<div class="col-md-12">
+<div class="col-md-12 preference-panel">
 
     <div class="col-md-12 col-keywords">
 
@@ -37,7 +40,7 @@
                 <% unless (preference.keywords.count - 4) <= 0 %>
 
                     <div class="preference-box word-box" onclick="location.href='/statistics/readers/<%=@reader.id%>/preferences/<%=preference.id%>';">
-                        <h6 style="font-size: 11px;"><u><%= (preference.keywords.count - 4) %> more keywords</u></h6>
+                        <h6 style="font-size: 11px;"><u><%= (preference.keywords.count - 4) %> more topics</u></h6>
                     </div>
 
                 <% end %>
@@ -50,27 +53,27 @@
 
 </div>
 
-<h3>Reading Pattern for Categories</h3><br><br>
+<h3><%=@reader.name%>'s Reading Pattern</h3><br><br>
 
 <div class="col-md-12">
     <%= line_chart @preferences.all.map { |preference|
         {name: preference.category, data: @orders.where(category_id: Category.find_by(name: preference.category).id).group_by_day(:created_at).count}
-    }, legend: :left, ytitle: "Articles" %> <br><br>
+    }, legend: :left, ytitle: "Articles", width: "90%" %> <br><br>
 </div>
 
-<h3>All Keywords</h3><br><br>
+<h3><%=@reader.name%>'s Interests</h3><br><br>
 
 <div class="col-md-12">
-    <%= bar_chart @keywords.group(:name).sum(:preferencial_score), colors: ["#f70439", "#666"], min: 0, max: 100, width: "90%", height: "600px", label: "Relevance" %> <br><br>
+    <%= bar_chart @keywords.group(:name).sum(:preferencial_score), colors: ["#f70439", "#666"], min: 0, max: 100, width: "90%", height: "#{@heigth}px", xtitle: "Relevance", label: "Relevance" %> <br><br>
 </div>
 
-<h3>Suggestion Pattern</h3><br><br>
+<h3>Suggestion Pattern for <%=@reader.name%></h3><br><br>
 
 <div class="col-md-12">
 
     <%= line_chart @preferences.all.map { |preference|
         {name: preference.category, data: @articles.where(category_id: Category.find_by(name: preference.category).id).group_by_day(:created_at).count}
-    }, legend: :left, ytitle: "Articles" %>
+    }, legend: :left, ytitle: "Articles", width: "90%"  %>
 
 </div>
 

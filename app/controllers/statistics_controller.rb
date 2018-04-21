@@ -6,21 +6,25 @@ class StatisticsController < ApplicationController
   respond_to :js, :json, :html
 
   def index
-    # ALL READERS
+
     @readers = Reader.all
 
-    # ALL CATEGORIES - Maybe Table
-    @categories = Category.order(relevance: :desc).take(10)
-    
-    @data = @categories.map { |c| [c.name, c.relevance] }.to_h
+    @keywords = Keyword.where(word_type: "Preference").order(name: :asc)
 
-    @heigth = 20*Keyword.where(word_type: "Preference").count
+    categories_to_normalize = Category.order(relevance: :desc).limit(10)
 
-    @keywords = Keyword.where(word_type: "Preferences")
-
+    max_relevance_keyword = @keywords.group(:name).sum(:relevance).values.max
+    max_relevance_category = categories_to_normalize.sum(:relevance)
+  
     normalizer = StatisticsHelper::Normalizer.new
+    normalizer.normalize(@keywords, max_relevance_keyword)
+    normalizer.normalize(categories_to_normalize, max_relevance_category)
 
-    normalizer.normalize(@keywords)
+    @categories = Category.order(preferencial_score: :desc).take(10)
+    
+    @heigth = 15*Keyword.where(word_type: "Preference").count
+
+    @data = @categories.map { |c| [c.name, c.preferencial_score] }.to_h
 
   end
 
@@ -33,14 +37,22 @@ class StatisticsController < ApplicationController
 
     @keywords = Keyword.where(reader_id: @reader.id)
 
+    @heigth = 15*@keywords.count
+
+    max_relevance = @keywords.group(:name).sum(:relevance).values.max
+
+    normalizer = StatisticsHelper::Normalizer.new
+    normalizer.normalize(@keywords, max_relevance)
+
   end
 
   def preferences
     @keywords = @reader.preferences.find_by(id: @preference.id).keywords
 
-    normalizer = StatisticsHelper::Normalizer.new
+    max_relevance = @keywords.group(:name).sum(:relevance).values.max
 
-    normalizer.normalize(@keywords)
+    normalizer = StatisticsHelper::Normalizer.new
+    normalizer.normalize(@keywords, max_relevance)
 
     category_id = Category.find_by(name: @preference.category).id
 

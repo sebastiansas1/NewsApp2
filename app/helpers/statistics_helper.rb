@@ -2,12 +2,10 @@ module StatisticsHelper
 
     class Normalizer
 
-
-        def normalize(keywords)
-            words = keywords.all.extend(DescriptiveStatistics)
-            max_relevance = Keyword.where(word_type: "Preference").group(:name).sum(:relevance).values.max
-            words.each do |word|
-                rescale(word, max_relevance)
+        def normalize(data, max_relevance)
+            objects = data.all.extend(DescriptiveStatistics)
+            objects.each do |object|
+                rescale(object, max_relevance)
             end
         end
 
