@@ -283,6 +283,18 @@ p.notice {
     height: 50%;
 }
 
+.related-articles-section {
+	margin-top: 40px;
+}
+
+@media (min-width: 992px) {
+	.related-articles-section {
+		margin-top: 70px;
+		height: 440px;
+		overflow: scroll;
+	}
+}
+
 .article-box {
     width: 250px;
     height: 320px;

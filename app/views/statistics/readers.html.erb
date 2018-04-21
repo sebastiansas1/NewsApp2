@@ -27,7 +27,12 @@
 
             <div class="col-md-3 preference-box category-box">
 
-                <h4 class="preference-name category" onclick="location.href='/statistics/readers/<%=@reader.id%>/preferences/<%=preference.id%>';" ><%= preference.category %> <span class="badge badge-light preference" style="margin: 5px;"><%= ((preference.relevance / @preferences.sum(:relevance).to_f) * 100).round(0) %>%</span></h4>
+                <h4 class="preference-name category" onclick="location.href='/statistics/readers/<%=@reader.id%>/preferences/<%=preference.id%>';" >
+                    <%= preference.category %> 
+                    <span class="badge badge-light preference" style="margin: 5px;">
+                        <%= preference.preferencial_score %>%
+                    </span>
+                </h4>
 
                 <% preference.keywords.order(relevance: :desc).take(4).each do |keyword| %>
 

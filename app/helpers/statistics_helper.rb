@@ -10,7 +10,7 @@ module StatisticsHelper
         end
 
         # PRIVATE METHODS BELOW
-
+        
         def rescale(object, max)
             x = object.relevance
             z = (x / max.to_f) * 100
@@ -65,7 +65,7 @@ module StatisticsHelper
                 return percentage = (negative - positive) * 100 
             end
 
-            if zScore = 0
+            if zScore == 0
                 return 0
             end
 

@@ -38,4 +38,25 @@ namespace :custom_task do
       article.delete
     end
   end
+
+  desc 'Normalizes all data in database'
+  task normalize_data: :environment do
+
+    normalizer = StatisticsHelper::Normalizer.new
+    
+    Reader.all.each do |reader|
+
+      return false if reader.preferences.nil?
+
+        keywords = Keyword.where(reader_id: reader.id)
+
+        normalizer.normalize(reader.preferences, reader.preferences.sum(:relevance))
+
+        normalizer.normalize(keywords, keywords.group(:name).sum(:relevance).values.max)
+
+    end
+
+    puts "All data normalized at #{Time.now}"  
+
+  end
 end

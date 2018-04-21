@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180421181106) do
+ActiveRecord::Schema.define(version: 20180421213351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20180421181106) do
     t.string "api_id"
     t.datetime "publication_date"
     t.integer "reader_id"
+    t.float "rank", default: 0.0, null: false
   end
 
   create_table "categories", force: :cascade do |t|
@@ -107,6 +108,7 @@ ActiveRecord::Schema.define(version: 20180421181106) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "reader_id"
+    t.float "preferencial_score", default: 0.0, null: false
   end
 
   create_table "readers", force: :cascade do |t|

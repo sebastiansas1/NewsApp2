@@ -29,10 +29,19 @@ class ArticlesController < ApplicationController
   end
 
   def index_personal
+
+    ranker = ArticlesHelper::Ranker.new
+
     @title = 'For You'
     @orders = current_reader.orders.all.order(created_at: :desc)
+
+    # Time to rank these articles! Let's do it!
+    Article.where(reader_id: @reader.id).each do |article|
+      ranker.rank(article, current_reader)
+    end
+
     @articles = Article.where(reader_id: @reader.id)
-                       .order(publication_date: :desc)
+
   end
 
   def show
@@ -40,9 +49,10 @@ class ArticlesController < ApplicationController
 
     @related_articles = Article
                         .where(category_id: @article.category_id)
-                        .where.not(id: @article.id)
+                        .where.not(api_id: @article.api_id)
                         .order(publication_date: :desc)
-                        .limit(2)
+                        .limit(9)
+    @better_related_articles = @related_articles.select('DISTINCT ON (publication_date, api_id,headline) *')
     @related_category = Category.find(@article.category_id).name
 
     if reader_signed_in?

@@ -43,6 +43,7 @@ class StatisticsController < ApplicationController
 
     normalizer = StatisticsHelper::Normalizer.new
     normalizer.normalize(@keywords, max_relevance)
+    normalizer.normalize(@preferences, @preferences.sum(:relevance))
 
   end
 

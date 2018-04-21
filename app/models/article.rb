@@ -32,4 +32,5 @@ class Article < ApplicationRecord
   has_many :keywords, as: :word
 
   validates_uniqueness_of :api_id, scope: :reader_id
+  validates :rank, inclusion: { in: 0..100 }
 end
