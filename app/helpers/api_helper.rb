@@ -37,6 +37,9 @@ module ApiHelper
 
     # Method that gathers articles based on the user's preferences #
     def search(tag_id, reader_id)
+
+      ranker = ArticlesHelper::Ranker.new
+
       json = self.class.get("#{QUERY1 + PARAMETERS_API}&tag=#{tag_id}")
       response = json['response']
       articles = response['results']
@@ -75,6 +78,7 @@ module ApiHelper
                                 body_text, category_id, thumbnail, 
                                 publication_date, reader_id)
           sort_personal_keywords(article['tags'], api_article_id, reader_id, category_id)
+          ranker.rank(Article.last, Reader.find(reader_id))
         end
       end
     end

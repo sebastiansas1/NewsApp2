@@ -36,9 +36,9 @@ class ArticlesController < ApplicationController
     @orders = current_reader.orders.all.order(created_at: :desc)
 
     # Time to rank these articles! Let's do it!
-    Article.where(reader_id: @reader.id).each do |article|
-      ranker.rank(article, current_reader)
-    end
+    # Article.where(reader_id: @reader.id).each do |article|
+    #   ranker.rank(article, current_reader)
+    # end
 
     @articles = Article.where(reader_id: @reader.id)
 
