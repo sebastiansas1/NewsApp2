@@ -34,7 +34,7 @@
 
 <div class="col-md-12">
 
-    <%= bar_chart @keywords.group(:name).sum(:preferencial_score), colors: ["#93f", "#666"], min: 0, max: 100, width: "90%", height: "#{@heigth}px", label: "Relevance" %> <br><br>
+    <%= bar_chart @keywords.group(:name).sum(:preferencial_score), colors: ["#93f", "#666"], min: 0, max: 100, width: "90%", height: "#{@heigth+30}px", label: "Relevance" %> <br><br>
 
 </div>
 
