@@ -21,6 +21,7 @@ class ArticlesController < ApplicationController
       @topics.each do |topic|
         @articles.push Article.find(topic.word_id)
       end
+      @articles = @articles.sort_by{|e| e[:publication_date]}.reverse
     elsif params[:category] != 'Top Trending' && params[:topic].blank?
       @title = "Homepage - #{params[:category]}"
       @category_id = Category.find_by(name: params[:category]).id
