@@ -24,7 +24,7 @@ class StatisticsController < ApplicationController
 
     @topics = Keyword.where(word_type: "Preference").group(:name).sum(:relevance).sort_by { |name, relevance, id| relevance}.reverse[0..19]
     
-    @heigth = 10*Keyword.where(word_type: "Preference").count
+    @heigth = 15*Keyword.where(word_type: "Preference").count + 50
 
     @data = @categories.map { |c| [c.name, c.preferencial_score] }.to_h
 
@@ -39,7 +39,7 @@ class StatisticsController < ApplicationController
 
     @keywords = Keyword.where(reader_id: @reader.id)
 
-    @heigth = 15*@keywords.count
+    @heigth = 15*@keywords.count + 50
 
     max_relevance = @keywords.group(:name).sum(:relevance).values.max
 
@@ -61,25 +61,13 @@ class StatisticsController < ApplicationController
 
     @categorised_orders = @reader.orders.where(category_id: category_id)
 
-    @heigth = 15*@keywords.count
+    @heigth = 15*@keywords.count + 50
 
   end
 
 
   def keywords
-    # category_id = Category.find_by(name: @preference.category).id
 
-    # orders = @reader.orders.where(category_id: category_id)
-
-    # orders.each do |order|
-    #   @keywords = Article.find(order.article_id).keywords
-
-    #   @keywords.each do |keyword|
-    #     if keyword.name == @word.name
-    #       KeywordStatistic.create(keyword_id: @word.id, name: keyword.name, created_at: order.created_at)
-    #     end
-    #   end
-    # end
   end
 
   private

@@ -98,4 +98,28 @@ module StatisticsHelper
 
     end
 
+    class Euclide 
+
+        def euclidean_distance(a, b)
+
+            distance = axis(a, b, 0)
+
+            return Math.sqrt(distance)
+
+        end
+
+        def axis(a, b, index)
+
+            return false if a[0].nil? || b[0].nil? || a.size != b.size
+            
+            return 0 if a[index].nil?
+                
+            axis_distance = (b[index] - a[index])**2
+ 
+            return axis_distance += axis(a, b, index+1)
+
+        end
+
+    end
+
 end
