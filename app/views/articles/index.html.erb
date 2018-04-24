@@ -1,56 +1,114 @@
-<% if params[:category].blank? %>
+<% if params[:category].blank? && params[:topic].blank? %>
     <h1 class="current-category" style="font-weight: bold;">All Articles</h1>    
 <% end %>
 
-<h1 class="current-category" style="font-weight: bold;"><%= params[:category] %></h1>
-<div class="row justify-content-center">
+<% unless params[:category] == "Top Trending" || !params[:topic].blank? %>
+    <h1 class="current-category" style="font-weight: bold;"><%= params[:category] %></h1>
+    <div class="row justify-content-center">
 
-    <% @articles.each do |article| %>
+        <% @articles.each do |article| %>
 
-    <% unless @orders.find_by(article_id: article.id) %>
+            <% unless @orders.find_by(article_id: article.id) %>
 
-        <div class="col-md-3 col-md-offset-1 article-box" onclick="location.href='/articles/<%= article.id %>';" style="cursor: pointer;">
-            <a href="/articles/<%= article.id %>" class="a-article">
-                <%= image_tag article.img_src, class: "article_img" %>
-            </a>
-            
-            <h4 class="article-headline"><%= article.headline %></h4>
-            
-            <div class="article-mini-date" style="width: 85%; position: absolute; bottom: 0px; text-transform: uppercase; font-size: 14px; color:gray;">
-                <p>
-                    <%= Category.find(article.category_id).name %>
+                <div class="col-md-3 col-md-offset-1 article-box" onclick="location.href='/articles/<%= article.id %>';" style="cursor: pointer;">
+                    <a href="/articles/<%= article.id %>" class="a-article">
+                        <%= image_tag article.img_src, class: "article_img" %>
+                    </a>
                     
-                    <% if article.created_at > current_reader.last_sign_in_at && @orders.find_by(article_id: article.id).nil? %>
-                        <span style="color: #f81848; float: right;"><i class="fab fa-hotjar"></i> New</span>
-                    <% end %>
-                </p>
-            </div>
+                    <h4 class="article-headline"><%= article.headline %></h4>
+                    
+                    <div class="article-mini-date" style="width: 85%; position: absolute; bottom: 0px; text-transform: uppercase; font-size: 14px; color:gray;">
+                        <p>
+                            <%= Category.find(article.category_id).name %>
+                            
+                            <% if article.created_at > current_reader.last_sign_in_at && @orders.find_by(article_id: article.id).nil? %>
+                                <span style="color: #f81848; float: right;"><i class="fab fa-hotjar"></i> New</span>
+                            <% end %>
+                        </p>
+                    </div>
 
-        </div>
+                </div>
 
-    <% end %>
-
-    <% end %>
-
-</div>
-
-
-<% if params[:category] == "Top Trending" %>
-    
-    <h1 class="current-category" style="font-weight: bold;">Most Liked</h1>
-    <div class="row">
-
-        <% @most_liked_articles.each do |liked_article| %>
-
-            <div class="col-md-3 article-box" onclick="location.href='/articles/<%= liked_article.id %>';" style="cursor: pointer;">  
-                <a href="/articles/<%= liked_article.id %>" class="a-article">
-                    <%= image_tag liked_article.img_src, class: "article_img" %>
-                </a>
-                <h4 class="article-headline"><%= liked_article.headline %></h4>
-            </div>
+            <% end %>
 
         <% end %>
 
     </div>
+<% end %>
 
+
+<% if params[:category] == "Top Trending" %>
+    
+    <h1 class="current-category" style="font-weight: bold;">Trending Now</h1>
+    <div class="row">
+
+        <div class="col-md-4" style="margin-left: 20px;">
+            
+            <h3 style="margin-bottom: 30px;">Categories</h3>
+
+            <% Category.order(preferencial_score: :desc).limit(5).each do |category|%>
+
+                <div class="preference-box word-box" onclick="location.href='/articles?category=<%=category.name%>';">
+                    <h4 class="preference-name category" style="color:#a33cf7"><%= link_to category.name, articles_path(category: category.name), class: "article-mini-preference", style: "font-weight: 400;" %></h4>
+                </div>  
+
+            <% end %>
+
+        </div>
+
+        <div class="col-md-4 col-md-offset-2" >
+
+            <h3 style="margin-bottom: 30px;">Topics</h3>
+
+            <% @trending.take(10).each do |topic| %>
+
+                <% if !@analyzer.trending(topic.first) %>
+
+                    <div class="preference-box word-box" onclick="location.href='/articles?topic=<%=topic.first%>';">
+                        <h4 class="preference-name category"><%= link_to topic.first, articles_path(topic: topic.first), class: "article-mini-category", style: "font-weight: 400;" %></h4>
+                    </div>  
+
+                <% end %>
+
+            <% end %>
+
+        </div>
+
+
+    </div>
+
+<% end %>
+
+<% if !params[:topic].blank? %>
+    <h1 class="current-category" style="font-weight: bold;"><%= params[:topic] %></h1>
+    <div class="row justify-content-center">
+
+        <% @articles.uniq { |i| i.api_id }.each do |article| %>
+
+            <% unless @orders.find_by(article_id: article.id) %>
+
+                <div class="col-md-3 col-md-offset-1 article-box" onclick="location.href='/articles/<%= article.id %>';" style="cursor: pointer;">
+                    <a href="/articles/<%= article.id %>" class="a-article">
+                        <%= image_tag article.img_src, class: "article_img" %>
+                    </a>
+                    
+                    <h4 class="article-headline"><%= article.headline %></h4>
+                    
+                    <div class="article-mini-date" style="width: 85%; position: absolute; bottom: 0px; text-transform: uppercase; font-size: 14px; color:gray;">
+                        <p>
+                            <%= Category.find(article.category_id).name %>
+                            
+                            <% if article.created_at > current_reader.last_sign_in_at && @orders.find_by(article_id: article.id).nil? %>
+                                <span style="color: #f81848; float: right;"><i class="fab fa-hotjar"></i> New</span>
+                            <% end %>
+                        </p>
+                    </div>
+
+                </div>
+
+            <% end %>
+
+        <% end %>
+
+    </div>
 <% end %>

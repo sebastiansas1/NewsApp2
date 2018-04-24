@@ -9,21 +9,21 @@ class ArticlesController < ApplicationController
     @title = 'Homepage'
     @orders = current_reader.orders.all.order(created_at: :desc)
 
-    if params[:category].blank?
+    if params[:category].blank? && params[:topic].blank?
       @articles = Article.where(reader_id: nil).order(publication_date: :desc)
     elsif params[:category] == 'Top Trending'
-      @title = 'Homepage - Top Trending'
-      @articles = Article.all.order(views: :desc, publication_date: :desc).limit(8)
-      @most_liked_articles = Article.select('DISTINCT ON (cached_votes_score, publication_date, api_id,headline) *').order(cached_votes_score: :desc, publication_date: :desc).limit(8)
-      
-    else
+      @title = 'Homepage - Trending'
+      @trending = Keyword.where(word_type: "Preference").group(:name).sum(:relevance).sort_by { |name, relevance, id| relevance}.reverse[0..50]
+      @analyzer = StatisticsHelper::Analyzer.new
+    elsif !params[:topic].blank?  
+      @articles = []     
+      @topics = Keyword.where(word_type: "Article").where(name: params[:topic])    
+      @topics.each do |topic|
+        @articles.push Article.find(topic.word_id)
+      end
+    elsif params[:category] != 'Top Trending' && params[:topic].blank?
       @title = "Homepage - #{params[:category]}"
       @category_id = Category.find_by(name: params[:category]).id
-      # @articles = Article.where(category_id: @category_id).order(publication_date: :desc)
-      # @articles = Article.select(:api_id, :headline, 
-      #                            :subheading, :category_id, 
-      #                            :img_src, :publication_date, 
-      #                            :created_at, :updated_at).distinct.where(category_id: @category_id)
       @articles = Article.select('DISTINCT ON (publication_date, api_id,headline) *').where(category_id: @category_id).order(publication_date: :desc)
     end
   end

@@ -71,6 +71,30 @@ module StatisticsHelper
 
         end
 
+    end
+
+    class Analyzer 
+
+        def trending(keyword_name)
+            group = KeywordStatistic.where(name: keyword_name).group(:id).group_by_day(:created_at)
+            x = group.where("created_at > ?", 1.days.ago).count.size
+            y = group.where(created_at: 2.days.ago..1.days.ago).count.size
+            
+            if (growth_rate(x.to_f, y.to_f) > 20.00)
+                return true
+            else
+                return false
+            end
+        end
+
+        def growth_rate(x,y)
+            # Growth died
+            if (x == 0 || y == 0)
+                return 0
+            else
+                return rate = (((x - y) / y) * 100).round(2)
+            end
+        end
 
     end
 

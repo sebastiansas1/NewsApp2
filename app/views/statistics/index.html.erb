@@ -51,6 +51,13 @@
     }, legend: :left, ytitle: "Articles" %> <br><br>
 </div>
 
+<h3>Reading Patterns per Topics</h3><br><br>
+<div class="col-md-12">
+    <%= line_chart @topics.map { |topic|
+        {name: topic.first, data: KeywordStatistic.where(name: topic.first).group_by_day(:created_at).count}
+    }, legend: :left, ytitle: "Articles" %> <br><br>
+</div>
+
 
 <h3>Category Relevance</h3>
 <p>(based on <b><%= @readers.count %></b> readers and <b><%= Order.count %></b> articles read globally)</p>
@@ -67,6 +74,6 @@
 <br>
 
 <div class="col-md-12 col-keywords">
-    <%= bar_chart Keyword.where(word_type: "Preference").group(:name).sum(:preferencial_score), colors: ["#57f", "#666"], min: 0, max: 100, width: "90%", height: "#{@heigth}px", xtitle: "Relevance (Global average)", label: "Relevance"%>
+    <%= bar_chart @keywords.group(:name).sum(:preferencial_score), colors: ["#57f", "#666"], min: 0, max: 100, width: "90%", height: "#{@heigth}px", xtitle: "Relevance (Global average)", label: "Relevance"%>
 </div>
 

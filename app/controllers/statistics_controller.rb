@@ -21,8 +21,10 @@ class StatisticsController < ApplicationController
     normalizer.normalize(categories_to_normalize, max_relevance_category)
 
     @categories = Category.order(preferencial_score: :desc).take(10)
+
+    @topics = Keyword.where(word_type: "Preference").group(:name).sum(:relevance).sort_by { |name, relevance, id| relevance}.reverse[0..19]
     
-    @heigth = 12*Keyword.where(word_type: "Preference").count
+    @heigth = 10*Keyword.where(word_type: "Preference").count
 
     @data = @categories.map { |c| [c.name, c.preferencial_score] }.to_h
 
