@@ -39,8 +39,9 @@
 
 <% if params[:category] == "Top Trending" %>
     
-    <h1 class="current-category" style="font-weight: bold;">Trending Now</h1>
-    <div class="row">
+    <div class="row" style="margin-left: 7px;">
+
+        <h1 class="current-category" style="font-weight: bold;">Trending Now</h1>
 
         <div class="col-md-4" style="margin-left: 20px;">
             
@@ -84,7 +85,25 @@
 
         </div>
 
+    </div>
 
+    <div class="row" style="margin-top: 50px; margin-left: 7px;">
+
+        <h1 class="current-category" style="font-weight: bold;">Top Chart</h1>
+
+        <div class="col-md-4" style="margin-left: 20px;">
+
+            <h3 style="margin-bottom: 30px;">Topics</h3>
+
+            <% @trending.take(10).each do |topic| %>
+
+                <div class="preference-box word-box" onclick="location.href='/articles?topic=<%=topic.first%>';">
+                    <h4 class="preference-name category"><%= link_to topic.first, articles_path(topic: topic.first), class: "article-mini-top", style: "font-weight: 400;" %></h4>
+                </div>  
+
+            <% end %>
+    
+        </div>
     </div>
 
 <% end %>
