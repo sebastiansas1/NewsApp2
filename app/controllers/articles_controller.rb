@@ -74,6 +74,7 @@ class ArticlesController < ApplicationController
 
           current_reader.preferences.find_by(category: @related_category).keywords.create(name: keyword.name, tag: keyword.tag, reader_id: current_reader.id, category_id: @article.category_id, created_at: Time.now, updated_at: Time.now)
           word = current_reader.preferences.find_by(category: @related_category).keywords.find_by(name: keyword.name)
+          KeywordStatistic.create(keyword_id: word.id, name: word.name, created_at: Time.now)
 
           unless word.nil?
             word.relevance += 1

@@ -5,10 +5,10 @@ namespace :custom_task do
     Reader.all.each do |reader|
       puts "Computing Articles for: #{reader.name}"
       return false if reader.preferences.nil?
-      reader.preferences.order(relevance: :desc).limit(5).each do |preference|
-        puts "CATEGORY |||| #{preference.category}"
+      reader.preferences.order(relevance: :desc).limit(4).each do |preference|
+        puts "CATEGORY | #{preference.category}"
         return false if preference.nil?
-        preference.keywords.order(relevance: :desc).limit(4).each do |keyword|
+        preference.keywords.order(relevance: :desc).limit(5).each do |keyword|
           puts "KEYWORD | #{keyword.name}"
           api.search(keyword.tag, reader.id) unless keyword.nil?
         end
@@ -59,4 +59,5 @@ namespace :custom_task do
     puts "All data normalized at #{Time.now}"  
 
   end
+
 end

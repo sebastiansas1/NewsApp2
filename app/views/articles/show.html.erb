@@ -69,7 +69,7 @@
 <div class="row row-article-stats article-info">
     <div class="col-md-4 col-article-info" align="left">
         <p class="p-stats">Category: <strong><%= @article.category.name %></strong></p>
-        <p class="p-stats">Keyword: 
+        <p class="p-stats">Keywords: 
             <strong>
                 <% @article.keywords.each_with_index do |keyword, index| %>
                     <% if index != @article.keywords.count - 1%>

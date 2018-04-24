@@ -7,7 +7,7 @@
 
     <div class="row justify-content-center">
 
-        <% @articles.where("rank > ?", 25).order(rank: :desc).each do |article| %>
+        <% @articles.where("rank > ?", 25).order(created_at: :desc, rank: :desc).each do |article| %>
 
             <% unless @orders.find_by(article_id: article.id) %>
 
@@ -28,8 +28,8 @@
                             <% elsif article.rank < 30 %>
                                 <span style="color: #e86f0c; float: right; text-transform: capitalize;"><b><%= article.rank.to_i %>% Match</b></span>
                             <% end %>
-                            <% if article.created_at > current_reader.last_sign_in_at && @orders.find_by(article_id: article.id).nil? %>
-                                <span style="color: #f81848; float: right;"><i class="fab fa-hotjar"></i> New</span>
+                            <% if article.created_at > current_reader.last_sign_in_at %>
+                                <span style="color: #f81848;"><i class="fab fa-hotjar"></i> New</span>
                             <% end %>
                         </div>
                     </div>

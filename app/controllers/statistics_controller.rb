@@ -22,7 +22,7 @@ class StatisticsController < ApplicationController
 
     @categories = Category.order(preferencial_score: :desc).take(10)
     
-    @heigth = 15*Keyword.where(word_type: "Preference").count
+    @heigth = 12*Keyword.where(word_type: "Preference").count
 
     @data = @categories.map { |c| [c.name, c.preferencial_score] }.to_h
 
@@ -61,30 +61,23 @@ class StatisticsController < ApplicationController
 
     @heigth = 15*@keywords.count
 
-    @maxvalue = @categorised_orders.group_by_day(:created_at).count.values.max
-    @maxvalue += 1
-
   end
 
 
   def keywords
-    category_id = Category.find_by(name: @preference.category).id
+    # category_id = Category.find_by(name: @preference.category).id
 
-    orders = @reader.orders.where(category_id: category_id)
+    # orders = @reader.orders.where(category_id: category_id)
 
-    orders.each do |order|
-      @keywords = Article.find(order.article_id).keywords
+    # orders.each do |order|
+    #   @keywords = Article.find(order.article_id).keywords
 
-      @keywords.each do |keyword|
-        if keyword.name == @word.name
-          KeywordStatistic.create(keyword_id: @word.id, name: keyword.name, created_at: order.created_at)
-        end
-      end
-    end
-
-    @maxvalue = KeywordStatistic.where(:keyword_id => @word.id).group_by_day(:created_at).count.values.max
-    @maxvalue += 1
-
+    #   @keywords.each do |keyword|
+    #     if keyword.name == @word.name
+    #       KeywordStatistic.create(keyword_id: @word.id, name: keyword.name, created_at: order.created_at)
+    #     end
+    #   end
+    # end
   end
 
   private
