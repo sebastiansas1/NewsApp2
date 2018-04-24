@@ -60,15 +60,25 @@
 
             <h3 style="margin-bottom: 30px;">Topics</h3>
 
+            <% counter = 0 %>
+
             <% @trending.take(10).each do |topic| %>
 
-                <% if !@analyzer.trending(topic.first) %>
+                <% if @analyzer.trending(topic.first) %>
 
                     <div class="preference-box word-box" onclick="location.href='/articles?topic=<%=topic.first%>';">
                         <h4 class="preference-name category"><%= link_to topic.first, articles_path(topic: topic.first), class: "article-mini-category", style: "font-weight: 400;" %></h4>
                     </div>  
 
+                    <% counter += 1 %>
+
                 <% end %>
+
+            <% end %>
+
+            <% if counter == 0 %>
+                    
+                <h5> There are not trending topics at the moment </h5>
 
             <% end %>
 
