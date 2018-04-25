@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180421213351) do
+ActiveRecord::Schema.define(version: 20180425155305) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,12 +64,14 @@ ActiveRecord::Schema.define(version: 20180421213351) do
     t.float "preferencial_score", default: 0.0, null: false
   end
 
-  create_table "friends", force: :cascade do |t|
+  create_table "friendships", force: :cascade do |t|
     t.integer "reader_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "strength"
     t.integer "friend_id"
+    t.float "similarity", default: 0.0, null: false
+    t.float "distance", default: 100.0, null: false
+    t.float "temp_distance"
   end
 
   create_table "keyword_statistics", force: :cascade do |t|

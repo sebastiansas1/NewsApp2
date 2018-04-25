@@ -177,6 +177,37 @@ p.notice {
 	width: 75px;
 	height: 75px;
 	border-radius: 50%;
+	transition: ease-in 150ms;
+}
+
+.similarity-text {
+	position: absolute;
+	top: 21px;
+	font-weight: 400;
+	width: 70px;
+	left: 22px;
+	font-size: 12px;
+	z-index: 2;
+	color: transparent;
+	transition: ease-in 150ms;
+}
+
+.friend-image:hover{
+	.similarity-text {
+		color: #52f2a7;
+		transition: ease-in 150ms;
+	}
+	.avatar-friend  {
+		filter: blur(1px) brightness(25%);
+		transition: ease-in 150ms;
+	}
+}
+
+.donut {
+	position: absolute;
+	bottom: 24px;
+	left: 10px;
+	z-index: -1;
 }
 
 .friend-bar {

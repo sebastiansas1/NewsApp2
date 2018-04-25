@@ -2,12 +2,13 @@
 #
 # Table name: preferences
 #
-#  id         :integer          not null, primary key
-#  category   :string(255)
-#  relevance  :integer          default(0), not null
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  reader_id  :integer
+#  id                 :integer          not null, primary key
+#  category           :string
+#  relevance          :integer          default(0), not null
+#  created_at         :datetime         not null
+#  updated_at         :datetime         not null
+#  reader_id          :integer
+#  preferencial_score :float            default(0.0), not null
 #
 
 class Preference < ApplicationRecord

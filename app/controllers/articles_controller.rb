@@ -1,5 +1,6 @@
-class ArticlesController < ApplicationController
+# frozen_string_literal: true
 
+class ArticlesController < ApplicationController
   before_action :find_article, only: %i[show vote]
   before_action :find_reader, only: %i[index_personal]
   before_action :require_login
@@ -13,15 +14,15 @@ class ArticlesController < ApplicationController
       @articles = Article.where(reader_id: nil).order(publication_date: :desc)
     elsif params[:category] == 'Top Trending'
       @title = 'Homepage - Trending'
-      @trending = Keyword.where(word_type: "Preference").group(:name).sum(:relevance).sort_by { |name, relevance, id| relevance}.reverse[0..50]
+      @trending = Keyword.where(word_type: 'Preference').group(:name).sum(:relevance).sort_by { |_name, relevance, _id| relevance }.reverse[0..50]
       @analyzer = StatisticsHelper::Analyzer.new
-    elsif !params[:topic].blank?  
-      @articles = []     
-      @topics = Keyword.where(word_type: "Article").where(name: params[:topic])    
+    elsif !params[:topic].blank?
+      @articles = []
+      @topics = Keyword.where(word_type: 'Article').where(name: params[:topic])
       @topics.each do |topic|
         @articles.push Article.find(topic.word_id)
       end
-      @articles = @articles.sort_by{|e| e[:publication_date]}.reverse
+      @articles = @articles.sort_by { |e| e[:publication_date] }.reverse
     elsif params[:category] != 'Top Trending' && params[:topic].blank?
       @title = "Homepage - #{params[:category]}"
       @category_id = Category.find_by(name: params[:category]).id
@@ -30,11 +31,9 @@ class ArticlesController < ApplicationController
   end
 
   def index_personal
-
     @title = 'For You'
     @orders = current_reader.orders.all.order(created_at: :desc)
     @articles = Article.where(reader_id: @reader.id)
-
   end
 
   def show
@@ -127,14 +126,17 @@ class ArticlesController < ApplicationController
   end
 
   def friends
+    @analyzer = StatisticsHelper::Analyzer.new
     @title = 'Homepage - Friends'
 
-    @friends = current_reader.friends.all.order(strength: :desc)
+    @analyzer.compute_similarity(current_reader.friendships)
+
+    @friendships = current_reader.friendships.order(similarity: :desc)
 
     @array = []
 
-    @friends.each do |friend|
-      @reader = Reader.find(friend.friend_id)
+    @friendships.each do |friendship|
+      @reader = Reader.find(friendship.friend_id)
       @reader_orders = @reader.orders.all.order(created_at: :desc)
       @grouped_articles_by_reader = @reader_orders.group_by(&:reader_id)
       @array.push @grouped_articles_by_reader

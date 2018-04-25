@@ -1,6 +1,6 @@
 # == Schema Information
 #
-# Table name: friends
+# Table name: friendships
 #
 #  id         :integer          not null, primary key
 #  reader_id  :integer
@@ -10,8 +10,8 @@
 #  friend_id  :integer
 #
 
-class Friend < ApplicationRecord
+class Friendship < ApplicationRecord
   belongs_to :reader
 
-  validates :strength, inclusion: { in: 0..100 }
+  validates :similarity, inclusion: { in: 0..100 }
 end

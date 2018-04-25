@@ -37,7 +37,7 @@ class StatisticsController < ApplicationController
 
     @articles = Article.where(reader_id: @reader.id)
 
-    @keywords = Keyword.where(reader_id: @reader.id)
+    @keywords = Keyword.where(reader_id: @reader.id).order(name: :asc)
 
     @heigth = 15*@keywords.count + 50
 
@@ -50,7 +50,7 @@ class StatisticsController < ApplicationController
   end
 
   def preferences
-    @keywords = @reader.preferences.find_by(id: @preference.id).keywords
+    @keywords = @reader.preferences.find_by(id: @preference.id).keywords.order(name: :asc)
 
     max_relevance = @keywords.group(:name).sum(:relevance).values.max
 
