@@ -4,11 +4,11 @@
 # Create readers
 Reader.create!([{ id: 1, email: 'lorena@gmail.com', password: 'newsapp', password_confirmation: 'newsapp', created_at: Time.now, updated_at: Time.now, name: 'Lorena' },
                 { id: 2, email: 'mike@gmail.com', password: 'newsapp', password_confirmation: 'newsapp', created_at: Time.now, updated_at: Time.now, name: 'Mike' },
-                { id: 3, email: 'joe.d@gmail.com', password: 'newsapp', password_confirmation: 'newsapp', created_at: Time.now, updated_at: Time.now, name: 'Joseph' },
+                { id: 3, email: 'marcel@gmail.com', password: 'newsapp', password_confirmation: 'newsapp', created_at: Time.now, updated_at: Time.now, name: 'Marcel' },
                 { id: 4, email: 'joe.b@gmail.com', password: 'newsapp', password_confirmation: 'newsapp', created_at: Time.now, updated_at: Time.now, name: 'Joe' },
                 { id: 5, email: 'sebastian@gmail.com', password: 'newsapp', password_confirmation: 'newsapp', created_at: Time.now, updated_at: Time.now, name: 'Sebastian' },
                 { id: 6, email: 'giorgio@gmail.com', password: 'newsapp', password_confirmation: 'newsapp', created_at: Time.now, updated_at: Time.now, name: 'Giorgio' },
-                { id: 7, email: 'lars@gmail.com', password: 'newsapp', password_confirmation: 'newsapp', created_at: Time.now, updated_at: Time.now, name: 'Lars' },
+                { id: 7, email: 'amalia@gmail.com', password: 'newsapp', password_confirmation: 'newsapp', created_at: Time.now, updated_at: Time.now, name: 'Amalia' },
                 { id: 8, email: 'carina@gmail.com', password: 'newsapp', password_confirmation: 'newsapp', created_at: Time.now, updated_at: Time.now, name: 'Carina' },
                 { id: 9, email: 'sergiu@gmail.com', password: 'newsapp', password_confirmation: 'newsapp', created_at: Time.now, updated_at: Time.now, name: 'Sergiu' },
                 { id: 10, email: 'antwnis@gmail.com', password: 'newsapp', password_confirmation: 'newsapp', created_at: Time.now, updated_at: Time.now, name: 'Antwnis' }])
