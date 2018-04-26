@@ -27,7 +27,9 @@
         <% if reader_signed_in? || admin_signed_in? %>
           <!-- Navbar Header -->
           <div class="navbar-header">
-            <img src="/assets/medium/logo3.png" alt="News App Logo" class="navbar-brand logo" onclick="location.href='/';" >
+            <%= link_to root_path do %>
+              <img src="/assets/medium/logo3.png" alt="News App Logo" class="navbar-brand logo" >
+            <% end %>
           </div>
 
           <% if reader_signed_in? %>

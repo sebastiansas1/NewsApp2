@@ -126,21 +126,36 @@ class ArticlesController < ApplicationController
   end
 
   def friends
-    @analyzer = StatisticsHelper::Analyzer.new
+    analyzer = StatisticsHelper::Analyzer.new
+    ranker = ArticlesHelper::Ranker.new
+
     @title = 'Homepage - Friends'
 
-    @analyzer.compute_similarity(current_reader.friendships)
+    analyzer.compute_similarity(current_reader.friendships)
 
-    @friendships = current_reader.friendships.order(similarity: :desc).limit(3)
+    @friendships = current_reader.friendships.where("similarity > ?", 25).order(similarity: :desc).limit(3)
 
-    @array = []
-
+    @suggested_orders, @ranks = [],[]
+    
     @friendships.each do |friendship|
-      @reader = Reader.find(friendship.friend_id)
-      @reader_orders = @reader.orders.all.order(created_at: :desc)
-      @grouped_articles_by_reader = @reader_orders.group_by(&:reader_id)
-      @array.push @grouped_articles_by_reader
+      reader = Reader.find(friendship.friend_id)
+      reader_orders = reader.orders.all.order(created_at: :desc)
+
+      reader_orders.each do |order|
+        article = Article.find(order.article_id)
+        
+        unless current_reader.orders.find_by(article_id: order.article_id) || order.created_at < 2.days.ago 
+          
+          rank = ranker.what_rank(article, current_reader)
+          if rank > 5
+            @suggested_orders << order
+            @ranks << rank
+          end
+
+        end
+      end
     end
+
   end
 
   private

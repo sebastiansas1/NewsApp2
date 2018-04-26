@@ -124,7 +124,7 @@
 <% end %>
 
 <% if !params[:topic].blank? %>
-    <h1 class="current-category" style="font-weight: bold;"><%= params[:topic] %></h1>
+    <h1 class="current-category" style="font-weight: bold;"><%= params[:topic].capitalize %></h1>
     <div class="row justify-content-center">
 
         <% @articles.uniq { |i| i.api_id }.each do |article| %>
