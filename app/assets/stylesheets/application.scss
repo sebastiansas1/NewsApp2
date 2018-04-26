@@ -106,6 +106,18 @@ p.notice {
 	}
 }
 
+.content-container {
+	margin-top: 80px;
+}
+
+@media (max-width: 767px) {
+	.content-container {
+		margin-top: 20px;
+	}
+}
+
+
+
 .navbar-default .navbar-nav > .active-nav > a {
 	background-color: transparent;
 	color: black;

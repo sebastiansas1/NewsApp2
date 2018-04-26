@@ -4,6 +4,10 @@ module ApplicationHelper
   end
 
   def cp(path)
-    'active' if current_page?(path)
+    if params[:category].blank? && params[:topic].blank?
+    'active' if current_page?(path) 
+    elsif params[:category] == "Top Trending"  
+      'active' if current_page?(path)
+    end
   end
 end

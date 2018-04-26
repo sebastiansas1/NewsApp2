@@ -18,7 +18,7 @@ class ArticlesController < ApplicationController
       @analyzer = StatisticsHelper::Analyzer.new
     elsif !params[:topic].blank?
       @articles = []
-      @topics = Keyword.where(word_type: 'Article').where(name: params[:topic])
+      @topics = Keyword.where(word_type: 'Article').where(name: params[:topic].capitalize)
       @topics.each do |topic|
         @articles.push Article.find(topic.word_id)
       end
@@ -131,7 +131,7 @@ class ArticlesController < ApplicationController
 
     @analyzer.compute_similarity(current_reader.friendships)
 
-    @friendships = current_reader.friendships.order(similarity: :desc)
+    @friendships = current_reader.friendships.order(similarity: :desc).limit(3)
 
     @array = []
 

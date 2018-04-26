@@ -19,12 +19,13 @@
 
   <body>
 
-    <nav class="navbar navbar-default">
-
+    <nav id="main-nav" class="navbar navbar-default navbar-fixed-top" role="navigation">
+    
+      <!-- Navbar Container -->
       <div class="container ">
 
         <% if reader_signed_in? || admin_signed_in? %>
-
+          <!-- Navbar Header -->
           <div class="navbar-header">
             <img src="/assets/medium/logo3.png" alt="News App Logo" class="navbar-brand logo" onclick="location.href='/';" >
           </div>
@@ -32,88 +33,109 @@
           <% if reader_signed_in? %>
 
             <ul class="nav navbar-nav navbar-centre">
-              <li class="<%=cp(personal_articles_path(reader_id: current_reader.id))%>-nav"> <%= link_to glyph(:heart) + " For Me", personal_articles_path(reader_id: current_reader.id) %></li>
-              <li class="<%=cp(articles_path)%>-nav"> <%= link_to glyph(:stats) + " Trending", articles_path(category: "Top Trending")%></li>        
-              <li class="<%=cp(friends_path)%>-nav"> <%= link_to glyph(:star) + " Friends", friends_path %></li>
+                <li class="<%=cp(personal_articles_path(reader_id: current_reader.id))%>-nav"> <%= link_to glyph(:heart) + " For Me", personal_articles_path(reader_id: current_reader.id) %></li>
+                <li class="<%=cp(articles_path)%>-nav"> <%= link_to glyph(:stats) + " Trending", articles_path(category: "Top Trending")%></li>        
+                <li class="<%=cp(friends_path)%>-nav"> <%= link_to glyph(:star) + " Community", friends_path %></li>
             </ul>
 
           <% else %>
 
             <ul class="nav navbar-nav navbar-centre">
-              <li class="<%=cp(statistics_path)%>-nav"> <%= link_to glyph(:globe) + " Global Activity", statistics_path %></li>
-              <li class="<%=cp(friends_path)%>-nav"> <%= link_to glyph(:friend) + " User Similarity Report" %></li>
+                <li class="<%=cp(statistics_path)%>-nav"> <%= link_to glyph(:globe) + " Global Activity", statistics_path %></li>
+                <li class="<%=cp(friends_path)%>-nav"> <%= link_to glyph(:friend) + " User Similarity Report" %></li>
             </ul>
 
           <% end %>
 
+            <ul class="nav navbar-nav navbar-right">
+
+                <!-- READER -->
+  
+                <% if reader_signed_in? %>
+  
+                  <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
+                    aria-expanded="false">Categories <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                      <% Category.all.order(:name).each do |category| %>
+                        <li class="<%= 'active' if params[:category] == category.name %>">
+                          <%= link_to category.name, articles_path(category: category.name), class: "category-link" %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  </li>
+  
+                  <div class="btn-group avatar-dropdown">
+                    <button type="button" class="btn btn-default dropdown-toggle avatar-button" data-toggle="dropdown" 
+                    aria-haspopup="true" aria-expanded="false">
+                      <%= image_tag current_reader.avatar, class: "avatar" %>
+                      <%= link_to current_reader.name, class: "avatar-name" %> 
+                    </button>
+  
+                    <ul class="dropdown-menu" role="menu">
+  
+                      <li><%= link_to glyph(:repeat) + " History", history_path %></li>
+                      <p></p>
+                      <li><%= link_to glyph(:pencil) + " Edit Profile", edit_reader_registration_path %></li>
+                      <p></p>
+                      <li><%= link_to glyph(:off) + " Log Out", destroy_reader_session_path, method: :delete %></li>
+  
+                    </ul>
+                  
+                  </div>
+  
+                <% end %> 
+  
+  
+                <!-- ADMIN -->
+  
+                <% if admin_signed_in? %>
+  
+                  <li><%= link_to current_admin.name, edit_admin_registration_path %></li>
+                  <li><%= link_to  "Log Out", destroy_admin_session_path, method: :delete %></li>
+  
+                <% end %>
+  
+            </ul>
+
         <% else %>
 
-          <div class="navbar-login">
-            <img src="/assets/medium/logo3.png" alt="News App Logo" class="navbar-brand navbar-initial" onclick="location.href='/';" >
-          </div>
-
-        <% end %>
-
-        <ul class="nav navbar-nav navbar-right">
-
-          <!-- READER -->
-
-          <% if reader_signed_in? %>
-
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
-              aria-expanded="false">Categories <span class="caret"></span></a>
-              <ul class="dropdown-menu" role="menu">
-                <% Category.all.order(:name).each do |category| %>
-                  <li class="<%= 'active' if params[:category] == category.name %>">
-                    <%= link_to category.name, articles_path(category: category.name), class: "category-link" %>
-                  </li>
-                <% end %>
-              </ul>
-            </li>
-
-            <div class="btn-group avatar-dropdown">
-              <button type="button" class="btn btn-default dropdown-toggle avatar-button" data-toggle="dropdown" 
-              aria-haspopup="true" aria-expanded="false">
-                <%= image_tag current_reader.avatar, class: "avatar" %>
-                <%= link_to current_reader.name, class: "avatar-name" %> 
-              </button>
-
-              <ul class="dropdown-menu" role="menu">
-
-                <li><%= link_to glyph(:repeat) + " History", history_path %></li>
-                <p></p>
-                <li><%= link_to glyph(:pencil) + " Edit Profile", edit_reader_registration_path %></li>
-                <p></p>
-                <li><%= link_to glyph(:off) + " Log Out", destroy_reader_session_path, method: :delete %></li>
-
-              </ul>
-            
+            <div class="navbar-login">
+              <img src="/assets/medium/logo3.png" alt="News App Logo" class="navbar-brand navbar-initial" onclick="location.href='/';" >
             </div>
 
-          <% end %> 
-
-
-          <!-- ADMIN -->
-
-          <% if admin_signed_in? %>
-
-            <li><%= link_to current_admin.name, edit_admin_registration_path %></li>
-            <li><%= link_to  "Log Out", destroy_admin_session_path, method: :delete %></li>
-
-          <% end %>
-
-        </ul>
+        <% end %>
 
       </div>
 
     </nav>
 
-    <div class="container">
+    <script>
+      $(window).on('resize', function() {
+        if($(window).width() < 768) {
+            $('#main-nav').removeClass('navbar-fixed-top');
+        }else{
+            $('#main-nav').addClass('navbar-fixed-top');
+        }
+      })
+      
+      var width = $(window).width(); 
+  
+      if (width < 768) {
+        $('#main-nav').removeClass('navbar-fixed-top');
+      }
+      else {
+        $('#main-nav').addClass('navbar-fixed-top');
+      }
+    </script>
+
+    <div class="container content-container">
       <%= yield %>
     </div>
 
     <br><br>
 
   </body>
+
+
 </html>

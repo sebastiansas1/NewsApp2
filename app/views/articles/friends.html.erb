@@ -1,4 +1,4 @@
-<h1 class="current-category" style="font-weight: bold;">What your friends are reading</h1>
+<h1 class="current-category" style="font-weight: bold;">Similar users to you</h1>
 
 <div class="row">
 
@@ -6,55 +6,60 @@
 
         <% @reader = Reader.find(friendship.friend_id) %>
 
-        <!-- Friend Bar -->
+        <% @similarity = friendship.similarity.to_i%>
 
-        <div class="col-md-6">
+        <% unless @similarity == 0 %>
 
-            <br><br>
+            <!-- Friend Bar -->
 
-            <div class="col-md-12 col-md-offset-1">
+            <div class="col-md-6">
 
-                <div class="friend-bar">
-                    <div class="friend-image">
-                        <div class="donut">    
-                            <% @similarity = friendship.similarity.to_i%>
-                            <%= pie_chart [["Match", @similarity], ["", 100-@similarity]], donut: true, library: {animation: {easing: 'easeOutQuad'}, backgroundColor: "transparent", elements: {arc: {borderWidth: 0}}},legend: false, width: "85px", height: "85px", colors: ["#52f2a7","transparent"] %>
-                        </div>
-                        <h6 class="similarity-text"><%=@similarity%>% Match</h6>
-                        <%= image_tag @reader.avatar, class: "avatar-friend" %>
-                    </div>
-                    <div class="friend-bar-text">
-                        <h3 class="friend-name"><%= @reader.name %></h3>
-                        <p class="friend-name">Has been reading ...</p>
-                    </div>
-                </div>
-                
-                <br>
+                <br><br>
 
-            </div>
-        
-            <div class="col-md-12 col-md-offset-1" style="margin-bottom: 10px;">
+                <div class="col-md-12 col-md-offset-1">
 
-                <% @array.each do |a| %>
-                    <% if a[friendship.friend_id].class == Array %>
-                        <% a[friendship.friend_id].take(4).each do |friend_article| %>  
-                            
-                            <% @article = Article.find(friend_article.article_id) %>
-
-                            <div class="col-md-3 article-box-history" onclick="location.href='/articles/<%= @article.id %>';" style="cursor: pointer;">
-                                <a href="/articles/<%= @article.id %>" class="a-article">
-                                    <%= image_tag @article.img_src, class: "article_img-history", style:"margin-top:14px;" %>
-                                </a>
-                                <h6 class="article-headline-history"><%= @article.headline %></h6>
+                    <div class="friend-bar">
+                        <div class="friend-image">
+                            <div class="donut">    
+                                <%= pie_chart [["Match", @similarity], ["", 100-@similarity]], donut: true, library: {animation: {easing: 'easeOutQuad'}, backgroundColor: "transparent", elements: {arc: {borderWidth: 0}}},legend: false, width: "85px", height: "85px", colors: ["#52f2a7","transparent"] %>
                             </div>
+                            <h6 class="similarity-text"><%=@similarity%>% Match</h6>
+                            <%= image_tag @reader.avatar, class: "avatar-friend" %>
+                        </div>
+                        <div class="friend-bar-text">
+                            <h3 class="friend-name"><%= @reader.name %></h3>
+                            <p class="friend-name">Has been reading ...</p>
+                        </div>
+                    </div>
+                    
+                    <br>
 
+                </div>
+            
+                <div class="col-md-12 col-md-offset-1" style="margin-bottom: 10px;">
+
+                    <% @array.each do |a| %>
+                        <% if a[friendship.friend_id].class == Array %>
+                            <% a[friendship.friend_id].take(4).each do |friend_article| %>  
+                                
+                                <% @article = Article.find(friend_article.article_id) %>
+
+                                <div class="col-md-3 article-box-history" onclick="location.href='/articles/<%= @article.id %>';" style="cursor: pointer;">
+                                    <a href="/articles/<%= @article.id %>" class="a-article">
+                                        <%= image_tag @article.img_src, class: "article_img-history", style:"margin-top:14px;" %>
+                                    </a>
+                                    <h6 class="article-headline-history"><%= @article.headline %></h6>
+                                </div>
+
+                            <% end %>
                         <% end %>
                     <% end %>
-                <% end %>
+
+                </div>
 
             </div>
 
-        </div>
+        <% end %>
 
     <% end %> 
 

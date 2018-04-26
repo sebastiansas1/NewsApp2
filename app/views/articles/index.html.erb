@@ -43,7 +43,22 @@
 
         <h1 class="current-category" style="font-weight: bold;">Trending Now</h1>
 
-        <div class="col-md-4" style="margin-left: 20px;">
+        <div class="search">
+            <%= form_tag(articles_path, method: :get, class:'navbar-form') do %>
+                <div class="input-group" style="width: 300px;margin: 10px 0px 15px 15px;">
+                    <%= text_field_tag :topic, "" ,class:"form-control pull-right", style:"border: 1px solid #c0c0c0; background-color: #ffffff;", placeholder: "Search for a topic" %>
+                    <span class="input-group-btn">
+                        <%= button_tag '', class:"btn btn-default", name: nil do %>
+                            <span class="glyphicon glyphicon-search">
+                                <span class="sr-only">Search</span>
+                            </span>
+                        <% end %>
+                    </span>
+                </div>
+            <% end %>
+        </div>
+
+        <div class="col-md-4" style="margin-left: 0px;">
             
             <h3 style="margin-bottom: 30px;">Categories</h3>
 
@@ -79,7 +94,7 @@
 
             <% if counter == 0 %>
                     
-                <h5> There are not trending topics at the moment </h5>
+                <h5> There are no trending topics at the moment. </h5>
 
             <% end %>
 
@@ -91,7 +106,7 @@
 
         <h1 class="current-category" style="font-weight: bold;">Top Chart</h1>
 
-        <div class="col-md-4" style="margin-left: 20px;">
+        <div class="col-md-4" style="margin-left: 0px;">
 
             <h3 style="margin-bottom: 30px;">Topics</h3>
 
