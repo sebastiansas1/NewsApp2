@@ -104,6 +104,11 @@ p.notice {
 		position: absolute;
 		right: 0;
 	}
+
+	.category-list {
+		height: 500px;
+		overflow: scroll;
+	}
 }
 
 .content-container {
